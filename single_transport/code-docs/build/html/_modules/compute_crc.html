@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>compute_crc &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">compute_crc</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for compute_crc</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">CRC functions. Creates checksums for all the message payloads in bytes</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">crc</span> <span class="kn">import</span> <span class="n">Calculator</span><span class="p">,</span> <span class="n">Configuration</span>
+
+
+
+<div class="viewcode-block" id="compute_crc"><a class="viewcode-back" href="../modules/compute_crc.html#compute_crc.compute_crc">[docs]</a><span class="k">def</span> <span class="nf">compute_crc</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">nbtyes</span> <span class="o">=</span> <span class="mi">4</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    I got the CRC and checksum from https://reveng.sourceforge.io/crc-catalogue/all.htm.</span>
+<span class="sd">    We choose the algorithm **CRC-32/XFER** because </span>
+<span class="sd">    1. *The algorithm is evidenced by a widely-available implementation that can calculate CRCs for any desired message.*</span>
+<span class="sd">    as the webpage ensures us.</span>
+<span class="sd">    2. It returns exactly 4 bytes (which is the length we desire).</span>
+
+<span class="sd">    :param payload: message payload to convert to CRC</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param nbytes: number of bytes to compress to in the CRC compression</span>
+<span class="sd">    :type nbytes: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        CRC (string) -- CRC-32/XFER CRC of 4 bytes</span>
+
+<span class="sd">    :formula:</span>
+<span class="sd">        CRC-32/XFER https://reveng.sourceforge.io/crc-catalogue/all.htm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;compute crc&gt; &quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: message is not in bytes&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+    <span class="c1"># name=&quot;CRC-32/XFER&quot; &lt;- type of checksum configuration</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">polynomial</span><span class="o">=</span><span class="mh">0x000000af</span><span class="p">,</span> 
+        <span class="n">init_value</span><span class="o">=</span><span class="mh">0x00000000</span><span class="p">,</span> <span class="n">reverse_input</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+        <span class="n">reverse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">final_xor_value</span><span class="o">=</span><span class="mh">0x00000000</span>
+        <span class="p">)</span>
+
+    <span class="n">calculator</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">crc</span> <span class="o">=</span> <span class="n">calculator</span><span class="o">.</span><span class="n">checksum</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;resulting CRC: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">crc</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">crc</span></div>
+
+
+
+
+<div class="viewcode-block" id="old_compute_crc"><a class="viewcode-back" href="../modules/compute_crc.html#compute_crc.old_compute_crc">[docs]</a><span class="k">def</span> <span class="nf">old_compute_crc</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">nbytes</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    compute the crc of the message, using the ammount of bytes permitted</span>
+
+<span class="sd">    :param payload: message payload to convert to CRC</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param nbytes: number of bytes to compress to in the CRC compression</span>
+<span class="sd">    :type nbytes: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        CRC (string) -- custom CRC after adding the byte values plus the bytearray to int</span>
+
+<span class="sd">    :formula:</span>
+<span class="sd">        n = nbytes</span>
+<span class="sd">        CRC = [ sum_byte_by_byte(payload) + concat_numbers_left_to_right(payload) + concat_numbers_right_to_left(payload) ] % 256^n</span>
+<span class="sd">        description: second page of https://jamboard.google.com/d/1ERZewSRK3-BmkMuzH5g7swd7OwKDTgcD2FevFguLn2g/edit?usp=sharing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;compute crc&gt; &quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: message is not in bytes&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">divisor</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#: if the divisor is a multiple of 256, no changes are appreciated after a small change</span>
+
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">)):</span>
+        <span class="n">byte</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">byte</span><span class="p">,</span> <span class="s2">&quot;little&quot;</span><span class="p">)</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">num</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="n">right</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+    <span class="n">crc</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">%</span> <span class="n">divisor</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; message int: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, divisor: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">divisor</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;resulting CRC: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">crc</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">crc</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

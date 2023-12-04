@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mqtt_interaction_node_basic &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mqtt_interaction_node_main" href="mqtt_interaction_node_main.html" />
+    <link rel="prev" title="mqtt_interaction_module" href="mqtt_interaction_module.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">mqtt_interaction_node_basic</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/mqtt_interaction_node_basic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mqtt_interaction_node_basic">
+<span id="mqtt-interaction-node-basic"></span><h1>mqtt_interaction_node_basic<a class="headerlink" href="#module-mqtt_interaction_node_basic" title="Permalink to this headline"></a></h1>
+<p>Basic node to gateway interaction class</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mqtt_interaction_node_basic</span></code></a>(mode[, wni])</p></td>
+<td><p>Basic mesh network mqtt interaction class.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mqtt_interaction_node_basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction" title="mqtt_interaction_module.mqtt_interaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_module.mqtt_interaction</span></code></a></p>
+<p>Basic mesh network mqtt interaction class.</p>
+<p>The classes <a class="reference internal" href="mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main" title="mqtt_interaction_node_main.mqtt_interaction_node_main"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mqtt_interaction_node_main()</span></code></a> and
+<a class="reference internal" href="mqtt_interaction_node_temporal.html#mqtt_interaction_node_temporal.mqtt_interaction_node_temporal" title="mqtt_interaction_node_temporal.mqtt_interaction_node_temporal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mqtt_interaction_node_temporal()</span></code></a> are extensions of this one.</p>
+<p>The structure of this class is the following:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Structure</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><dl class="simple">
+<dt>It initializes the sub class <a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction" title="mqtt_interaction_module.mqtt_interaction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mqtt_interaction()</span></code></a> and gives the following parameters to it:</dt><dd><ul class="simple">
+<li><p>subtopic</p></li>
+<li><p>pubtopic</p></li>
+<li><p>mode</p></li>
+<li><p>local file for message id upadtes</p></li>
+<li><p>interlocutor</p></li>
+<li><p>WNI (can be None)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Sets the timout time for listening to a response message, to 7 seconds.</p></li>
+<li><dl class="simple">
+<dt>Finally, it has the following methods:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_nodes()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet"><code class="xref py py-meth docutils literal notranslate"><span class="pre">publish_meshnet()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">listen_to_nodes()</span></code></a></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">send_message_to_nodes_from_input()</span></code></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node"><code class="xref py py-meth docutils literal notranslate"><span class="pre">request_to_node()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_gateway_answer_callback()</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>subtopic</strong> (<em>string</em>) – MQTT topic to which the client will subscribe to</p></li>
+<li><p><strong>pubtopic</strong> (<em>string</em>) – MQTT topic to which the client will publish to</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – mode of the interaction. Can be either “listen” to receive messages from the subtopic, or “request” if we want to the entity to publish requests to the pubtopic</p></li>
+<li><p><strong>file_settings</strong> (<em>file</em>) – file containing the shared message id to update</p></li>
+<li><p><strong>interlocutor</strong> (<em>string</em>) – entity which we wish to communicate to. Defaults to <em>cloud</em></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Returns a <strong>mqtt_interaction_node_basic</strong> class with the following attributes:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">pubclient</dt>
+<dd class="field-odd"><p>(mqtt.Client) – MQTT client for publishing messages (only if interlocutor is “cloud”)</p>
+</dd>
+<dt class="field-even">subclient</dt>
+<dd class="field-even"><p>(mqtt.Client) – MQTT client for subscribing to a topic (only if interlocutor is “cloud”)</p>
+</dd>
+<dt class="field-odd">pub_msg_id</dt>
+<dd class="field-odd"><p>(int) – unique message temporal identifier for the published messages</p>
+</dd>
+<dt class="field-even">gw_id</dt>
+<dd class="field-even"><p>(int) – gateway id for the interaction</p>
+</dd>
+<dt class="field-odd">run_loop</dt>
+<dd class="field-odd"><p>(bool) – run the subclient loop, while true</p>
+</dd>
+<dt class="field-even">pub_resp_received</dt>
+<dd class="field-even"><p>(bool) – whether a response for the sent message has been received</p>
+</dd>
+<dt class="field-odd">max_wait</dt>
+<dd class="field-odd"><p>(int) – max waiting time for response before deciding no response has been received, in seconds</p>
+</dd>
+<dt class="field-even">startime</dt>
+<dd class="field-even"><p>(int) – start time (in seconds) of the loop in the subclient</p>
+</dd>
+<dt class="field-odd">thread</dt>
+<dd class="field-odd"><p>(thread) – thread to use for starting a subscriber or publisher client when needed while the main thread still runs</p>
+</dd>
+<dt class="field-even">print_raw_data</dt>
+<dd class="field-even"><p>(bool) – whether or not we wish to print the raw data we get from the node</p>
+</dd>
+<dt class="field-odd">tunnel</dt>
+<dd class="field-odd"><p>(cloud_to_node_tunnel) – class for establishing a connection between a cloud interaction and a node interaction</p>
+</dd>
+<dt class="field-even">node_response</dt>
+<dd class="field-even"><p>(RxMsg) – The message containing the received response from the nodes</p>
+</dd>
+<dt class="field-odd">wni</dt>
+<dd class="field-odd"><p><em>(WirepasNetworkInterface)</em> – a wirepas network interface class connected to the selected local mqtt broker</p>
+</dd>
+</dl>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+<p>Initialize class interaction attributes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize class interaction attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes">
+<span class="sig-name descname"><span class="pre">listen_to_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.listen_to_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Listens to node messages.</p>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic">
+<li><p>Sets a wirepass filter</p></li>
+<li><p>Sets a callback on any received data from the nodes, in our cass the cb is <a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_message" title="mqtt_interaction_module.mqtt_interaction.on_message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message()</span></code></a></p></li>
+<li><dl class="simple">
+<dt>If the mode is “request”, it will:</dt><dd><ul class="simple">
+<li><p>start the <a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.start_listen_loop" title="mqtt_interaction_module.mqtt_interaction.start_listen_loop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start_listen_loop()</span></code></a> loop, to continuously listen to wirepass messages</p></li>
+<li><p>Once the loop finishes (for whatever reason) it removes the wirepas filter for the callback</p></li>
+</ul>
+</dd>
+</dl>
+<p>If the mode is “listen” it doesn’t do anything else.</p>
+</li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><p>This is the equivalent function to the <a class="reference internal" href="mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud" title="mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud"><code class="xref py py-meth docutils literal notranslate"><span class="pre">listen_to_cloud()</span></code></a>
+function in the interaction cloud class.</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prefix</strong> (<em>string</em>) – parent prefix to append to the current prefix. This will be reported in all prints made by this function</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>True</strong> if successful, an error if not.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback">
+<span class="sig-name descname"><span class="pre">on_gateway_answer_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw_error_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.on_gateway_answer_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback" title="Permalink to this definition"></a></dt>
+<dd><p>Callback called when gateway publishes a message to the mesh network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>More precisley, this callback is called when a message is received on the “gw-response/” local MQTT topic.</p></li>
+<li><p>In this script a message will be printed only if an error is raised.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><p>By construction, every message published to this MQTT topic is a response to a previous request made to the nodes.</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gw_error_code</strong> (<em>bool?</em>) – error code</p></li>
+<li><p><strong>param</strong> (<em>list?</em>) – error parameteres¿? It just displays ‘None’ when there is no error, so we cannot use this as the response, or yes?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>Print an error message only if an error is raised.</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes">
+<span class="sig-name descname"><span class="pre">on_message_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.on_message_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Every time a message is received from the mesh network, this function is invoked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>We get the timestamp of when the message is received</p></li>
+<li><p>We create a <em>RxMsg</em> class with all the raw info from the wirepass.data input</p></li>
+<li><p>We parse the message payload, in order to extract the <em>message type</em> and <em>additional arguments</em> (if applicable)</p></li>
+<li><dl class="simple">
+<dt>If the parsing is successful,</dt><dd><ul class="simple">
+<li><p>The message is displayed</p></li>
+<li><dl class="simple">
+<dt>If the mode == “request” then</dt><dd><ul>
+<li><p>We call the function <a class="reference internal" href="mqtt_interaction_node_temporal.html#mqtt_interaction_node_temporal.mqtt_interaction_node_temporal.on_message_temporal_node" title="mqtt_interaction_node_temporal.mqtt_interaction_node_temporal.on_message_temporal_node"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_temporal_node()</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>If mode == “listen”
+- We just call the function <a class="reference internal" href="mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen" title="mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_main_node_listen()</span></code></a></p></li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>It is the equivalent to the <a class="reference internal" href="mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c" title="mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_c()</span></code></a> function of the
+mqtt_interaction_cloud class.</p></li>
+</ol>
+</dd>
+<dt class="field-odd">References</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It is useful to check the wirepas mqtt library documentation -&gt; <a class="reference external" href="https://wirepas.github.io/wirepas-mqtt-library/">https://wirepas.github.io/wirepas-mqtt-library/</a></p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>data</strong> (<em>wirepass.data</em>) – a list containing various different information regarding the message. It includes the raw payload, the node id, the gateway id, the sink id.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet">
+<span class="sig-name descname"><span class="pre">publish_meshnet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gateway_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.publish_meshnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet" title="Permalink to this definition"></a></dt>
+<dd><p>Publishes a message to the mesh network.</p>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic">
+<li><p>Tries to send the message to the mesh network using the <em>wirepas_interaction_network</em> function <code class="xref py py-meth docutils literal notranslate"><span class="pre">send_message()</span></code>.
+For that to work, it has to give the following variables to the wirepas function:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>gateway_id</em> – that will transmit the message</p></li>
+<li><p><em>sink_id</em> – that will send the message to the right node</p></li>
+<li><p><em>node_id</em> – of the target node</p></li>
+<li><p><em>src_ep</em></p></li>
+<li><p><em>dst_ep</em></p></li>
+<li><p><em>payload</em> – of the message</p></li>
+<li><p><em>Quality of Service</em> (QOS) – of the desired MQTT connection</p></li>
+<li><p><em>callback</em> – function in case an error is reported</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Report in the logs if the publish was successful or not.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><p>It is the mesh-network equivalent to the
+<a class="reference internal" href="mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c" title="mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c"><code class="xref py py-meth docutils literal notranslate"><span class="pre">publish_c()</span></code></a> cloud interaction function.</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – message payload, has a variable length</p></li>
+<li><p><strong>gateway_id</strong> (<em>int</em>) – gateway id to who the message was sent.</p></li>
+<li><p><strong>sink_id</strong> (<em>int</em>) – sink id that received the message in the gateway</p></li>
+<li><p><strong>node_id</strong> (<em>int</em>) – node id where we want to send the message.</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – parent prefix to append to the current prefix. This will be reported in all prints made by this function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>True</strong> if message was sent successfully, an error if not.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node">
+<span class="sig-name descname"><span class="pre">request_to_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.request_to_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node" title="Permalink to this definition"></a></dt>
+<dd><p>Sends messages to the mesh network.</p>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><dl class="simple">
+<dt>If the payload is <em>None</em>:</dt><dd><ul class="simple">
+<li><p>It updates the message id, takes the last one from the <em>local_settings.py</em> file, and increments it by 1 by calling the function
+<a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.update_msg_id" title="mqtt_interaction_module.mqtt_interaction.update_msg_id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_msg_id()</span></code></a>.</p></li>
+<li><p>Puts all the message information to bytes using the  <a class="reference internal" href="create_message_functions.html#create_message_functions.message_to_bytes" title="create_message_functions.message_to_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message_to_bytes()</span></code></a>  function</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Stores the information regarding the message to be sent, in a database (if applicable)</p></li>
+<li><p>Gets the current timestamp in order to know when we sent the message, using the function <a class="reference internal" href="global_vars.html#global_vars.get_timestamp" title="global_vars.get_timestamp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_timestamp()</span></code></a></p></li>
+<li><p>Sends the message by running the <a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.publish" title="mqtt_interaction_module.mqtt_interaction.publish"><code class="xref py py-meth docutils literal notranslate"><span class="pre">publish()</span></code></a> function.</p></li>
+<li><p>Prints whether the message was sent or there was an error.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><dl class="simple">
+<dt>This function can be called in 2 ways:</dt><dd><ol class="arabic simple">
+<li><p>providing the payload</p></li>
+<li><p>providing msg_type and arguments</p></li>
+</ol>
+</dd>
+</dl>
+<p>In both cases you have to provide the gateway id, sink id, and node id.</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gw_id</strong> (<em>int</em>) – gateway id to who the message was sent.</p></li>
+<li><p><strong>sink_id</strong> (<em>int</em>) – sink id that received the message in the gateway</p></li>
+<li><p><strong>node_id</strong> (<em>int</em>) – node id where we want to send the message.</p></li>
+<li><p><strong>msg_type</strong> (<em>int</em>) – Type of message that we want to send</p></li>
+<li><p><strong>args</strong> (<em>list</em>) – Additional message arguments, depending on the message type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing, so far</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_basic.mqtt_interaction_node_basic.send_msg_to_nodes_from_input">
+<span class="sig-name descname"><span class="pre">send_msg_to_nodes_from_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.send_msg_to_nodes_from_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.send_msg_to_nodes_from_input" title="Permalink to this definition"></a></dt>
+<dd><p>Prepares and sends a message to the nodes, based on the user input.</p>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic">
+<li><p>Update the message id, takes the last one from the <em>local_settings.py</em> file, and increments it by 1 by calling the function
+<a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.update_msg_id" title="mqtt_interaction_module.mqtt_interaction.update_msg_id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_msg_id()</span></code></a>.</p></li>
+<li><p>Generates the initial message payload in bytes, by calling the function
+<a class="reference internal" href="create_message_functions.html#create_message_functions.get_msg_from_input" title="create_message_functions.get_msg_from_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_msg_from_input()</span></code></a>.</p></li>
+<li><p>It finally calls the <a class="reference internal" href="#mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node"><code class="xref py py-class docutils literal notranslate"><span class="pre">request_to_node</span></code></a> function and provides it the following
+parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>gw_id</em> – gateway id</p></li>
+<li><p><em>sink_id</em> – sink id</p></li>
+<li><p><em>dst_addr</em> – id of the node we want to send the message to</p></li>
+<li><p><em>payload</em> – initial payload of the message in bytes, which so far just contains the message id and type.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><p>This is the mesh network equivalent function to the
+<a class="reference internal" href="mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input" title="mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send_cloud_msg_from_input()</span></code></a> function in the cloud class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mqtt_interaction_module.html" class="btn btn-neutral float-left" title="mqtt_interaction_module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mqtt_interaction_node_main.html" class="btn btn-neutral float-right" title="mqtt_interaction_node_main" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

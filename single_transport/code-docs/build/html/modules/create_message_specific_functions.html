@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create_message_specific_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="database_functions" href="database_functions.html" />
+    <link rel="prev" title="create_message_nodes" href="create_message_nodes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">create_message_specific_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/create_message_specific_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-create_message_specific_functions">
+<span id="create-message-specific-functions"></span><h1>create_message_specific_functions<a class="headerlink" href="#module-create_message_specific_functions" title="Permalink to this headline"></a></h1>
+<p>Functions designed each for a specific message type. Each of this functions will take different arguments and create
+specific payloads that might be combinded later by the calling functions to create the whole message payload.</p>
+<ol class="arabic simple">
+<li><p>There is a set of basic functions for general messages that just have 1 or 2 arguments.</p></li>
+<li><dl class="simple">
+<dt>The other functions (i.e. CRC, alarm, led on, etc) call the 1-argument message function, and</dt><dd><p>tell her that the only argument to put is <em>this alarm</em> or <em>this list of nodes</em> or whatever arguments they need to convert into bytes.</p>
+</dd>
+</dl>
+</li>
+<li><p>For messages that have many or a variable ammount of arguments, a specific function has been created for them.</p></li>
+</ol>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.gen_crc_message" title="create_message_specific_functions.gen_crc_message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_crc_message</span></code></a>(args)</p></td>
+<td><p>Transform the CRC into bytes from a normal message argument list</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.gen_gw_version_message" title="create_message_specific_functions.gen_gw_version_message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_gw_version_message</span></code></a>(args)</p></td>
+<td><p>Set the message argument into bytes for a cloud response to a previous gateway request with the gateway version</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.gen_random_node_id_list" title="create_message_specific_functions.gen_random_node_id_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_random_node_id_list</span></code></a>(num_nodes)</p></td>
+<td><p>Generate a random list of node ids, of length given by the argument</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.node_id_list_client_id_payload" title="create_message_specific_functions.node_id_list_client_id_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_id_list_client_id_payload</span></code></a>(args)</p></td>
+<td><p>Set the message argument into bytes for a message with client id and node id list</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.node_id_list_payload" title="create_message_specific_functions.node_id_list_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_id_list_payload</span></code></a>(node_ids)</p></td>
+<td><p>Set the message argument into bytes for a given node id list</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.pack_crc" title="create_message_specific_functions.pack_crc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pack_crc</span></code></a>(crc)</p></td>
+<td><p>Put the CRC into bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.random_alarm_node_list_payload" title="create_message_specific_functions.random_alarm_node_list_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_alarm_node_list_payload</span></code></a>(num_nodes)</p></td>
+<td><p>Set the message argument into bytes for a random alarm and node id list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.random_node_id_list_payload" title="create_message_specific_functions.random_node_id_list_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_node_id_list_payload</span></code></a>(num_nodes)</p></td>
+<td><p>Set the message argument into bytes for a random node id list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.random_node_status_list_payload" title="create_message_specific_functions.random_node_status_list_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_node_status_list_payload</span></code></a>(num_nodes)</p></td>
+<td><p>Set the argument payload for random node status list messages.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.respond_remove_nodes_msg_payload" title="create_message_specific_functions.respond_remove_nodes_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">respond_remove_nodes_msg_payload</span></code></a>(args)</p></td>
+<td><p>Set the message argument into bytes for a remove nodes list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.send_node_status_msg_payload" title="create_message_specific_functions.send_node_status_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_node_status_msg_payload</span></code></a>([args])</p></td>
+<td><p>Set the argument into bytes for node status list messages.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.send_node_version_msg_payload" title="create_message_specific_functions.send_node_version_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_node_version_msg_payload</span></code></a>(s_major, ...)</p></td>
+<td><p>Set the message  argument into bytes for sending the node version.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.set_1_arg_payload" title="create_message_specific_functions.set_1_arg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_1_arg_payload</span></code></a>(args[, packs])</p></td>
+<td><p>Set the argument payload for messages that only have 1 argument.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.set_2_arg_payload" title="create_message_specific_functions.set_2_arg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_2_arg_payload</span></code></a>(args[, packs])</p></td>
+<td><p>Set the argument payload for messages that only have 2 arguments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.set_alarm_and_crc_msg" title="create_message_specific_functions.set_alarm_and_crc_msg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_alarm_and_crc_msg</span></code></a>(alarm, crc)</p></td>
+<td><p>Set the message argument into bytes for a cloud response to a previous gateway request with an alarm and many nodes to it</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.set_client_id_msg_payload" title="create_message_specific_functions.set_client_id_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_client_id_msg_payload</span></code></a>(args)</p></td>
+<td><p>Set the message argument into bytes for the client id</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.set_dimming_msg_payload" title="create_message_specific_functions.set_dimming_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_dimming_msg_payload</span></code></a>(args)</p></td>
+<td><p>Set the argument into bytes for dimming messages.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.set_echo_msg_payload" title="create_message_specific_functions.set_echo_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_echo_msg_payload</span></code></a>([args])</p></td>
+<td><p>Set the argument into bytes for echo messages.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.set_electric_params_list_msg_payload" title="create_message_specific_functions.set_electric_params_list_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_electric_params_list_msg_payload</span></code></a>(num_nodes)</p></td>
+<td><p>Set the message argument into bytes for a node electric parameters list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.set_electrim_params_msg_payload" title="create_message_specific_functions.set_electrim_params_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_electrim_params_msg_payload</span></code></a>()</p></td>
+<td><p>Set the message argument into bytes for node electric parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.set_remove_nodes_msg_payload" title="create_message_specific_functions.set_remove_nodes_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_remove_nodes_msg_payload</span></code></a>(num_nodes)</p></td>
+<td><p>Set the message argument into bytes for a remove nodes list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_specific_functions.set_solar_metrics_msg_payload" title="create_message_specific_functions.set_solar_metrics_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_solar_metrics_msg_payload</span></code></a>()</p></td>
+<td><p>Set the message argument into bytes for a node solar panel metrics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_specific_functions.set_strategy_msg_payload" title="create_message_specific_functions.set_strategy_msg_payload"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_strategy_msg_payload</span></code></a>(args)</p></td>
+<td><p>Set the argument into bytes for strategy messages.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.gen_crc_message">
+<span class="sig-name descname"><span class="pre">gen_crc_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#gen_crc_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.gen_crc_message" title="Permalink to this definition"></a></dt>
+<dd><p>Transform the CRC into bytes from a normal message argument list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list</em>) – list of arguments containing CRC to use at position 0</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – generated payload corresonding to the crc</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.gen_gw_version_message">
+<span class="sig-name descname"><span class="pre">gen_gw_version_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#gen_gw_version_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.gen_gw_version_message" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a cloud response to a previous gateway request with the gateway version</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alarm</strong> (<em>int</em>) – the alarm that the gateway sent to the cloud</p></li>
+<li><p><strong>payload</strong> (<em>bytes</em>) – received message payload that we want to transform into a CRC</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – generated node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.gen_random_node_id_list">
+<span class="sig-name descname"><span class="pre">gen_random_node_id_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#gen_random_node_id_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.gen_random_node_id_list" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a random list of node ids, of length given by the argument</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">list</dt>
+<dd class="field-odd"><p>(np.array) – generated node id list, as a numpy array</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.node_id_list_client_id_payload">
+<span class="sig-name descname"><span class="pre">node_id_list_client_id_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#node_id_list_client_id_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.node_id_list_client_id_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a message with client id and node id list</p>
+<p>::param args:  list of 2 elements containing the <em>client_id</em> and the <em>node_id_list</em> to send to cloud
+:type args: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – generated node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.node_id_list_payload">
+<span class="sig-name descname"><span class="pre">node_id_list_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#node_id_list_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.node_id_list_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a given node id list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>node_ids</strong> (<em>int array</em>) – array containing all node id’s</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – generated node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.pack_crc">
+<span class="sig-name descname"><span class="pre">pack_crc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#pack_crc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.pack_crc" title="Permalink to this definition"></a></dt>
+<dd><p>Put the CRC into bytes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>crc</strong> (<em>int</em>) – CRC to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – generated payload corresonding to the crc</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.random_alarm_node_list_payload">
+<span class="sig-name descname"><span class="pre">random_alarm_node_list_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#random_alarm_node_list_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.random_alarm_node_list_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a random alarm and node id list. Change this function, right now it is inventing the node alarms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num:nodes</strong> – number of nodes to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated alarm and node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.random_node_id_list_payload">
+<span class="sig-name descname"><span class="pre">random_node_id_list_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#random_node_id_list_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.random_node_id_list_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a random node id list. Change this function, right now it is inventing the node ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_nodes</strong> – number of nodes to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.random_node_status_list_payload">
+<span class="sig-name descname"><span class="pre">random_node_status_list_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#random_node_status_list_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.random_node_status_list_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument payload for random node status list messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num:nodes</strong> – number of nodes to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node list status, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.respond_remove_nodes_msg_payload">
+<span class="sig-name descname"><span class="pre">respond_remove_nodes_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#respond_remove_nodes_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.respond_remove_nodes_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a remove nodes list. argument into bytes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list</em>) – list containig the arguments to use when answering the cloud</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – crc generated message, this is just a crc message!</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.send_node_status_msg_payload">
+<span class="sig-name descname"><span class="pre">send_node_status_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#send_node_status_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.send_node_status_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument into bytes for node status list messages. So far it is inventing the status of the nodes, so
+this function should change.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list containing: led status</em><em>, </em><em>dimming</em><em>, </em><em>num neighbours</em><em>, </em><em>rssi</em><em>, </em><em>hops</em>) – node status list to pack into bytes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – packed node status list</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.send_node_version_msg_payload">
+<span class="sig-name descname"><span class="pre">send_node_version_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s_major</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_minor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_revision</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_build</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_maj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_rev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_build</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BBBBBBBB'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#send_node_version_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.send_node_version_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message  argument into bytes for sending the node version.
+The node software version consists of a list of 8 int ranging from 0-254 which codify:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><em>stack_version</em> major.minor.revision.build. These are the first 4 ints of the list.</p></li>
+<li><p><em>app_version</em> major.minor.revision.build. These are the last 4 ints of the list.</p></li>
+</ol>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list containing: s_major</em><em>, </em><em>s_minor</em><em>, </em><em>s_revision</em><em>, </em><em>s_build</em><em>, </em><em>app_maj</em><em>, </em><em>app_min</em><em>, </em><em>app_rev</em><em>, </em><em>app_build and packs</em>) – node version list to pack into bytes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – 8 bytes codifying the node version in bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_1_arg_payload">
+<span class="sig-name descname"><span class="pre">set_1_arg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'B'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_1_arg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_1_arg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument payload for messages that only have 1 argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>list</em>) – argument to pack into bytes</p></li>
+<li><p><strong>packs</strong> (<em>string</em>) – compression type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – packed argument</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Checks whether the <em>arguments</em> is a <em>list</em> or an <em>int</em></p></li>
+<li><p>According to each case, uses the <strong>struct.pack</strong> function to bring the <em>int</em> to <em>bytes</em> and returns the result</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_2_arg_payload">
+<span class="sig-name descname"><span class="pre">set_2_arg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BB'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_2_arg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_2_arg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument payload for messages that only have 2 arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>list</em>) – argument to pack into bytes</p></li>
+<li><p><strong>packs</strong> (<em>string</em>) – compression type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – packed arguments</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_alarm_and_crc_msg">
+<span class="sig-name descname"><span class="pre">set_alarm_and_crc_msg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alarm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_alarm_and_crc_msg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_alarm_and_crc_msg" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a cloud response to a previous gateway request with an alarm and many nodes to it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alarm</strong> (<em>int</em>) – the alarm that the gateway sent to the cloud</p></li>
+<li><p><strong>payload</strong> (<em>bytes</em>) – received message payload that we want to transform into a CRC</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – generated node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_client_id_msg_payload">
+<span class="sig-name descname"><span class="pre">set_client_id_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_client_id_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_client_id_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for the client id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node consumption metrics, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_dimming_msg_payload">
+<span class="sig-name descname"><span class="pre">set_dimming_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_dimming_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_dimming_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument into bytes for dimming messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list</em>) – dimming to pack into bytes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – packed arguments</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_echo_msg_payload">
+<span class="sig-name descname"><span class="pre">set_echo_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_echo_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_echo_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument into bytes for echo messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list</em>) – echo to pack into bytes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – packed echo</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_electric_params_list_msg_payload">
+<span class="sig-name descname"><span class="pre">set_electric_params_list_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_electric_params_list_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_electric_params_list_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a node electric parameters list. Change this function, right now it is inventing the electrical
+parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_nodes</strong> – number of nodes to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node consumption metrics list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_electrim_params_msg_payload">
+<span class="sig-name descname"><span class="pre">set_electrim_params_msg_payload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_electrim_params_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_electrim_params_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for node electric parameters. Change this function, right now it is inventing the electrical
+parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node consumption metrics, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_remove_nodes_msg_payload">
+<span class="sig-name descname"><span class="pre">set_remove_nodes_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_remove_nodes_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_remove_nodes_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a remove nodes list. Right now it is inventing the node ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num:nodes</strong> – number of nodes to use</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node id list, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_solar_metrics_msg_payload">
+<span class="sig-name descname"><span class="pre">set_solar_metrics_msg_payload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_solar_metrics_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_solar_metrics_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the message argument into bytes for a node solar panel metrics. Change this function, right now it is inventing the solar
+parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – randomly generated node solar panel metrics, and packed into bytes</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_specific_functions.set_strategy_msg_payload">
+<span class="sig-name descname"><span class="pre">set_strategy_msg_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_specific_functions.html#set_strategy_msg_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_specific_functions.set_strategy_msg_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Set the argument into bytes for strategy messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>list</em>) – strategy to pack into bytes</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – packed strategy</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="create_message_nodes.html" class="btn btn-neutral float-left" title="create_message_nodes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="database_functions.html" class="btn btn-neutral float-right" title="database_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

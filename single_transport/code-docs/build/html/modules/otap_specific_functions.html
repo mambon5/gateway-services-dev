@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>otap_specific_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="otap_update_all_nodes" href="otap_update_all_nodes.html" />
+    <link rel="prev" title="otap_menu" href="otap_menu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">otap_specific_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/otap_specific_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-otap_specific_functions">
+<span id="otap-specific-functions"></span><h1>otap_specific_functions<a class="headerlink" href="#module-otap_specific_functions" title="Permalink to this headline"></a></h1>
+<p>Set of specific functions that use the wirepas OTAP.</p>
+<dl class="simple">
+<dt>The functions listed here allow the user to:</dt><dd><ol class="arabic simple">
+<li><p>Get the scratchpads of every node connected to the gateway’s sink</p></li>
+<li><p>Upload an scratchpad to the sink</p></li>
+<li><p>Order the sink to propagate this scratchpad to all the nodes</p></li>
+<li><p>Delete any scratchpad that is stored in the sink</p></li>
+<li><p>Set a new sink configuration (change network channel, address, start/stop the sink)</p></li>
+</ol>
+</dd>
+</dl>
+<p>Combining the 5 options above, and extracting different information in each of them, we delevopped a set of 14 different functions (so far)
+that extract/send information and commands from the sink and the nodes without having to set up any custom program in the node that
+reads and processess our custom requests. It is all handled by the built-in wirepas stack programs of the nodes and the sink</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#otap_specific_functions.activate_all_sinks" title="otap_specific_functions.activate_all_sinks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">activate_all_sinks</span></code></a>(wni)</p></td>
+<td><p>Activate all sinks in gateway range.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#otap_specific_functions.configure_sink" title="otap_specific_functions.configure_sink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">configure_sink</span></code></a>(current_net_ad[, ...])</p></td>
+<td><p>Sets up a new configuration for the sink.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#otap_specific_functions.get_node_list" title="otap_specific_functions.get_node_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_list</span></code></a>(otapHelper)</p></td>
+<td><p>Gets the list of nodes connected to the gateway the function does 2 things:     1. It sends a remote &quot;scratchpad status&quot; to all connected nodes, and awaits its response     2. After 2 seconds, it sends a command that gets or captures the response from the nodes to the sink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#otap_specific_functions.get_node_version" title="otap_specific_functions.get_node_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_version</span></code></a>(otapHelper, node_id)</p></td>
+<td><p>Gets the stack and app version of the node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#otap_specific_functions.get_scratchpads" title="otap_specific_functions.get_scratchpads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scratchpads</span></code></a>(wni, otapHelper)</p></td>
+<td><p>This function gets the scratchapd of every node connected to the sink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#otap_specific_functions.list_sinks" title="otap_specific_functions.list_sinks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_sinks</span></code></a>(wni)</p></td>
+<td><p>List all sinks and their gateway id.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#otap_specific_functions.print_node_list" title="otap_specific_functions.print_node_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_node_list</span></code></a>(nodes)</p></td>
+<td><p>Prints the list of current node ids.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.activate_all_sinks">
+<span class="sig-name descname"><span class="pre">activate_all_sinks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wni</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#activate_all_sinks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.activate_all_sinks" title="Permalink to this definition"></a></dt>
+<dd><p>Activate all sinks in gateway range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><dl class="simple">
+<dt>using the WNI command “get_sink()” the function collects all the information regarding the sink: <a href="#id1"><span class="problematic" id="id2">*</span></a>gateway id, sink id, network address,</dt><dd><p>network channel, is sink active?*</p>
+</dd>
+</dl>
+</li>
+<li><p>with this information it calls the <em>configure_sink</em> function with argument <em>start_it</em> set to <em>True</em> which activates the sink.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>wni</strong> (<em>WirepasNetworkInterface</em>) – Wirepas network interface class, containign the MQTT broker connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.configure_sink">
+<span class="sig-name descname"><span class="pre">configure_sink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_net_ad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_it</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#configure_sink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.configure_sink" title="Permalink to this definition"></a></dt>
+<dd><p>Sets up a new configuration for the sink.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>First of all, it gets all the sinks connected to the gateway using the wirepas function <em>get_sinks()</em>.</p></li>
+<li><p>Then it sets the sink configuration according to the input arguments, using the wirepas <em>set_sink_config()</em> function.</p></li>
+<li><p>It restarts the sink by calling the shell script <em>start_sinks.sh</em></p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>current_net_ad</strong> (<em>int</em>) – Current network channel of the sink</p></li>
+<li><p><strong>net_channel</strong> (<em>int</em>) – New network channel to set the sink to</p></li>
+<li><p><strong>net_address</strong> (<em>int</em>) – New network address to set the sink to</p></li>
+<li><p><strong>start_it</strong> (<em>bool</em>) – Whether to start the sink configuration or not, after changing the rest of the parameters</p></li>
+<li><p><strong>wni</strong> (<em>WirepasNetworkInterface</em>) – Wirepas network interface class, containign the MQTT broker connection</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.get_node_list">
+<span class="sig-name descname"><span class="pre">get_node_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">otapHelper</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#get_node_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.get_node_list" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the list of nodes connected to the gateway
+the function does 2 things:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>It sends a remote “scratchpad status” to all connected nodes, and awaits its response</p></li>
+<li><p>After 2 seconds, it sends a command that gets or captures the response from the nodes to the sink</p></li>
+</ol>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>otapHelper</strong> (<em>WirepasOtapHelper</em>) – Class to ease Otap operation containing the network address.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">node list</dt>
+<dd class="field-odd"><p><em>(list[int])</em> consists of a list of nodes ids connected to the sink.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.get_node_version">
+<span class="sig-name descname"><span class="pre">get_node_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">otapHelper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#get_node_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.get_node_version" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the stack and app version of the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><p>1. A wirepas-specific python function is called, “send_remote_scratchpad_status” in order to send a scratchpad information
+request to a specific node.
+2. After 0 seconds, another python function is executed to extract that information from the sink.
+3. From the stratchpad status of the node, the stack and app version are extracted and returned.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>node_id</strong> (<em>int</em>) – address of the node from which we want the software version</p></li>
+<li><p><strong>otapHelper</strong> (<em>WirepasOtapHelper</em>) – Class to ease Otap operation containing the network address.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">result</dt>
+<dd class="field-odd"><p><em>(list)</em> with:</p>
+</dd>
+</dl>
+<ol class="arabic simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">success</dt>
+<dd class="field-odd"><p><em>bool</em> - whether the node version could be retrieved or not using otap.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">node_software_version</dt>
+<dd class="field-odd"><p><em>(list[int])</em> consists of a list of 8 int ranging from 0-254 which codify:
+1. <em>stack_version</em> major.minor.revision.build. These are the first 4 ints of the list.
+2. <em>app_version</em> major.minor.revision.build. These are the last 4 ints of the list.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.get_scratchpads">
+<span class="sig-name descname"><span class="pre">get_scratchpads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wni</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otapHelper</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#get_scratchpads"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.get_scratchpads" title="Permalink to this definition"></a></dt>
+<dd><p>This function gets the scratchapd of every node connected to the sink.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It uses the WNI to get a list of all the connected sinks to the gateway backend</p></li>
+<li><p>It sends a remote “scratchpad status” to all connected nodes, and awaits its response</p></li>
+<li><p>After 0 seconds, it gets or captures the response from the nodes to the sink</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>wni</strong> (<em>WirepasNetworkInterface</em>) – Wirepas network interface class, containign the MQTT broker connection</p></li>
+<li><p><strong>otapHelper</strong> (<em>WirepasOtapHelper</em>) – Class to ease Otap operation containing the network address.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.list_sinks">
+<span class="sig-name descname"><span class="pre">list_sinks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wni</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#list_sinks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.list_sinks" title="Permalink to this definition"></a></dt>
+<dd><p>List all sinks and their gateway id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It uses the WNI to get a list of all the connected sinks to the gateway backend</p></li>
+<li><p>It lists them one by one</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>wni</strong> (<em>WirepasNetworkInterface</em>) – Wirepas network interface class, containing the MQTT broker connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="otap_specific_functions.print_node_list">
+<span class="sig-name descname"><span class="pre">print_node_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/otap_specific_functions.html#print_node_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#otap_specific_functions.print_node_list" title="Permalink to this definition"></a></dt>
+<dd><p>Prints the list of current node ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nodes</strong> (<em>list</em>) – list of current node ids</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="otap_menu.html" class="btn btn-neutral float-left" title="otap_menu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="otap_update_all_nodes.html" class="btn btn-neutral float-right" title="otap_update_all_nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>message_received_class &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="message_received_parse_functions" href="message_received_parse_functions.html" />
+    <link rel="prev" title="message_display_specific_functions" href="message_display_specific_functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">message_received_class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/message_received_class.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-message_received_class">
+<span id="message-received-class"></span><h1>message_received_class<a class="headerlink" href="#module-message_received_class" title="Permalink to this headline"></a></h1>
+<p>Message class used in all interactions.</p>
+<p class="rubric">Module Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_received_class.DB_PATH" title="message_received_class.DB_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DB_PATH</span></code></a></p></td>
+<td><p>database path</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_received_class.DB_NAME" title="message_received_class.DB_NAME"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DB_NAME</span></code></a></p></td>
+<td><p>database name</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_received_class.datab" title="message_received_class.datab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datab</span></code></a></p></td>
+<td><p>table names</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_received_class.TABLE_SUCCESS" title="message_received_class.TABLE_SUCCESS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TABLE_SUCCESS</span></code></a></p></td>
+<td><p>table of successfully requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_received_class.TABLE_FAILS" title="message_received_class.TABLE_FAILS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TABLE_FAILS</span></code></a></p></td>
+<td><p>table of failed requests</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_received_class.TABLE_REQUESTS_SENT" title="message_received_class.TABLE_REQUESTS_SENT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TABLE_REQUESTS_SENT</span></code></a></p></td>
+<td><p>table of requests sent</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_received_class.TABLE_RECEIVED_RESPONSES" title="message_received_class.TABLE_RECEIVED_RESPONSES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TABLE_RECEIVED_RESPONSES</span></code></a></p></td>
+<td><p>table of received responses</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_received_class.RxMsg" title="message_received_class.RxMsg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RxMsg</span></code></a>([payload, topic, source_address, ...])</p></td>
+<td><p>Message received class.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.DB_NAME">
+<span class="sig-name descname"><span class="pre">DB_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wirepas_mesh_network.db'</span></em><a class="headerlink" href="#message_received_class.DB_NAME" title="Permalink to this definition"></a></dt>
+<dd><p>database name</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.DB_PATH">
+<span class="sig-name descname"><span class="pre">DB_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bbdd/'</span></em><a class="headerlink" href="#message_received_class.DB_PATH" title="Permalink to this definition"></a></dt>
+<dd><p>database path</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="message_received_class.RxMsg">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RxMsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gw_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Message received class.
+The message is the main way of communicating information between the cloud, the gateway and the nodes.
+Every message will use this format when processed by the gateway.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<ol class="arabic simple">
+<li><p>Parsing of the received messages (main functionality of the class)</p></li>
+<li><p>Display of messages</p></li>
+<li><p>Storage of messages</p></li>
+<li><p>Calls specific functions depending on the message type, for parsing, displaying and storage.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – message payload, has a variable length</p></li>
+<li><p><strong>topic</strong> (<em>string</em>) – MQTT topic where the message was published. It is None for node to gateway messages.</p></li>
+<li><p><strong>source_address</strong> (<em>int</em>) – node id that sent the message. It is None for cloud to gateway messages.</p></li>
+<li><p><strong>gw_id</strong> (<em>int</em>) – gateway id to who the message was sent.</p></li>
+<li><p><strong>sink_id</strong> (<em>int</em>) – sink id that received the message in the gateway</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Returns a <strong>RxMsg</strong> class with the following attributes:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p>(bytes) – received message data payload</p>
+</dd>
+<dt class="field-even">msg_type</dt>
+<dd class="field-even"><p>(int) – message TYPE decoded from given data payload (value is None at init time)</p>
+</dd>
+<dt class="field-odd">msg_id</dt>
+<dd class="field-odd"><p>(int) – unique message temporal identifier</p>
+</dd>
+<dt class="field-even">gw_id</dt>
+<dd class="field-even"><p>(int) – gateway id</p>
+</dd>
+<dt class="field-odd">sink_id</dt>
+<dd class="field-odd"><p>(int) – sink id</p>
+</dd>
+<dt class="field-even">node_id</dt>
+<dd class="field-even"><p>(int) – node id that sent the message</p>
+</dd>
+<dt class="field-odd">topic</dt>
+<dd class="field-odd"><p>(string) – mqtt topic to which the message was sent (if applicable, for node messages this is None)</p>
+</dd>
+<dt class="field-even">args</dt>
+<dd class="field-even"><p>(list) – list of additional arguments (besides message id, and msg_type) contained in the message</p>
+</dd>
+</dl>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+<p>Initialize class instance attributes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gw_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize class instance attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.add_msg_to_response_received_table">
+<span class="sig-name descname"><span class="pre">add_msg_to_response_received_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gateway_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.add_msg_to_response_received_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.add_msg_to_response_received_table" title="Permalink to this definition"></a></dt>
+<dd><p>Save response received to the responses_received table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note</dt>
+<dd class="field-odd"><p>this function is bound to disappear, since it is not necessary anymore.
+Instead, the gateway can open a “listening” thread and await for the
+message id to be received, just before sending its message to the node.
+This way we avoid having to use the hard disk in order to use the
+request-response messaging mechanism.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>gateway_id</strong> (<em>int</em>) – gateway id</p></li>
+<li><p><strong>sink_id</strong> (<em>int</em>) – sink id</p></li>
+<li><p><strong>node_id</strong> (<em>int</em>) – node id</p></li>
+<li><p><strong>timestamp</strong> (<em>string</em>) – custom timestamp and date up to the milliseconds</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>bool – true if successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_raw_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.display" title="Permalink to this definition"></a></dt>
+<dd><p>Function to display the message fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<ol class="arabic simple">
+<li><p>Takes the parsed message</p></li>
+<li><dl class="simple">
+<dt>Calls the specific display function from <a class="reference internal" href="message_display_functions.html#module-message_display_functions" title="message_display_functions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message_display_functions()</span></code></a> depending on:</dt><dd><ul class="simple">
+<li><p><strong>message type</strong></p></li>
+<li><p><strong>message origin</strong> (cloud or nodes)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> (<em>datetime</em><em> (</em><em>custom format</em><em>)</em>) – timestamp passed by the caller</p></li>
+<li><p><strong>print_raw_data</strong> (<em>bool</em>) – Print raw data or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.get_gw_id">
+<span class="sig-name descname"><span class="pre">get_gw_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_supertopic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.get_gw_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.get_gw_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the <em>gateway id</em> field from the message payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sub_supertopic</strong> (<em>string</em>) – subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.get_msg_id">
+<span class="sig-name descname"><span class="pre">get_msg_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.get_msg_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.get_msg_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the <em>msg id</em> field from the message payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> return arguments. Empty if parsing was ok, otherwise returns the error type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.get_msg_id_and_type">
+<span class="sig-name descname"><span class="pre">get_msg_id_and_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.get_msg_id_and_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.get_msg_id_and_type" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the <em>msg type</em> and <em>message id</em> fields from the message payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>calls the <a class="reference internal" href="#message_received_class.RxMsg.get_msg_type" title="message_received_class.RxMsg.get_msg_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_msg_type()</span></code></a> and <a class="reference internal" href="#message_received_class.RxMsg.get_msg_id" title="message_received_class.RxMsg.get_msg_id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_msg_id()</span></code></a>  functions which will extract the first 3 bytes of the message</p></li>
+<li><p>returns an error if it is unsuccessful in any of its steps.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> return arguments. Empty if parsing was ok, otherwise returns the error type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.get_msg_type">
+<span class="sig-name descname"><span class="pre">get_msg_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.get_msg_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.get_msg_type" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the <em>msg type</em> field from the message payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Unpacks the third byte of the received message payload.</p></li>
+<li><p>If everything is correct, it will store the unpacked number as the message type attribute of the RxMsg class</p></li>
+<li><p>If the lenght of the message is 0, it will report an error, “unexpected message length”</p></li>
+<li><p>If the message type is not in the supported message list, it will report another error, “invalid message type”</p></li>
+</ol>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> return arguments. Empty if parsing was ok, otherwise returns the error type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.get_node_id">
+<span class="sig-name descname"><span class="pre">get_node_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_supertopic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.get_node_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.get_node_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the <em>node id</em> field from the message payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sub_supertopic</strong> (<em>string</em>) – subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.get_sub_supertopic">
+<span class="sig-name descname"><span class="pre">get_sub_supertopic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_topic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.get_sub_supertopic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.get_sub_supertopic" title="Permalink to this definition"></a></dt>
+<dd><p>getting message origin: (in the case of gateway - node messaging this will be None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sub_topic</strong> (<em>string</em>) – subscription MQTT topic to which the message was sent. Default to None for node-to-gateway messages</p>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>compute the MQTT super topic, according to the topic received.</p></li>
+<li><p>stores the value into an accessible attribute of the message named the same</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.parse" title="Permalink to this definition"></a></dt>
+<dd><p>Main parsing function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<ol class="arabic">
+<li><p>call the <a class="reference internal" href="#message_received_class.RxMsg.parse_basic" title="message_received_class.RxMsg.parse_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_basic()</span></code></a> function</p></li>
+<li><p>if the basic parsing was ok, then depending on the</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>message origin</strong> (cloud or nodes)</p></li>
+</ul>
+</div></blockquote>
+<p>a different parsing function from <a class="reference internal" href="message_received_parse_functions.html#module-message_received_parse_functions" title="message_received_parse_functions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message_received_parse_functions()</span></code></a> will be called.</p>
+</li>
+<li><p>After that, a specific parsing function from <a class="reference internal" href="message_specific_parse_functions.html#module-message_specific_parse_functions" title="message_specific_parse_functions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message_specific_parse_functions()</span></code></a> will be called
+depending on the</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>message type</strong>,</p></li>
+</ul>
+</div></blockquote>
+<p>which is designed specifically for that type of message.</p>
+</li>
+<li><p>The specific parsing function will save additional rellevant data contained in the message, in the
+<strong>args</strong> attribute (from arguments) of the <a class="reference internal" href="#message_received_class.RxMsg" title="message_received_class.RxMsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">RxMsg()</span></code></a> class, as a list of objects.</p></li>
+<li><p>Finally, it will return <em>True</em> if the parsing was all successfull, and <em>False</em> if there has been any kind of issue.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sub_supertopic</strong> (<em>string</em>) – subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> (<em>bool</em>) – True if parsing was successful, False if it failed)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.parse_basic">
+<span class="sig-name descname"><span class="pre">parse_basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_topic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.parse_basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.parse_basic" title="Permalink to this definition"></a></dt>
+<dd><p>Basic parsing for received messages. It does the most basic parsing of any message received. It just computes the</p>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic">
+<li><p>Extracts the:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>message id</em> using the <a class="reference internal" href="#message_received_class.RxMsg.get_msg_id_and_type" title="message_received_class.RxMsg.get_msg_id_and_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_msg_id_and_type()</span></code></a> function</p></li>
+<li><p><em>message type</em> using the <a class="reference internal" href="#message_received_class.RxMsg.get_msg_id_and_type" title="message_received_class.RxMsg.get_msg_id_and_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_msg_id_and_type()</span></code></a> function</p></li>
+<li><p><em>gateway id</em> using the <a class="reference internal" href="#message_received_class.RxMsg.get_gw_id" title="message_received_class.RxMsg.get_gw_id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_gw_id()</span></code></a> function</p></li>
+<li><p><em>node id</em> using the <a class="reference internal" href="#message_received_class.RxMsg.get_node_id" title="message_received_class.RxMsg.get_node_id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_node_id()</span></code></a> function</p></li>
+</ul>
+</div></blockquote>
+<p>from the message payload, and saves it in the <a class="reference internal" href="#message_received_class.RxMsg" title="message_received_class.RxMsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">RxMsg()</span></code></a> class.</p>
+</li>
+<li><p>It returns <em>True</em> if the message basic parsing was successful, and <em>False</em> plus the error message, otherwise.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>sub_supertopic</strong> (<em>string</em>) – subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> return arguments. Empty if parsing was ok, otherwise returns the error type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.register_node_to_db">
+<span class="sig-name descname"><span class="pre">register_node_to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.register_node_to_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.register_node_to_db" title="Permalink to this definition"></a></dt>
+<dd><p>Register or update a node. Each time that a node sends a message, and this function is
+triggered, we will store the following information to the database to register the new node:</p>
+<ul class="simple">
+<li><p>node_id TEXT      NOT NULL,</p></li>
+<li><p>active           INT     NOT NULL,</p></li>
+<li><p>led_status           INT     DEFAULT -1,</p></li>
+<li><p>dimming           INT     DEFAULT -1,</p></li>
+<li><p>first_seen           TEXT     DEFAULT “not yet”,</p></li>
+<li><p>last_seen           TEXT     DEFAULT “never”,</p></li>
+<li><p>amount_of_neighbours    INT     DEFAULT -1,</p></li>
+<li><p>hops    INT     DEFAULT -1,</p></li>
+<li><p>rssi    INT     DEFAULT -1,</p></li>
+</ul>
+<p>if this node was already registered, then we will only update the following parameters:</p>
+<ul class="simple">
+<li><p>last seen time</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_id</strong> (<em>int</em>) – node id</p></li>
+<li><p><strong>timestamp</strong> (<em>string</em>) – custom timestamp and date up to the milliseconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.save_periodic_message_to_db">
+<span class="sig-name descname"><span class="pre">save_periodic_message_to_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.save_periodic_message_to_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.save_periodic_message_to_db" title="Permalink to this definition"></a></dt>
+<dd><p>Save the periodic messages to the database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_id</strong> (<em>int</em>) – node id</p></li>
+<li><p><strong>timestamp</strong> (<em>string</em>) – custom timestamp and date up to the milliseconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="message_received_class.RxMsg.store">
+<span class="sig-name descname"><span class="pre">store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gateway_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_received_class.html#RxMsg.store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_received_class.RxMsg.store" title="Permalink to this definition"></a></dt>
+<dd><p>Saves to the database the received message payload arguments. The Gateway is responsible for
+creating and mantaining the databases</p>
+<p>If the global variable <em>store_messages</em> is set to True, this function will be called in different moments
+and store the following information:</p>
+<ol class="arabic simple">
+<li><p>Register nodes to the database</p></li>
+<li><p>add_msg_to_response_received_table (depracated, this function is not necessary anymore and will be deleted)</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> (<em>datetime</em><em> (</em><em>custom format</em><em>)</em>) – timestamp passed by caller</p></li>
+<li><p><strong>gateway_id</strong> (<em>int</em>) – gateway id</p></li>
+<li><p><strong>sink_id</strong> (<em>int</em>) – sink id</p></li>
+<li><p><strong>node_id</strong> (<em>int</em>) – node id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.TABLE_FAILS">
+<span class="sig-name descname"><span class="pre">TABLE_FAILS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed_requests'</span></em><a class="headerlink" href="#message_received_class.TABLE_FAILS" title="Permalink to this definition"></a></dt>
+<dd><p>table of failed requests</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.TABLE_RECEIVED_RESPONSES">
+<span class="sig-name descname"><span class="pre">TABLE_RECEIVED_RESPONSES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'responses_received'</span></em><a class="headerlink" href="#message_received_class.TABLE_RECEIVED_RESPONSES" title="Permalink to this definition"></a></dt>
+<dd><p>table of received responses</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.TABLE_REQUESTS_SENT">
+<span class="sig-name descname"><span class="pre">TABLE_REQUESTS_SENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'requests_sent'</span></em><a class="headerlink" href="#message_received_class.TABLE_REQUESTS_SENT" title="Permalink to this definition"></a></dt>
+<dd><p>table of requests sent</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.TABLE_SUCCESS">
+<span class="sig-name descname"><span class="pre">TABLE_SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'successful_requests'</span></em><a class="headerlink" href="#message_received_class.TABLE_SUCCESS" title="Permalink to this definition"></a></dt>
+<dd><p>table of successfully requests</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="message_received_class.datab">
+<span class="sig-name descname"><span class="pre">datab</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bbdd/wirepas_mesh_network.db'</span></em><a class="headerlink" href="#message_received_class.datab" title="Permalink to this definition"></a></dt>
+<dd><p>table names</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="message_display_specific_functions.html" class="btn btn-neutral float-left" title="message_display_specific_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="message_received_parse_functions.html" class="btn btn-neutral float-right" title="message_received_parse_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

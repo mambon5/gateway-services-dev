@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>backend_script_node_comms &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">backend_script_node_comms</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for backend_script_node_comms</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Starts the interaction of the gateway with the nodes. It creates the user interface (in the terminal) for sending and receiving messages </span>
+<span class="sd">to/from the mesh network, respectively.</span>
+<span class="sd">The interface is in the terminal and allows to select **one** of the following mqtt interaction modes:</span>
+
+<span class="sd">    1.  Gateway listens to mesh network messages</span>
+<span class="sd">    2.  Gateway sends requests to the mesh network</span>
+
+<span class="sd">    In order to start any of the 2 interactions listed here, we should:</span>
+
+<span class="sd">    - select an interaction mode (either *request* or *listen*)</span>
+<span class="sd">    - create an interaction with the nodes, using the :class:`mqtt_interaction_node_main &lt;mqtt_interaction_node_main.mqtt_interaction_node_main&gt;` class </span>
+<span class="sd">      or the :class:`mqtt_interaction_node_temporal &lt;mqtt_interaction_node_temporal.mqtt_interaction_node_temporal&gt;` class, depending</span>
+<span class="sd">      on the nature of the interaction. The *node main* class is more permanent and is supposed to constantly listen for any message from the nodes. While</span>
+<span class="sd">      the *node temporal class* is designed to be created and destroyed instantaneosuly, and just used for tunneling a message from the cloud to the node. </span>
+<span class="sd">      It is created as a necessary way of sending the message form the gateway to the node in order to complete the cloud &gt; node tunnel.</span>
+<span class="sd">    </span>
+<span class="sd">    Finally, the following is triggered depending on the interaction mode (listen or send):</span>
+
+<span class="sd">    - *for listen modes*: the subscription sub loop starts</span>
+<span class="sd">    - *for send modes*: the send message function is called.</span>
+
+<span class="sd">    :references: We followed this guide to install the python backend to the gateway &gt; https://developer.wirepas.com/support/solutions/articles/77000487992-how-to-communicate-with-a-wirepas-network-using-wirepas-gateway-ap </span>
+<span class="sd">    in order to know how to create a python backend to talk to the nodes.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">local_settings</span> <span class="k">as</span> <span class="nn">settings</span>       <span class="c1"># to import some global variables than we need to keep updated even if gateway stops</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>              <span class="c1"># import global variables</span>
+<span class="kn">import</span> <span class="nn">database_functions</span> <span class="k">as</span> <span class="nn">db_fs</span>      <span class="c1"># import functions for writing and reading of messages to/from the database</span>
+
+<span class="kn">from</span> <span class="nn">mqtt_interaction_node_main</span> <span class="kn">import</span> <span class="n">mqtt_interaction_node_main</span> 
+<span class="kn">from</span> <span class="nn">mqtt_interaction_cloud</span> <span class="kn">import</span> <span class="n">mqtt_interaction_cloud</span> 
+<span class="c1"># from mqtt_interaction_module import mqtt_interaction_cloud </span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">==== Script global variable ====</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">#: interaction modes:</span>
+<span class="n">GW_REQUEST_TO_NODES</span> <span class="o">=</span> <span class="s2">&quot;request to nodes&quot;</span>
+<span class="n">GW_LISTEN_TO_NODES</span> <span class="o">=</span> <span class="s2">&quot;listen to nodes&quot;</span>
+<span class="n">GW_LISTEN_TO_NODES_RAW_DATA</span> <span class="o">=</span> <span class="s2">&quot;listen to nodes -raw_data&quot;</span>
+<span class="n">FAKE_NODE_LISTENER</span> <span class="o">=</span> <span class="s2">&quot;fake node listener&quot;</span>
+<span class="n">FAKE_NODE_REQUESTER</span> <span class="o">=</span> <span class="s2">&quot;fake node requester (doesn&#39;t work, can&#39;t fully simulate wirepas message)&quot;</span>
+
+<span class="c1">#: different interaction modes with the nodes</span>
+<span class="n">MODE_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="n">GW_REQUEST_TO_NODES</span><span class="p">,</span> <span class="n">GW_LISTEN_TO_NODES</span><span class="p">,</span> <span class="n">GW_LISTEN_TO_NODES_RAW_DATA</span><span class="p">,</span> <span class="n">FAKE_NODE_LISTENER</span><span class="p">,</span> <span class="n">FAKE_NODE_REQUESTER</span><span class="p">]</span>
+
+<span class="n">FILE_SETTINGS</span> <span class="o">=</span> <span class="s2">&quot;local_settings.py&quot;</span>
+<span class="c1">#: get the current message id, saved in file &quot;settings&quot;</span>
+<span class="n">message_id</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">msg_id</span>
+
+<span class="c1"># path to gateway database:</span>
+<span class="c1">#: DB_PATH = &quot;/home/roma/smartec/gateway-services/single_transport/backend/bbdd/&quot;</span>
+<span class="n">DB_PATH</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">DB_PATH</span>
+<span class="c1">#: name of database:</span>
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">DB_NAME</span>
+
+<span class="n">datab</span> <span class="o">=</span> <span class="n">DB_PATH</span> <span class="o">+</span> <span class="n">DB_NAME</span>
+
+<span class="c1">#table names:</span>
+<span class="n">TABLE_SUCCESS</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_SUCCESS</span>
+<span class="n">TABLE_FAILS</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_FAILS</span>
+<span class="n">TABLE_REQUESTS_SENT</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_REQUESTS_SENT</span>
+<span class="n">TABLE_RECEIVED_RESPONSES</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_RECEIVED_RESPONSES</span>
+
+<span class="c1">#: save messages information to db or not</span>
+<span class="n">save_messages</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="run_node_comunications"><a class="viewcode-back" href="../modules/backend_script_node_comms.html#backend_script_node_comms.run_node_comunications">[docs]</a><span class="k">def</span> <span class="nf">run_node_comunications</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_list</span> <span class="o">=</span> <span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Starts the interaction with the mesh net. It allows the user to select a mode.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+
+<span class="sd">        1. You select a mode of the 5 available</span>
+<span class="sd">        2. then a :class:`mqtt_interaction_node_main &lt;mqtt_interaction_node_main.mqtt_interaction_node_main&gt;` or </span>
+<span class="sd">           :class:`mqtt_interaction_cloud &lt;mqtt_interaction_cloud.mqtt_interaction_node_main&gt;` class is created</span>
+<span class="sd">        3. Depending on the mode selected (*listen* or *request*) the function *.listen()* or *.send_message()*</span>
+<span class="sd">           are called.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="c1"># user selects mqtt mode:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;select an interaction type with the nodes:&quot;</span><span class="p">)</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">display_and_set_interaction_mode</span><span class="p">(</span><span class="n">MODE_LIST</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="c1"># mode already supplied</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;input already supplied when calling this function&quot;</span><span class="p">)</span>
+
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">MODE_LIST</span><span class="p">[</span><span class="n">mode</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mode selected: &quot;</span> <span class="o">+</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="c1"># main script -&gt; publish/subscribe details:</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">GW_REQUEST_TO_NODES</span><span class="p">:</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="n">mqtt_interaction_node_main</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;request&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">,</span> <span class="n">node_list</span> <span class="o">=</span> <span class="n">node_list</span><span class="p">)</span>        
+        <span class="n">inter</span><span class="o">.</span><span class="n">send_message</span><span class="p">()</span>
+    
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">GW_LISTEN_TO_NODES</span> <span class="ow">or</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">GW_LISTEN_TO_NODES_RAW_DATA</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;listen to nodes&quot;</span><span class="p">)</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="n">mqtt_interaction_node_main</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;listen&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">,</span> <span class="n">node_list</span> <span class="o">=</span> <span class="n">node_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">GW_LISTEN_TO_NODES_RAW_DATA</span><span class="p">:</span>
+            <span class="n">inter</span><span class="o">.</span><span class="n">print_raw_data</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">inter</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+
+    <span class="c1"># doesn&#39;t really work, because i can&#39;t simulate the entire message that wirepass receives either:</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">FAKE_NODE_LISTENER</span><span class="p">:</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="n">mqtt_interaction_cloud</span><span class="p">(</span>
+         <span class="n">subtopic</span><span class="o">=</span><span class="s2">&quot;gw-request/#&quot;</span><span class="p">,</span>
+         <span class="n">pubtopic</span><span class="o">=</span><span class="s2">&quot;gw-event/received_data/&quot;</span><span class="o">+</span> <span class="n">gvar</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span> <span class="n">gvar</span><span class="o">.</span><span class="n">sink</span> <span class="o">+</span><span class="s2">&quot;/5/1/1&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;listen&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>
+        <span class="c1">#          gw-event/received_data/  &lt;gw-id&gt;       /    &lt;sink-id&gt;/&lt;net_id&gt;/&lt;src_ep&gt;/&lt;dst_ep&gt;</span>
+        <span class="n">inter</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+    <span class="c1"># run this mosquitto sub instead:</span>
+    <span class="c1"># mosquitto_sub -P all_I_want_for_christmas_is_you -u roma_masana -h 127.0.0.1 -p 1883 -t gw-request/send_data/2486247681457/sink0</span>
+
+    <span class="c1"># doesn&#39;t really work, because i can&#39;t simulate the entire message that wirepass publishes:</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">FAKE_NODE_REQUESTER</span><span class="p">:</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="n">mqtt_interaction_cloud</span><span class="p">(</span>  
+         <span class="n">subtopic</span><span class="o">=</span><span class="s2">&quot;gw-request/#&quot;</span><span class="p">,</span>
+         <span class="n">pubtopic</span><span class="o">=</span><span class="s2">&quot;gw-event/received_data/&quot;</span><span class="o">+</span> <span class="n">gvar</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span> <span class="n">gvar</span><span class="o">.</span><span class="n">sink</span> <span class="o">+</span><span class="s2">&quot;/5/1/1&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;request&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>
+        <span class="n">inter</span><span class="o">.</span><span class="n">send_message</span><span class="p">()</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error: Unrecognized mode selected!&quot;</span><span class="p">)</span>  
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../modules/backend_script_node_comms.html#backend_script_node_comms.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">run_node_comunications</span><span class="p">()</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

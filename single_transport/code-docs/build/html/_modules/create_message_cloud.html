@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create_message_cloud &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">create_message_cloud</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for create_message_cloud</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions to create a message for the cloud. It also icludes some functions that create a message from the cloud to the gateway, buy theses </span>
+<span class="sd">are not meant for production.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+<span class="kn">import</span> <span class="nn">create_message_specific_functions</span> <span class="k">as</span> <span class="nn">cmsgspf</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">compute_crc</span> <span class="k">as</span> <span class="nn">get_crc</span>
+
+
+<div class="viewcode-block" id="gw_resp_to_cloud_req_to_node"><a class="viewcode-back" href="../modules/create_message_cloud.html#create_message_cloud.gw_resp_to_cloud_req_to_node">[docs]</a><span class="k">def</span> <span class="nf">gw_resp_to_cloud_req_to_node</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the payload for a gateway response to a cloud message that was sent to a node.</span>
+
+<span class="sd">    :does:</span>
+
+<span class="sd">    1. Depending on the *msg_type* it will call a specific function or another, to create the payload.</span>
+<span class="sd">    2. It will return this payload to the main *create_message* function.</span>
+<span class="sd">    </span>
+<span class="sd">    :param msg_type: message type </span>
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- partial payload to be sent, without the message id and type, which are already sent</span>
+
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;create gw resp to cloud msg /n &gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_LED_ON</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_LED_OFF</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_BLINKING</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; no extra arguments needed,  led on/off/blink msg payload&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_DIMMING</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_DIMMING_STATUS</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating set/get dimming msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_dimming_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>             <span class="c1"># dimming</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_STRATEGY</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating set strategy msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_strategy_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>            <span class="c1"># strategy </span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_ECHO</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating echo msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>   <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_echo_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># echo</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_LED_STATUS</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating get led status msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>                   <span class="c1"># get led status</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_NUMBER_OF_NEIGHBOURS</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating get num neighbours msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;I&quot;</span><span class="p">)</span>                   <span class="c1"># num neighbours</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_RSSI</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating rssi msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>                   <span class="c1"># rssi</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_HOPS</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating hops msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>             <span class="c1"># hops</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_NODE_STATUS</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating node status msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">send_node_status_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>   
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_VERSION</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating node version msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">send_node_version_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                             <span class="n">args</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">packs</span><span class="o">=</span><span class="s2">&quot;BBBBBBBB&quot;</span><span class="p">)</span>                           <span class="c1"># node status</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<div class="viewcode-block" id="gw_resp_to_cloud_req_to_gw"><a class="viewcode-back" href="../modules/create_message_cloud.html#create_message_cloud.gw_resp_to_cloud_req_to_gw">[docs]</a><span class="k">def</span> <span class="nf">gw_resp_to_cloud_req_to_gw</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the payload for the gateway response to a cloud message directed to a gateway.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+
+<span class="sd">    1. Depending on the *msg_type* it will call a specific function or another, to create the payload.</span>
+<span class="sd">    2. It will return this payload to the main *create_message* function.</span>
+
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- partial payload to be sent, without the message id and type, which are already sent</span>
+
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;create gw resp to cloud msg /gw &gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+          
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_NODE_LIST</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating node list msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">node_id_list_client_id_payload</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>             <span class="c1"># node list</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_REMOVE_NODES</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating node list msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">gen_crc_message</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>                                <span class="c1"># REMOVE NODES</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_GATEWAY</span><span class="p">,</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_NODES</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating software update msg payload&quot;</span><span class="p">)</span>
+        <span class="k">pass</span>   
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_GET_GATEWAY_VERSION</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating gw version msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">gen_gw_version_message</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>                               <span class="c1"># get gateway version</span>
+    
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<div class="viewcode-block" id="gw_request_to_cloud"><a class="viewcode-back" href="../modules/create_message_cloud.html#create_message_cloud.gw_request_to_cloud">[docs]</a><span class="k">def</span> <span class="nf">gw_request_to_cloud</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the payload for the gateway request to the cloud. These functions need to be developped further, since right now,</span>
+<span class="sd">    they invent the nodes to add/remove from the cloud database.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+
+<span class="sd">    1. Depending on the *msg_type* it will call a specific function or another, to create the payload.</span>
+<span class="sd">    2. It will return this payload to the main *create_message* function.</span>
+
+<span class="sd">    :param msg_type: message type </span>
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+<span class="sd">    </span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- partial payload to be sent, without the message id and type, which are already sent</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;create gw req to cloud&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALIVE_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; no extra arguments needed,  alive msg payload&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ADD_NODES_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating add nodes msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">random_node_id_list_payload</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>             <span class="c1"># gw to cl request add nodes</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_UNSEEN_NODES_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating remove nodes msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">random_node_id_list_payload</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>             <span class="c1"># gw to cl request remove nodes</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_STATUS_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating node status list msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">random_node_status_list_payload</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>             <span class="c1"># gw to cl request node status list</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALARM_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating alive msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">random_alarm_node_list_payload</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>             <span class="c1"># gw to cl request electric parameters</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ELECTRIC_PARAMETERS_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; creating send consumptions msg payload&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_electric_params_list_msg_payload</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>             <span class="c1"># gw to cl send consums</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<div class="viewcode-block" id="cloud_request_to_node"><a class="viewcode-back" href="../modules/create_message_cloud.html#create_message_cloud.cloud_request_to_node">[docs]</a><span class="k">def</span> <span class="nf">cloud_request_to_node</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the payload for the cloud request to a specific node. This function is not meant for production, only for testing purposes.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+
+<span class="sd">    1. Depending on the *msg_type* it will call a specific function or another, to create the payload.</span>
+<span class="sd">    2. It will return this payload to the main *create_message* function.</span>
+<span class="sd">    </span>
+<span class="sd">    :param msg_type: message type </span>
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- partial payload to be sent, without the message id and type, which are already sent</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;create cloud req to node &gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_LED_ON</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_LED_OFF</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_BLINKING</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_ECHO</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_LED_STATUS</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_DIMMING_STATUS</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_NUMBER_OF_NEIGHBOURS</span> <span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_RSSI</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_HOPS</span><span class="p">,</span> 
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_NODE_STATUS</span>
+                        <span class="p">]</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; no extra arguments needed&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_DIMMING</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_dimming_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>              <span class="c1"># dimming</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_SET_STRATEGY</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_strategy_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>            <span class="c1"># strategy</span>
+
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>
+        
+    
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="cloud_request_to_gateway"><a class="viewcode-back" href="../modules/create_message_cloud.html#create_message_cloud.cloud_request_to_gateway">[docs]</a><span class="k">def</span> <span class="nf">cloud_request_to_gateway</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the payload for the cloud request to a gateway. This function is not meant for production, only for testing purposes.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+
+<span class="sd">    1. Depending on the *msg_type* it will call a specific function or another, to create the payload.</span>
+<span class="sd">    2. It will return this payload to the main *create_message* function. </span>
+<span class="sd">   </span>
+<span class="sd">    :param msg_type: message type </span>
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- partial payload to be sent, without the message id and type, which are already sent</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;create cloud req to node &gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+    <span class="n">client_id</span> <span class="o">=</span> <span class="mi">73871</span>
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_NODE_LIST</span>
+                    <span class="p">]</span> <span class="p">:</span>                     
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_client_id_msg_payload</span><span class="p">([</span><span class="n">client_id</span><span class="p">])</span>          <span class="c1"># led on, led off, node list, node status list</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; set the payload for client id message.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_REMOVE_NODES</span><span class="p">:</span>
+        <span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">12</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_remove_nodes_msg_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span>              <span class="c1"># remove nodes</span>
+    
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="ow">in</span>  <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_GATEWAY</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_NODES</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no extra arguments needed&quot;</span><span class="p">)</span>                        <span class="c1"># update software</span>
+
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="cloud_resp_to_gateway"><a class="viewcode-back" href="../modules/create_message_cloud.html#create_message_cloud.cloud_resp_to_gateway">[docs]</a><span class="k">def</span> <span class="nf">cloud_resp_to_gateway</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the payload for the cloud response to a gateway request. This function is not meant for production, only for testing purposes.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+
+<span class="sd">    1. Depending on the *msg_type* it will call a specific function or another, to create the payload.</span>
+<span class="sd">    2. It will return this payload to the main *create_message* function. </span>
+<span class="sd">   </span>
+<span class="sd">    :param msg_type: message type </span>
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+<span class="sd">    :param msg: messge received class RxMsg, only when creating response messages to a previous request! This field will be *None* for request mode</span>
+<span class="sd">    :type msg: RxMsg</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- partial payload to be sent, without the message id and type, which are already sent</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;create cloud req to node &gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALIVE_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; no extra arguments needed&quot;</span><span class="p">)</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ADD_NODES_GW_TO_CLOUD</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_UNSEEN_NODES_GW_TO_CLOUD</span><span class="p">,</span>
+                    <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_STATUS_GW_TO_CLOUD</span><span class="p">,</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ELECTRIC_PARAMETERS_GW_TO_CLOUD</span>
+                    <span class="p">]</span> <span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_crc</span><span class="o">.</span><span class="n">compute_crc</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">payload</span><span class="p">)]</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">gen_crc_message</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="c1"># send crc</span>
+    <span class="k">elif</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALARM_GW_TO_CLOUD</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span>  <span class="n">cmsgspf</span><span class="o">.</span><span class="n">set_2_arg_payload</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">get_crc</span><span class="o">.</span><span class="n">compute_crc</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">payload</span><span class="p">))</span>             <span class="c1"># alarm and crc</span>
+
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>      
+    
+    <span class="k">return</span> <span class="n">payload</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

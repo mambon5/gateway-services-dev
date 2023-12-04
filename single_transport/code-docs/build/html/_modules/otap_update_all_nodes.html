@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>otap_update_all_nodes &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">otap_update_all_nodes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for otap_update_all_nodes</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Script responsible for updating the node software using OTAP.</span>
+
+<span class="sd">Main idea of propagate and process a scratchpad is the following one:</span>
+
+<span class="sd">1. Upload a scratchpad to the sink(s). The scratchpad is the byte-format firmware that has to be flashed into the nodes.</span>
+<span class="sd">2. *Process* the scratchpad to the sink and *propagate* it to all nodes connected directly (or indirectly via jumps or hops) to the sink</span>
+<span class="sd">3. Wait for the sink to restart (around 4min total) and the node to adopt the new scratchpad.</span>
+<span class="sd">4. After some minutes, all nodes related to the sink(s) will reboot and they will be running with the new firmware.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">otap_menu</span> <span class="k">as</span> <span class="nn">omenu</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../modules/otap_update_all_nodes.html#otap_update_all_nodes.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">wni</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uploads the selected scratchpad and propagates it to all the visible nodes.</span>
+
+<span class="sd">    :does:</span>
+<span class="sd">        1. It gets the scratchpad filename that is stored in the file &quot;otap/stratchpad_to_use.txt&quot;.</span>
+<span class="sd">        2. Then it sets the sink to *no otap* mode to erase any possibly conflicting scratchpad already loaded in the sink memory</span>
+<span class="sd">        3. uploads the scratchpad to the sink</span>
+<span class="sd">        4. Waits 6 seconds</span>
+<span class="sd">        5. It processes the scratchpad in the sink and propagates it to all connected nodes, forever or until a command to stop the propagation is received</span>
+<span class="sd">        6. it waits 2 minutes for the process and propagation to finish</span>
+<span class="sd">        7. Then it restarts all the gateway services by invoking the linux systemd service *restart gateway_services.service*</span>
+
+<span class="sd">    :param wni: Wirepas network interface class, containign the MQTT broker connection</span>
+<span class="sd">    :type wni: WirepasNetworkInterface</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;performing otap&gt;&quot;</span>
+    <span class="n">file_settings</span> <span class="o">=</span> <span class="s2">&quot;otap/stratchpad_to_use.txt&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_settings</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">scratchpad</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">otappath</span> <span class="o">=</span> <span class="s2">&quot;otap/scratchpads/&quot;</span>
+    <span class="c1"># scratchpad = &quot;pruebas/otap-2/otap-2_wpc_stack.otap&quot;</span>
+    <span class="n">scratchpad</span> <span class="o">=</span> <span class="n">otappath</span> <span class="o">+</span> <span class="n">scratchpad</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> sctatchpad file chosen: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">scratchpad</span><span class="p">))</span>
+    <span class="n">net_address</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">NETWORK_DEFAULT_CHANNEL</span>
+
+    <span class="k">if</span> <span class="n">wni</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> setting the WNI...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+        <span class="n">wni</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">create_wni</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> wni already given by calling function&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+
+    <span class="c1"># set sink to no-otap</span>
+    <span class="n">omenu</span><span class="o">.</span><span class="n">do_otap_action</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">omenu</span><span class="o">.</span><span class="n">OTAP_MODE_NO_OTAP</span><span class="p">,</span> <span class="n">curr_net_addr</span> <span class="o">=</span> <span class="n">net_address</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>
+
+    <span class="c1"># upload scratchpad</span>
+    <span class="n">omenu</span><span class="o">.</span><span class="n">do_otap_action</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">omenu</span><span class="o">.</span><span class="n">OTAP_MODE_UPLOAD_ONLY</span><span class="p">,</span> <span class="n">curr_net_addr</span> <span class="o">=</span> <span class="n">net_address</span><span class="p">,</span> <span class="n">scratchpad</span><span class="o">=</span><span class="n">scratchpad</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="c1"># propagate and process</span>
+    <span class="n">omenu</span><span class="o">.</span><span class="n">do_otap_action</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">omenu</span><span class="o">.</span><span class="n">OTAP_MODE_IMMEDIATELY</span><span class="p">,</span> <span class="n">curr_net_addr</span> <span class="o">=</span> <span class="n">net_address</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>
+
+    <span class="c1"># wait</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+
+    <span class="c1"># restart sink and gateway services.</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;echo admin | sudo -S systemctl restart gateway_services.service&quot;</span><span class="p">)</span></div>
+
+    <span class="c1">#time.sleep(120)</span>
+    <span class="c1"># activate the sink</span>
+    <span class="c1">#omenu.do_otap_action(mode=omenu.OTAP_MODE_ACTIVATE_ALL_SINKS, curr_net_addr = net_address)</span>
+
+    <span class="c1"># we can write here a line saying: gw updated</span>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

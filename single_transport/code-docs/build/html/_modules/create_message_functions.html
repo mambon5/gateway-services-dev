@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create_message_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">create_message_functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for create_message_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Script responsible for transforming the information into bytes and creating the message for the desired entity. </span>
+
+<span class="sd">- Once an &quot;interaction mode&quot; is selected, you can choose to create a message</span>
+<span class="sd">- This script switches between the different MQTT supertopics in order to know which kind of message is desired</span>
+<span class="sd">- Once a supertopic and message type are chosen, it will call a specific message content function, for message content creation</span>
+
+<span class="sd">- Some functions are not for production yet, and they invent or randomly generate the messages, for testing the infrastructure.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">create_message_cloud</span> <span class="k">as</span> <span class="nn">cmsgcloud</span>
+<span class="kn">import</span> <span class="nn">create_message_nodes</span> <span class="k">as</span> <span class="nn">cmsgnodes</span>
+
+<div class="viewcode-block" id="get_msg_from_input"><a class="viewcode-back" href="../modules/create_message_functions.html#create_message_functions.get_msg_from_input">[docs]</a><span class="k">def</span> <span class="nf">get_msg_from_input</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="n">pubtopic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a message based on the user input. Read the user input, and puts all the message information into bytes.</span>
+<span class="sd">    This function is designed for testing purposes only, won&#39;t be called in production.</span>
+<span class="sd">    </span>
+<span class="sd">    :param msg_id: message temporary unique identifier (id)</span>
+<span class="sd">    :type msg_id: int</span>
+<span class="sd">    :param pubtopic: MQTT topic where we will publish our message (None for gateay to node messaging)</span>
+<span class="sd">    :type pubtopic: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload (bytes) -- message payload</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;send_msg_from_input&gt;: &quot;</span>
+    <span class="n">pub_supertopic</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_supertopic</span><span class="p">(</span><span class="n">pubtopic</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;input the type of message and additional fields: &quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>                  <span class="c1"># this is done in order to remove any empty elements &#39;&#39; in the array</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">lenarg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;msg_id: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, msg_type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; num arguments: &quot;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lenarg</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, type &amp; arguments: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+    
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<div class="viewcode-block" id="message_to_bytes"><a class="viewcode-back" href="../modules/create_message_functions.html#create_message_functions.message_to_bytes">[docs]</a><span class="k">def</span> <span class="nf">message_to_bytes</span><span class="p">(</span><span class="n">msg_id</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;It creates the byte payload for delivery. It creates the message payload (in bytes) just using the:</span>
+<span class="sd">        1. message id</span>
+<span class="sd">        2. message type</span>
+<span class="sd">        3. message arguments</span>
+<span class="sd">        4. publication mqtt topic </span>
+<span class="sd">    this message is the one that will be sent.</span>
+<span class="sd">    We assume that all the necessary arguments have been passed for creating the message.</span>
+
+<span class="sd">    :param msg_id: message id </span>
+<span class="sd">    :type msg_id: int</span>
+<span class="sd">    :param msg_type: message type </span>
+<span class="sd">    :type msg_type: int</span>
+<span class="sd">    :param args: arguments that we wish to include in the message </span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param pub_supertopic: MQTT super topic where the message is gonig to be published. </span>
+<span class="sd">    :type pub_supertopic: string</span>
+<span class="sd">    :param prefix: string to prepend to all the prints/console logs</span>
+<span class="sd">    :type prefix: string</span>
+<span class="sd">    :param msg: messge received class RxMsg, only when creating response messages to a previous request! This field will be *None* for request mode</span>
+<span class="sd">    :type msg: RxMsg</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: *(bytes)* -- generated message payload</span>
+
+
+<span class="sd">    :does:</span>
+<span class="sd">        In order to encode the message it calls a series of subfunctions depending on the </span>
+
+<span class="sd">            1. Message type</span>
+<span class="sd">            2. Message destination *(represented by the pubtopic parameter)*</span>
+<span class="sd">        </span>
+<span class="sd">        There are a total of 9 types of messages to be created from the gateway (or simulated):</span>
+
+<span class="sd">            1. **gateway** response to cloud request to node</span>
+<span class="sd">            2. **gateway** response to cloud request to gateway</span>
+<span class="sd">            3. **gateway** request to cloud</span>
+<span class="sd">            4. **gateway** request to nodes</span>
+<span class="sd">            5. **gateway** response to nodes</span>
+<span class="sd">            6. node request to **gateway** (simulated)</span>
+<span class="sd">            7. cloud request to node (simulated)</span>
+<span class="sd">            8. cloud request to **gateway** (simulated)</span>
+<span class="sd">            9. cloud response to **gateway** request (simulated)</span>
+
+<span class="sd">       messages 1-5 are the production-time messages that the gateway will indeed create, number 6 simulates the node requests and 7-9 simulate the </span>
+<span class="sd">        cloud messages and responses. The last 4 messages are purely for testing that the first 5 gateway messages work as expected.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;msg to bytes &gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_PAYLOAD_ENDIANNESS_v2</span><span class="o">+</span><span class="s2">&quot;HB&quot;</span><span class="p">,</span> <span class="n">msg_id</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">)</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;creating message at:&quot;</span> <span class="o">+</span> <span class="n">timestamp</span><span class="p">)</span>
+
+    <span class="c1"># pub_supertopic = gvar.get_supertopic(pubtopic)</span>
+
+    <span class="c1"># SEND ERROR MESSAGE (if applicable)</span>
+    <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span><span class="p">:</span>
+        <span class="c1"># print(prefix + &quot;error message &quot; + str(args[0]))</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">pack</span><span class="p">(</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_PAYLOAD_ENDIANNESS_v2</span><span class="o">+</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+        <span class="c1"># print(&quot;{} payload: {}&quot;.format(prefix, payload))</span>
+
+    <span class="c1"># GATEWAY RESPONSE TO CLOUD REQ TO NODE</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway response to cloud request to node&quot;</span><span class="p">)</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgcloud</span><span class="o">.</span><span class="n">gw_resp_to_cloud_req_to_node</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>               
+
+    <span class="c1"># GATEWAY RESPONSE TO CLOUD REQUEST TO GW</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway response to cloud request to gateway&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgcloud</span><span class="o">.</span><span class="n">gw_resp_to_cloud_req_to_gw</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>              
+
+    <span class="c1"># GATEWAY REQUEST TO CLOUD</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_REQUEST_TO_CLOUD_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway request to cloud&quot;</span><span class="p">)</span> 
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgcloud</span><span class="o">.</span><span class="n">gw_request_to_cloud</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>               
+
+    <span class="c1"># GATEWAY --&gt; NODE MESSAGING</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway to node messaging&quot;</span><span class="p">)</span> 
+
+        <span class="c1"># GATEWAY REQUESTS TO NODE</span>
+        <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_RESPONSE_RECEIVED_FROM_NODES_LIST</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgnodes</span><span class="o">.</span><span class="n">gateway_request_to_nodes</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># GATEWAY RESPONSE TO NODE</span>
+        <span class="k">elif</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_NODE_REQUESTS_LIST</span><span class="p">:</span>            
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgnodes</span><span class="o">.</span><span class="n">gateway_response_to_nodes</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+    
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wrong message type&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">payload</span>
+
+    <span class="c1"># delete this case, it is only for testing:</span>
+
+    <span class="c1"># NODE REQUEST TO GATEWAY</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">NODE_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        
+        <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_NODE_REQUESTS_LIST</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgnodes</span><span class="o">.</span><span class="n">node_request_to_gateway</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+    <span class="c1"># DELETE THE FOLLOWING THREE CASES AND FUNCTIONS FOR PRODUCTION: (this is just for testing purposes)</span>
+
+    <span class="c1"># CLOUD REQUEST TO NODE</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud to node message request&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgcloud</span><span class="o">.</span><span class="n">cloud_request_to_node</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+    <span class="c1"># CLOUD REQUEST TO GATEWAY</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud to gateway message request&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgcloud</span><span class="o">.</span><span class="n">cloud_request_to_gateway</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> 
+        
+    <span class="c1"># CLOUD RESPONSE TO GATEWAY REQUEST</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud_response_to_gateway_req&quot;</span><span class="p">)</span> 
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">cmsgcloud</span><span class="o">.</span><span class="n">cloud_resp_to_gateway</span><span class="p">(</span><span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;error: invalid message origin!&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">payload</span></div>
+    
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

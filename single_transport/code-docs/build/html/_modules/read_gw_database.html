@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>read_gw_database &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">read_gw_database</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for read_gw_database</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Set of functions and cases that determine when and how the gateway database is read.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+<span class="kn">import</span> <span class="nn">create_message_specific_functions</span> <span class="k">as</span> <span class="nn">cmsgsp</span>
+
+
+<div class="viewcode-block" id="read_gw_database"><a class="viewcode-back" href="../modules/read_gw_database.html#read_gw_database.read_gw_database">[docs]</a><span class="k">def</span> <span class="nf">read_gw_database</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interlocutor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Function that reads the gateway database.</span>
+
+<span class="sd">    :does:</span>
+<span class="sd">        1. It checks the interlocutor (cloud/nodes)</span>
+<span class="sd">        2. It calls either the:</span>
+<span class="sd">            - :py:meth:`~read_gw_database.read_gw_database_nodes` if the interlocutor is *nodes*</span>
+<span class="sd">            - :py:meth:`~read_gw_database.read_gw_database_cloud` if the interlocutor is *cloud*</span>
+<span class="sd">     </span>
+<span class="sd">    :param msg: Message received class with all the arguments</span>
+<span class="sd">    :type msg: RxMsg</span>
+<span class="sd">    :param mode: either &quot;listen&quot; or &quot;request&quot;</span>
+<span class="sd">    :type mode: string </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;read gw database&gt; &quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+
+    <span class="c1"># node - gateway message</span>
+    <span class="k">if</span> <span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">read_gw_database_nodes</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">read_gw_database_cloud</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">prefix</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: invalid message origin detected&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="read_gw_database_nodes"><a class="viewcode-back" href="../modules/read_gw_database.html#read_gw_database.read_gw_database_nodes">[docs]</a><span class="k">def</span> <span class="nf">read_gw_database_nodes</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that reads the gateway database according to:</span>
+<span class="sd">        1. the message mode</span>
+<span class="sd">        2. the message type</span>
+<span class="sd">     </span>
+<span class="sd">    :param msg: Message received class with all the arguments</span>
+<span class="sd">    :type msg: RxMsg</span>
+<span class="sd">    :param mode: either &quot;listen&quot; or &quot;request&quot;</span>
+<span class="sd">    :type mode: string  </span>
+<span class="sd">     </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Depending on the **message type** these arguments can be more or fewer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;from node message&gt; &quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+
+    <span class="c1"># NODE RESPONSE TO GATEWAY REQUEST</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; node response to gateway request&gt; &quot;</span>
+        <span class="c1"># discriminate according to message type:</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span>    <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_LED_ON</span> <span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_LED_OFF</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_DIMMING</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_BLINKING</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_STRATEGY</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_ECHO</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SEND_NEW_STRAGEGY</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; send command&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+        
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span>  <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_LED_STATUS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_DIMMING_STATUS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_NUMBER_OF_NEIGHBOURS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_RSSI</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_NODE_STATUS</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; received node information&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;should read the database with the received information, but no database is available yet :/&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+    
+    <span class="c1"># NODE REQUEST TO GATEWAY</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;listen&quot;</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; node request to gateway&gt; &quot;</span>
+        <span class="c1"># discriminate according to message type:</span>
+        
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_GET_TIME</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span>  <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_SEND_ALARM</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_SEND_CURRENT_VOLTAGE</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_SEND_ELECTRIC_PARAMETERS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_SEND_SOLAR_PANEL_METRICS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_SEND_NODE_STATUS</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; received node information&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: invalid message mode detected&quot;</span><span class="p">)</span>
+
+    
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="read_gw_database_cloud"><a class="viewcode-back" href="../modules/read_gw_database.html#read_gw_database.read_gw_database_cloud">[docs]</a><span class="k">def</span> <span class="nf">read_gw_database_cloud</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that reads the gateway database according to:</span>
+<span class="sd">        1. message type</span>
+<span class="sd">     </span>
+<span class="sd">    This function is also responsible for extracting the gateway version from the file `global_vars.py` when required.</span>
+<span class="sd">        </span>
+<span class="sd">    :param msg: Message received class with all the arguments</span>
+<span class="sd">    :type msg: RxMsg</span>
+<span class="sd">    :param prefix: prefix to append to every message print</span>
+<span class="sd">    :type prefix: string</span>
+
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;from cloud message&gt; &quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+
+    <span class="c1"># CLOUD TO NODE REQUEST</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; cloud to node&gt; &quot;</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SEND_NEW_STRAGEGY</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; new strategy&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;right now a new strategy should be inserted into the database, but no database is configured yet :(&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span>  <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_LED_ON</span> <span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_LED_OFF</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_DIMMING</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_BLINKING</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_SET_STRATEGY</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_ECHO</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_LED_STATUS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_DIMMING_STATUS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_NUMBER_OF_NEIGHBOURS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_RSSI</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_HOPS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_GW_GET_NODE_STATUS</span><span class="p">,</span>
+                            <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_VERSION</span><span class="p">]:</span>
+
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>          
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+    <span class="c1"># CLOUD TO GATEWAY REQUEST</span>
+    <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; cloud to gateway&gt; &quot;</span>
+        <span class="c1"># discriminate according to message type:</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_NODE_LIST</span><span class="p">:</span> <span class="c1"># CLOUD -&gt; GATEWAY: read node list</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; get node list&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;right now nodes should be read from the database, but no database is configured yet, so we will invent some hehe :3&quot;</span><span class="p">)</span>
+            <span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">9</span>
+            <span class="n">nodelist</span> <span class="o">=</span> <span class="n">cmsgsp</span><span class="o">.</span><span class="n">gen_random_node_id_list</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;nodes &#39;read&#39; from database: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nodelist</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="n">nodelist</span><span class="p">]]</span>
+
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_GET_GATEWAY_VERSION</span><span class="p">:</span>
+            <span class="c1"># extract the gateway version from database or global var</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> gw version &gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+            <span class="n">gw_version</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_VERSION</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="n">gw_version</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">gw_version</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">gw_version</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="n">gw_version</span><span class="p">]]</span>
+    
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_CLOUD_TO_GATEWAY_REQUESTS_LIST</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+    
+    <span class="c1"># CLOUD RESPONSE TO GATEWAY REQUEST</span>
+    <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; cloud response to gateway request&gt; &quot;</span>
+        <span class="c1"># discriminate according to message type:</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALIVE_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ADD_NODES_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_UNSEEN_NODES_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_STATUS_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALARM_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ELECTRIC_PARAMETERS_GW_TO_CLOUD</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+    <span class="c1"># to be deleted from production: (simulates cloud behaviour)</span>
+
+    <span class="c1"># GATEWAY REQUEST TO CLOUD (no gateway database read needed)</span>
+    <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_REQUEST_TO_CLOUD_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; gateway request to cloud&gt; &quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed for fake cloud simulation from the gateway&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: invalid message origin detected&quot;</span><span class="p">)</span>
+
+    
+
+    <span class="k">return</span> <span class="n">result</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

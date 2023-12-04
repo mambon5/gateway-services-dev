@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mqtt_interaction_node_main &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mqtt_interaction_node_temporal" href="mqtt_interaction_node_temporal.html" />
+    <link rel="prev" title="mqtt_interaction_node_basic" href="mqtt_interaction_node_basic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">mqtt_interaction_node_main</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/mqtt_interaction_node_main.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mqtt_interaction_node_main">
+<span id="mqtt-interaction-node-main"></span><h1>mqtt_interaction_node_main<a class="headerlink" href="#module-mqtt_interaction_node_main" title="Permalink to this headline"></a></h1>
+<p>Main node to gateway interaction class.</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mqtt_interaction_node_main.mqtt_interaction_node_main" title="mqtt_interaction_node_main.mqtt_interaction_node_main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mqtt_interaction_node_main</span></code></a>([mode, wni, ...])</p></td>
+<td><p>This is the main interaction class with the nodes.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="mqtt_interaction_node_main.mqtt_interaction_node_main">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mqtt_interaction_node_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'listen'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_main.mqtt_interaction_node_main" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_node_basic.mqtt_interaction_node_basic</span></code></a></p>
+<p>This is the main interaction class with the nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Structure</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It will be running as long as the gateway is powered and until the script is stopped externally by someone or an error.</p></li>
+<li><p>It listens to all the node messages, and then creates all the cloud-classes that listen
+to the cloud messages directed towards the nodes.</p></li>
+<li><p>It is the director of the wirepas orchestra.</p></li>
+<li><dl class="simple">
+<dt>It has the following methods:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen" title="mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_main_node_listen()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list" title="mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_node_list()</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>wni</strong> (<em>WirepasNetworkInterface</em>) – the wirepas network interface class connected to the selected local mqtt broker</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – mode of the interaction. Can be either “listen” to receive messages from the subtopic, or “request” if we want to the entity to publish requests to the pubtopic</p></li>
+<li><p><strong>node_list</strong> (<em>string</em>) – list of nodes that the gateway can see and talk to</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Returns a <a class="reference internal" href="mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic" title="mqtt_interaction_node_basic.mqtt_interaction_node_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mqtt_interaction_node_basic()</span></code></a> class with the following attributes:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">node_id_list</dt>
+<dd class="field-odd"><p>(int) – list of all nodes connected to the gateway at some point</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+<p>Initialize class interaction attributes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_main.mqtt_interaction_node_main.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'listen'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_main.mqtt_interaction_node_main.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize class interaction attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen">
+<span class="sig-name descname"><span class="pre">on_message_main_node_listen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.on_message_main_node_listen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen" title="Permalink to this definition"></a></dt>
+<dd><p>Every time a node sends a message to the gateway, this functions is executed.</p>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Tunnel to cloud (i.e. starts listenning to incoming cloud messages, if the node that sends the message is unregisterd by the gateway)</p></li>
+<li><p>Update the database (if applicable)</p></li>
+<li><p>Read gateway database (if applicable)</p></li>
+<li><p>Prepare the response based on the results of the previous actions</p></li>
+<li><p>Send the message to the nodes, if the message is a node request, by calling the function
+<a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.publish" title="mqtt_interaction_module.mqtt_interaction.publish"><code class="xref py py-meth docutils literal notranslate"><span class="pre">publish()</span></code></a></p></li>
+</ol>
+</dd>
+<dt class="field-even">Note</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>It is the equivalent to the <a class="reference internal" href="mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c" title="mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_c()</span></code></a> function of the</p></li>
+</ul>
+<p>mqtt_interaction_cloud class.</p>
+</dd>
+<dt class="field-odd">References</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It is useful to check the wirepas mqtt library documentation -&gt; <a class="reference external" href="https://wirepas.github.io/wirepas-mqtt-library/">https://wirepas.github.io/wirepas-mqtt-library/</a></p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – message class</p></li>
+<li><p><strong>parsed</strong> (<em>bool</em>) – True if parsing was successful, False if failed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list">
+<span class="sig-name descname"><span class="pre">update_node_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.update_node_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list" title="Permalink to this definition"></a></dt>
+<dd><p>Updates the node id list, if necessary. This function is executed everytime a node message is received.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Checks whether the node id that sent the message, is not already in the node list.</p></li>
+<li><p>If it is not there, then add it.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>node_id</strong> (<em>int</em>) – Node id that has been detected on a new message.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mqtt_interaction_node_basic.html" class="btn btn-neutral float-left" title="mqtt_interaction_node_basic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mqtt_interaction_node_temporal.html" class="btn btn-neutral float-right" title="mqtt_interaction_node_temporal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

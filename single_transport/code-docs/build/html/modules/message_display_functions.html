@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>message_display_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="message_display_specific_functions" href="message_display_specific_functions.html" />
+    <link rel="prev" title="local_settings" href="local_settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">message_display_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/message_display_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-message_display_functions">
+<span id="message-display-functions"></span><h1>message_display_functions<a class="headerlink" href="#module-message_display_functions" title="Permalink to this headline"></a></h1>
+<p>script containing the general display functions depending on the message origin (cloud or node).</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_display_functions.display_cloud_request_to_gateway" title="message_display_functions.display_cloud_request_to_gateway"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_cloud_request_to_gateway</span></code></a>(msg, prefix)</p></td>
+<td><p>Display the message sent by the cloud to a gateway The type of display depends on the message type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_display_functions.display_cloud_request_to_node" title="message_display_functions.display_cloud_request_to_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_cloud_request_to_node</span></code></a>(msg, prefix)</p></td>
+<td><p>Display a message sent by the cloud to a node</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_display_functions.display_cloud_response_to_gateway_req" title="message_display_functions.display_cloud_response_to_gateway_req"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_cloud_response_to_gateway_req</span></code></a>(msg, ...)</p></td>
+<td><p>Display the response message sent by a cloud to a gateway request.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_display_functions.display_gateway_node_messages" title="message_display_functions.display_gateway_node_messages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_gateway_node_messages</span></code></a>(msg, prefix)</p></td>
+<td><p>Display the messages from/to the mesh network and the gateway.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_display_functions.display_gateway_request_to_cloud" title="message_display_functions.display_gateway_request_to_cloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_gateway_request_to_cloud</span></code></a>(msg, prefix)</p></td>
+<td><p>Display the request sent by a gateway to the cloud.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_display_functions.display_gateway_response_to_cloud_request_to_gateway" title="message_display_functions.display_gateway_response_to_cloud_request_to_gateway"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_gateway_response_to_cloud_request_to_gateway</span></code></a>(...)</p></td>
+<td><p>Display the response from a gateway to a cloud request to the gateway itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_display_functions.display_gateway_response_to_cloud_request_to_node" title="message_display_functions.display_gateway_response_to_cloud_request_to_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display_gateway_response_to_cloud_request_to_node</span></code></a>(...)</p></td>
+<td><p>Display the gateway response to a cloud request to a specific node</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_cloud_request_to_gateway">
+<span class="sig-name descname"><span class="pre">display_cloud_request_to_gateway</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_cloud_request_to_gateway"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_cloud_request_to_gateway" title="Permalink to this definition"></a></dt>
+<dd><p>Display the message sent by the cloud to a gateway
+The type of display depends on the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_cloud_request_to_node">
+<span class="sig-name descname"><span class="pre">display_cloud_request_to_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_cloud_request_to_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_cloud_request_to_node" title="Permalink to this definition"></a></dt>
+<dd><p>Display a message sent by the cloud to a node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_cloud_response_to_gateway_req">
+<span class="sig-name descname"><span class="pre">display_cloud_response_to_gateway_req</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_cloud_response_to_gateway_req"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_cloud_response_to_gateway_req" title="Permalink to this definition"></a></dt>
+<dd><p>Display the response message sent by a cloud to a gateway request.
+The type of display depends on the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_gateway_node_messages">
+<span class="sig-name descname"><span class="pre">display_gateway_node_messages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_gateway_node_messages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_gateway_node_messages" title="Permalink to this definition"></a></dt>
+<dd><p>Display the messages from/to the mesh network and the gateway.
+The type of display depends on the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_gateway_request_to_cloud">
+<span class="sig-name descname"><span class="pre">display_gateway_request_to_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_gateway_request_to_cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_gateway_request_to_cloud" title="Permalink to this definition"></a></dt>
+<dd><p>Display the request sent by a gateway to the cloud.
+The type of display depends on the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_gateway_response_to_cloud_request_to_gateway">
+<span class="sig-name descname"><span class="pre">display_gateway_response_to_cloud_request_to_gateway</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_gateway_response_to_cloud_request_to_gateway"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_gateway_response_to_cloud_request_to_gateway" title="Permalink to this definition"></a></dt>
+<dd><p>Display the response from a gateway to a cloud request to the gateway itself.
+The type of display depends on the message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_display_functions.display_gateway_response_to_cloud_request_to_node">
+<span class="sig-name descname"><span class="pre">display_gateway_response_to_cloud_request_to_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_display_functions.html#display_gateway_response_to_cloud_request_to_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_display_functions.display_gateway_response_to_cloud_request_to_node" title="Permalink to this definition"></a></dt>
+<dd><p>Display the gateway response to a cloud request to a specific node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="local_settings.html" class="btn btn-neutral float-left" title="local_settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="message_display_specific_functions.html" class="btn btn-neutral float-right" title="message_display_specific_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

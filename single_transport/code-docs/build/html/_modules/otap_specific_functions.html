@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>otap_specific_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">otap_specific_functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for otap_specific_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Set of specific functions that use the wirepas OTAP. </span>
+
+<span class="sd">The functions listed here allow the user to:</span>
+<span class="sd">    1. Get the scratchpads of every node connected to the gateway&#39;s sink</span>
+<span class="sd">    2. Upload an scratchpad to the sink</span>
+<span class="sd">    3. Order the sink to propagate this scratchpad to all the nodes</span>
+<span class="sd">    4. Delete any scratchpad that is stored in the sink</span>
+<span class="sd">    5. Set a new sink configuration (change network channel, address, start/stop the sink)</span>
+
+<span class="sd">Combining the 5 options above, and extracting different information in each of them, we delevopped a set of 14 different functions (so far)</span>
+<span class="sd">that extract/send information and commands from the sink and the nodes without having to set up any custom program in the node that</span>
+<span class="sd">reads and processess our custom requests. It is all handled by the built-in wirepas stack programs of the nodes and the sink</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">wirepas_mesh_messaging</span> <span class="k">as</span> <span class="nn">wmm</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+
+<span class="c1"># def type_to_str(type_int):</span>
+<span class="c1">#     map_to_str = (&quot;Blank&quot;, &quot;Present&quot;, &quot;Process&quot;)</span>
+<span class="c1">#     try:</span>
+<span class="c1">#         return map_to_str[type_int]</span>
+<span class="c1">#     except IndexError:</span>
+<span class="c1">#         return &quot;Unknown {}&quot;.format(type_int)</span>
+
+
+<span class="c1"># def status_to_str(status):</span>
+<span class="c1">#     if status == 255:</span>
+<span class="c1">#         return &quot;New&quot;</span>
+<span class="c1">#     if status == 0:</span>
+<span class="c1">#         return &quot;Success&quot;</span>
+
+<span class="c1">#     return &quot;Error {}&quot;.format(status)</span>
+
+
+<div class="viewcode-block" id="print_node_list"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.print_node_list">[docs]</a><span class="k">def</span> <span class="nf">print_node_list</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints the list of current node ids.</span>
+
+<span class="sd">    :param nodes: list of current node ids</span>
+<span class="sd">    :type nodes: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">List of nodes:&quot;</span><span class="p">)</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="c1"># Convert utc time to date</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcfromtimestamp</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;ts&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; </span><span class="si">{:5d}</span><span class="s2"> | </span><span class="si">{:10d}</span><span class="s2"> | </span><span class="si">{}</span><span class="s2"> | </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">id</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">,</span>
+            <span class="n">timestamp</span><span class="p">,</span>
+            <span class="n">node</span>
+        <span class="p">));</span>
+        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_scratchpads"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.get_scratchpads">[docs]</a><span class="k">def</span> <span class="nf">get_scratchpads</span><span class="p">(</span><span class="n">wni</span><span class="p">,</span> <span class="n">otapHelper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function gets the scratchapd of every node connected to the sink. </span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+<span class="sd">        1. It uses the WNI to get a list of all the connected sinks to the gateway backend</span>
+<span class="sd">        2. It sends a remote &quot;scratchpad status&quot; to all connected nodes, and awaits its response</span>
+<span class="sd">        3. After 0 seconds, it gets or captures the response from the nodes to the sink</span>
+
+<span class="sd">    :param wni: Wirepas network interface class, containign the MQTT broker connection</span>
+<span class="sd">    :type wni: WirepasNetworkInterface</span>
+<span class="sd">    :param otapHelper: Class to ease Otap operation containing the network address.</span>
+<span class="sd">    :type otapHelper: WirepasOtapHelper</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sinks</span> <span class="o">=</span> <span class="n">wni</span><span class="o">.</span><span class="n">get_sinks</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;displaying sinks:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sinks</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;displaying node scratchpads:&quot;</span><span class="p">)</span>
+    <span class="n">otapHelper</span><span class="o">.</span><span class="n">send_remote_scratchpad_status</span><span class="p">()</span>
+    <span class="c1">#time.sleep(0.2)</span>
+    <span class="n">print_node_list</span><span class="p">(</span><span class="n">otapHelper</span><span class="o">.</span><span class="n">get_current_nodes_status</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="list_sinks"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.list_sinks">[docs]</a><span class="k">def</span> <span class="nf">list_sinks</span><span class="p">(</span><span class="n">wni</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List all sinks and their gateway id. </span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+<span class="sd">        1. It uses the WNI to get a list of all the connected sinks to the gateway backend</span>
+<span class="sd">        2. It lists them one by one</span>
+
+<span class="sd">    :param wni: Wirepas network interface class, containing the MQTT broker connection</span>
+<span class="sd">    :type wni: WirepasNetworkInterface</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">on_config_changed</span><span class="p">():</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">wni</span><span class="o">.</span><span class="n">get_sinks</span><span class="p">():</span>
+            <span class="n">line</span> <span class="o">+=</span> <span class="s2">&quot;[gw: </span><span class="si">%s</span><span class="s2">, sink: </span><span class="si">%s</span><span class="s2">, net address: </span><span class="si">%s</span><span class="s2">, net channel: </span><span class="si">%s</span><span class="s2">, sink running: </span><span class="si">%s</span><span class="s2">] &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> 
+                                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_address&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_channel&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;started&quot;</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="n">wni</span><span class="o">.</span><span class="n">set_config_changed_cb</span><span class="p">(</span><span class="n">on_config_changed</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="configure_sink"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.configure_sink">[docs]</a><span class="k">def</span> <span class="nf">configure_sink</span><span class="p">(</span><span class="n">current_net_ad</span><span class="p">,</span> <span class="n">net_channel</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">net_address</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">start_it</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets up a new configuration for the sink. </span>
+
+<span class="sd">    :does:</span>
+<span class="sd">        1. First of all, it gets all the sinks connected to the gateway using the wirepas function *get_sinks()*.</span>
+<span class="sd">        2. Then it sets the sink configuration according to the input arguments, using the wirepas *set_sink_config()* function.</span>
+<span class="sd">        3. It restarts the sink by calling the shell script *start_sinks.sh*</span>
+
+<span class="sd">    :param current_net_ad: Current network channel of the sink</span>
+<span class="sd">    :type current_net_ad: int</span>
+<span class="sd">    :param net_channel: New network channel to set the sink to</span>
+<span class="sd">    :type net_channel: int</span>
+<span class="sd">    :param net_address: New network address to set the sink to</span>
+<span class="sd">    :type net_address: int</span>
+<span class="sd">    :param start_it: Whether to start the sink configuration or not, after changing the rest of the parameters</span>
+<span class="sd">    :type start_it: bool</span>
+<span class="sd">    :param wni: Wirepas network interface class, containign the MQTT broker connection</span>
+<span class="sd">    :type wni: WirepasNetworkInterface</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;sink config&gt;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> Configuring all sinks of the gateway to new network address: </span><span class="si">{}</span><span class="s2">, new channel: </span><span class="si">{}</span><span class="s2"> and start it: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> 
+                                                                                                                            <span class="n">net_channel</span><span class="p">,</span> <span class="n">net_address</span><span class="p">,</span> <span class="n">start_it</span><span class="p">))</span>                                                                                         
+    <span class="c1"># try:</span>
+    <span class="k">for</span> <span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">wni</span><span class="o">.</span><span class="n">get_sinks</span><span class="p">():</span>
+    <span class="c1">#for gw, sink, config in wni.get_sinks(network_address=int(current_net_ad)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set new config to </span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">wni</span><span class="o">.</span><span class="n">set_sink_config</span><span class="p">(</span><span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;network_channel&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">net_channel</span><span class="p">),</span> <span class="s2">&quot;network_address&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">net_address</span><span class="p">),</span>
+                                                <span class="s2">&quot;started&quot;</span><span class="p">:</span><span class="n">start_it</span><span class="p">})</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;res: &quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="o">!=</span> <span class="n">wmm</span><span class="o">.</span><span class="n">GatewayResultCode</span><span class="o">.</span><span class="n">GW_RES_OK</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> Cannot set new config to </span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2"> res=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> New configuration set for sink </span><span class="si">{}</span><span class="s2"> from gateway </span><span class="si">{}</span><span class="s2"> to network address: </span><span class="si">{}</span><span class="s2"> and network channel: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">prefix</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">gw</span><span class="p">,</span> <span class="n">net_address</span><span class="p">,</span> <span class="n">net_channel</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">start_it</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> Sink started&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> Sink not started&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> Cannot set new config to </span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> Ended iterating through all sinks of the gateway&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+
+    <span class="c1"># restart sink</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;sh&#39;</span><span class="p">,</span> <span class="s1">&#39;./start_sinks.sh&#39;</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error: Shell script &#39;start_sinks.sh&#39; couldn&#39;t start.&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># except:</span>
+    <span class="c1">#     print(&quot;error: while setting the new sink configuration&quot;)</span>
+
+
+<div class="viewcode-block" id="activate_all_sinks"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.activate_all_sinks">[docs]</a><span class="k">def</span> <span class="nf">activate_all_sinks</span><span class="p">(</span><span class="n">wni</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Activate all sinks in gateway range. </span>
+
+<span class="sd">    :does:</span>
+<span class="sd">        1. using the WNI command &quot;get_sink()&quot; the function collects all the information regarding the sink: *gateway id, sink id, network address,</span>
+<span class="sd">            network channel, is sink active?*</span>
+<span class="sd">        2. with this information it calls the *configure_sink* function with argument *start_it* set to *True* which activates the sink.</span>
+
+<span class="sd">    :param wni: Wirepas network interface class, containign the MQTT broker connection</span>
+<span class="sd">    :type wni: WirepasNetworkInterface</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;activate all sinks&gt; &quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; activating ... &quot;</span><span class="p">)</span>
+
+
+    <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">wni</span><span class="o">.</span><span class="n">get_sinks</span><span class="p">():</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="s2">&quot;[gw: </span><span class="si">%s</span><span class="s2">, sink: </span><span class="si">%s</span><span class="s2">, net address: </span><span class="si">%s</span><span class="s2">, net channel: </span><span class="si">%s</span><span class="s2">, sink running: </span><span class="si">%s</span><span class="s2">] &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gw</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> 
+                            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_address&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_channel&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;started&quot;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;starting: &quot;</span> <span class="o">+</span> <span class="n">line</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">configure_sink</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_address&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_channel&quot;</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;network_address&quot;</span><span class="p">],</span> <span class="n">start_it</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;sink started successfully&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: failed to start the sink&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_node_version"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.get_node_version">[docs]</a><span class="k">def</span> <span class="nf">get_node_version</span><span class="p">(</span><span class="n">otapHelper</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets the stack and app version of the node. </span>
+
+<span class="sd">    :does:</span>
+<span class="sd">        1. A wirepas-specific python function is called, &quot;send_remote_scratchpad_status&quot; in order to send a scratchpad information </span>
+<span class="sd">        request to a specific node.</span>
+<span class="sd">        2. After 0 seconds, another python function is executed to extract that information from the sink.</span>
+<span class="sd">        3. From the stratchpad status of the node, the stack and app version are extracted and returned.</span>
+
+<span class="sd">    :param node_id: address of the node from which we want the software version</span>
+<span class="sd">    :type node_id: int</span>
+<span class="sd">    :param otapHelper: Class to ease Otap operation containing the network address.</span>
+<span class="sd">    :type otapHelper: WirepasOtapHelper</span>
+
+<span class="sd">    :return: </span>
+<span class="sd">        :result: *(list)* with:</span>
+<span class="sd">        1. :success: *bool* - whether the node version could be retrieved or not using otap.</span>
+<span class="sd">        2. :node_software_version: *(list[int])* consists of a list of 8 int ranging from 0-254 which codify:</span>
+<span class="sd">                1. *stack_version* major.minor.revision.build. These are the first 4 ints of the list.</span>
+<span class="sd">                2. *app_version* major.minor.revision.build. These are the last 4 ints of the list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;get node version&gt; &quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; getting it ... &quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+    
+    <span class="n">node_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;displaying node version for node </span><span class="si">{}</span><span class="s2">:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span>
+    <span class="n">otapHelper</span><span class="o">.</span><span class="n">send_remote_scratchpad_status</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+    
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">node_status</span> <span class="o">=</span> <span class="n">otapHelper</span><span class="o">.</span><span class="n">get_current_nodes_status</span><span class="p">()[</span><span class="n">node_id</span><span class="p">]</span>
+        <span class="n">stack_version</span> <span class="o">=</span> <span class="n">node_status</span><span class="p">[</span><span class="s2">&quot;stack_version&quot;</span><span class="p">]</span>
+        <span class="n">app_version</span> <span class="o">=</span> <span class="n">node_status</span><span class="p">[</span><span class="s2">&quot;app_version&quot;</span><span class="p">]</span>
+        <span class="c1"># print_node_version(otapHelper.get_current_nodes_status()[node_id])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">stack_version</span> <span class="o">+</span> <span class="n">app_version</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> error: failed to load software version for node </span><span class="si">{}</span><span class="s2">. maybe the node is not reachable by the sink?&quot;</span><span class="o">.</span>
+              <span class="nb">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">node_id</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+    
+
+
+<div class="viewcode-block" id="get_node_list"><a class="viewcode-back" href="../modules/otap_specific_functions.html#otap_specific_functions.get_node_list">[docs]</a><span class="k">def</span> <span class="nf">get_node_list</span><span class="p">(</span><span class="n">otapHelper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets the list of nodes connected to the gateway</span>
+<span class="sd">    the function does 2 things:</span>
+<span class="sd">        1. It sends a remote &quot;scratchpad status&quot; to all connected nodes, and awaits its response</span>
+<span class="sd">        2. After 2 seconds, it sends a command that gets or captures the response from the nodes to the sink</span>
+<span class="sd">    </span>
+<span class="sd">    :param otapHelper: Class to ease Otap operation containing the network address.</span>
+<span class="sd">    :type otapHelper: WirepasOtapHelper</span>
+
+<span class="sd">    :return: </span>
+<span class="sd">        :node list: *(list[int])* consists of a list of nodes ids connected to the sink.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;get node list&gt; &quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; getting it ... &quot;</span><span class="p">)</span>
+    <span class="n">otapHelper</span><span class="o">.</span><span class="n">send_remote_scratchpad_status</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">node_list</span> <span class="o">=</span> <span class="n">otapHelper</span><span class="o">.</span><span class="n">get_current_nodes_status</span><span class="p">()</span>
+    <span class="n">node_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">node_list</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="c1"># getting just the node ids.</span>
+    <span class="k">return</span> <span class="n">node_list</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

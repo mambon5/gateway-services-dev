@@ -1,0 +1,1 @@
+none of the files in this directory except README.txt should be uploaded to github. Since then each gateway will download them and override its current logs with the github logs. And we don't want that to happen.

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mqtt_interaction_node_basic &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mqtt_interaction_node_basic</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mqtt_interaction_node_basic</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Basic node to gateway interaction class</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">message_received_class</span> <span class="kn">import</span> <span class="n">RxMsg</span>
+<span class="kn">import</span> <span class="nn">mqtt_interaction_module</span> <span class="k">as</span> <span class="nn">interm</span>
+<span class="kn">from</span> <span class="nn">mqtt_interaction_module</span> <span class="kn">import</span> <span class="n">mqtt_interaction</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>              <span class="c1">#: import global variables</span>
+<span class="kn">import</span> <span class="nn">mqtt_credentials</span> <span class="k">as</span> <span class="nn">creds</span>        <span class="c1"># global and local credentials containing all the details on the MQTT broker connection (passwords, hosts, ports, etc)</span>
+<span class="kn">import</span> <span class="nn">create_message_functions</span> <span class="k">as</span> <span class="nn">creamsgf</span>     <span class="c1">#create message functions</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">wirepas_mesh_messaging</span> <span class="k">as</span> <span class="nn">wmm</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please install Wirepas mesh messaging wheel: pip install wirepas-mesh-messaging&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="mqtt_interaction_node_basic"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic">[docs]</a><span class="k">class</span> <span class="nc">mqtt_interaction_node_basic</span><span class="p">(</span><span class="n">mqtt_interaction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Basic mesh network mqtt interaction class. </span>
+<span class="sd">    </span>
+<span class="sd">    The classes :py:meth:`~mqtt_interaction_node_main.mqtt_interaction_node_main` and </span>
+<span class="sd">    :py:meth:`~mqtt_interaction_node_temporal.mqtt_interaction_node_temporal` are extensions of this one.</span>
+
+<span class="sd">    The structure of this class is the following:</span>
+
+<span class="sd">    :structure:</span>
+<span class="sd">        1. It initializes the sub class :py:meth:`~mqtt_interaction_module.mqtt_interaction` and gives the following parameters to it:</span>
+<span class="sd">            - subtopic</span>
+<span class="sd">            - pubtopic</span>
+<span class="sd">            - mode</span>
+<span class="sd">            - local file for message id upadtes</span>
+<span class="sd">            - interlocutor </span>
+<span class="sd">            - WNI (can be None)</span>
+<span class="sd">        2. Sets the timout time for listening to a response message, to 7 seconds.</span>
+<span class="sd">        3. Finally, it has the following methods:</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes` </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.send_message_to_nodes_from_input`  </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback` </span>
+<span class="sd">            </span>
+<span class="sd">    </span>
+<span class="sd">    :param subtopic: MQTT topic to which the client will subscribe to</span>
+<span class="sd">    :type subtopic: string</span>
+<span class="sd">    :param pubtopic: MQTT topic to which the client will publish to</span>
+<span class="sd">    :type pubtopic: string</span>
+<span class="sd">    :param mode: mode of the interaction. Can be either &quot;listen&quot; to receive messages from the subtopic, or &quot;request&quot; if we want to the entity to publish requests to the pubtopic</span>
+<span class="sd">    :type mode: string</span>
+<span class="sd">    :param file_settings: file containing the shared message id to update</span>
+<span class="sd">    :type file_settings: file</span>
+<span class="sd">    :param interlocutor: entity which we wish to communicate to. Defaults to *cloud*</span>
+<span class="sd">    :type interlocutor: string</span>
+
+<span class="sd">    :return:</span>
+
+<span class="sd">        Returns a **mqtt_interaction_node_basic** class with the following attributes:</span>
+
+<span class="sd">            :pubclient: (mqtt.Client) -- MQTT client for publishing messages (only if interlocutor is &quot;cloud&quot;) </span>
+<span class="sd">            :subclient: (mqtt.Client) -- MQTT client for subscribing to a topic (only if interlocutor is &quot;cloud&quot;) </span>
+<span class="sd">            :pub_msg_id: (int) -- unique message temporal identifier for the published messages</span>
+<span class="sd">            :gw_id: (int) -- gateway id for the interaction</span>
+<span class="sd">            :run_loop: (bool) -- run the subclient loop, while true</span>
+<span class="sd">            :pub_resp_received: (bool) -- whether a response for the sent message has been received</span>
+<span class="sd">            :max_wait: (int) -- max waiting time for response before deciding no response has been received, in seconds</span>
+<span class="sd">            :startime: (int) -- start time (in seconds) of the loop in the subclient</span>
+<span class="sd">            :thread: (thread) -- thread to use for starting a subscriber or publisher client when needed while the main thread still runs</span>
+<span class="sd">            :print_raw_data: (bool) -- whether or not we wish to print the raw data we get from the node</span>
+<span class="sd">            :tunnel: (cloud_to_node_tunnel) -- class for establishing a connection between a cloud interaction and a node interaction</span>
+<span class="sd">            :node_response: (RxMsg) -- The message containing the received response from the nodes</span>
+<span class="sd">            :wni: *(WirepasNetworkInterface)* -- a wirepas network interface class connected to the selected local mqtt broker     &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="mqtt_interaction_node_basic.__init__"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;init mqtt node interac&gt; &quot;</span>
+        <span class="n">subtopic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pubtopic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">interlocutor</span> <span class="o">=</span> <span class="s2">&quot;nodes&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_response</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># Connect to MQTT broker.</span>
+        <span class="c1"># print(prefix + &quot;connecting to {}:{} ...&quot;.format(creds.local_broker, creds.local_port))</span>
+        
+        <span class="n">mqtt_interaction</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtopic</span><span class="p">,</span> <span class="n">pubtopic</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> 
+                                         <span class="n">gvar</span><span class="o">.</span><span class="n">FILE_SETTINGS_LOCAL</span><span class="p">,</span>  <span class="n">interlocutor</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span>       
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span> <span class="o">=</span> <span class="mi">7</span>         <span class="c1"># default max waiting time for response before deciding no response has been received, in seconds</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;mqtt_interaction_node_basic innit&gt;: &quot;</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction_node_basic.publish_meshnet"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet">[docs]</a>    <span class="k">def</span> <span class="nf">publish_meshnet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gateway_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Publishes a message to the mesh network. </span>
+<span class="sd">            </span>
+<span class="sd">            :does:</span>
+<span class="sd">                1. Tries to send the message to the mesh network using the *wirepas_interaction_network* function :py:meth:`~wirepas_network_interface.send_message`.</span>
+<span class="sd">                   For that to work, it has to give the following variables to the wirepas function:</span>
+<span class="sd">                        - *gateway_id* -- that will transmit the message</span>
+<span class="sd">                        - *sink_id* -- that will send the message to the right node</span>
+<span class="sd">                        - *node_id* -- of the target node</span>
+<span class="sd">                        - *src_ep*</span>
+<span class="sd">                        - *dst_ep*</span>
+<span class="sd">                        - *payload* -- of the message </span>
+<span class="sd">                        - *Quality of Service* (QOS) -- of the desired MQTT connection</span>
+<span class="sd">                        - *callback* -- function in case an error is reported</span>
+<span class="sd">                2. Report in the logs if the publish was successful or not.</span>
+<span class="sd">                   </span>
+
+<span class="sd">            :note: It is the mesh-network equivalent to the </span>
+<span class="sd">                   :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c` cloud interaction function.</span>
+
+<span class="sd">            :param payload: message payload, has a variable length</span>
+<span class="sd">            :type payload: bytes</span>
+<span class="sd">            :param gateway_id: gateway id to who the message was sent.</span>
+<span class="sd">            :type gateway_id: int</span>
+<span class="sd">            :param sink_id: sink id that received the message in the gateway</span>
+<span class="sd">            :type sink_id: int</span>
+<span class="sd">            :param node_id: node id where we want to send the message.</span>
+<span class="sd">            :type node_id: int</span>
+<span class="sd">            :param prefix: parent prefix to append to the current prefix. This will be reported in all prints made by this function</span>
+<span class="sd">            :type prefix: string</span>
+
+<span class="sd">    </span>
+<span class="sd">            :returns:</span>
+<span class="sd">                - **True** if message was sent successfully, an error if not.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;node msg publish&gt; &quot;</span>
+
+            <span class="n">src_ep</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">UPLINK_PACKET_EVAL_APP_ENDPOINT</span>
+            <span class="n">dst_ep</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">UPLINK_PACKET_EVAL_APP_ENDPOINT</span>
+            <span class="n">qos</span> <span class="o">=</span> <span class="mi">1</span>
+            
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># send message:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wni</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">gateway_id</span><span class="p">,</span>
+                                            <span class="n">sink_id</span><span class="p">,</span>
+                                            <span class="n">node_id</span><span class="p">,</span>
+                                            <span class="n">src_ep</span><span class="p">,</span>
+                                            <span class="n">dst_ep</span><span class="p">,</span>
+                                            <span class="n">payload</span><span class="p">,</span>
+                                            <span class="n">qos</span><span class="p">,</span>
+                                            <span class="n">cb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_gateway_answer_callback</span><span class="p">)</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error in sending msg: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> 
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># successful return from send_message</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;message sent successfully&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;message failed to send.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction_node_basic.listen_to_nodes"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">listen_to_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Listens to node messages. </span>
+
+<span class="sd">            :does:</span>
+<span class="sd">                1. Sets a wirepass filter</span>
+<span class="sd">                2. Sets a callback on any received data from the nodes, in our cass the cb is :py:meth:`~mqtt_interaction_module.mqtt_interaction.on_message`</span>
+<span class="sd">                3. If the mode is &quot;request&quot;, it will: </span>
+<span class="sd">                    - start the :py:meth:`~mqtt_interaction_module.mqtt_interaction.start_listen_loop` loop, to continuously listen to wirepass messages</span>
+<span class="sd">                    - Once the loop finishes (for whatever reason) it removes the wirepas filter for the callback</span>
+<span class="sd">                   If the mode is &quot;listen&quot; it doesn&#39;t do anything else.</span>
+<span class="sd">            </span>
+<span class="sd">            :note: This is the equivalent function to the :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud` </span>
+<span class="sd">                   function in the interaction cloud class.</span>
+
+<span class="sd">            :param prefix: parent prefix to append to the current prefix. This will be reported in all prints made by this function</span>
+<span class="sd">            :type prefix: string</span>
+
+<span class="sd">            :returns:</span>
+<span class="sd">                - **True** if successful, an error if not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># console logs:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;nodes&gt; &quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;started listening&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Register for incoming data and store reception filter ID</span>
+        <span class="n">filter_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wni</span><span class="o">.</span><span class="n">register_data_cb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_message</span><span class="p">,</span>
+                                              <span class="n">src_ep</span><span class="o">=</span><span class="n">gvar</span><span class="o">.</span><span class="n">UPLINK_PACKET_EVAL_APP_ENDPOINT</span><span class="p">,</span>
+                                              <span class="n">dst_ep</span><span class="o">=</span><span class="n">gvar</span><span class="o">.</span><span class="n">UPLINK_PACKET_EVAL_APP_ENDPOINT</span>
+                                              <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span>
+            <span class="c1"># Start loop and wait for message(s)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_listen_loop</span><span class="p">()</span>
+
+            <span class="c1"># Unregister from data reception and return to main shell menu.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wni</span><span class="o">.</span><span class="n">unregister_data_cb</span><span class="p">(</span><span class="n">filter_id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction_node_basic.send_msg_to_nodes_from_input"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.send_msg_to_nodes_from_input">[docs]</a>    <span class="k">def</span> <span class="nf">send_msg_to_nodes_from_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepares and sends a message to the nodes, based on the user input.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">        </span>
+<span class="sd">            1. Update the message id, takes the last one from the *local_settings.py* file, and increments it by 1 by calling the function</span>
+<span class="sd">               :py:meth:`~mqtt_interaction_module.mqtt_interaction.update_msg_id`.</span>
+<span class="sd">            2. Generates the initial message payload in bytes, by calling the function</span>
+<span class="sd">               :py:meth:`~create_message_functions.get_msg_from_input`.</span>
+<span class="sd">            3. It finally calls the :class:`request_to_node &lt;mqtt_interaction_node_basic.request_to_node&gt;` function and provides it the following</span>
+<span class="sd">               parameters:</span>
+<span class="sd">                - *gw_id* -- gateway id</span>
+<span class="sd">                - *sink_id* -- sink id</span>
+<span class="sd">                - *dst_addr* -- id of the node we want to send the message to</span>
+<span class="sd">                - *payload* -- initial payload of the message in bytes, which so far just contains the message id and type.</span>
+<span class="sd">        </span>
+<span class="sd">        :note:  This is the mesh network equivalent function to the </span>
+<span class="sd">                    :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input` function in the cloud class.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;to nodes&gt; &quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_msg_id</span><span class="p">()</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">get_msg_from_input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pubtopic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_to_node</span><span class="p">(</span><span class="n">gw_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">sink</span><span class="p">,</span> <span class="n">dst_addr</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">node_id</span><span class="p">,</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span></div>
+         
+<div class="viewcode-block" id="mqtt_interaction_node_basic.request_to_node"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node">[docs]</a>    <span class="k">def</span> <span class="nf">request_to_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">msg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">payload</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sends messages to the mesh network. </span>
+<span class="sd">            </span>
+<span class="sd">            :does:</span>
+<span class="sd">                1. If the payload is *None*:</span>
+<span class="sd">                    -   It updates the message id, takes the last one from the *local_settings.py* file, and increments it by 1 by calling the function</span>
+<span class="sd">                        :py:meth:`~mqtt_interaction_module.mqtt_interaction.update_msg_id`.</span>
+<span class="sd">                    -   Puts all the message information to bytes using the  :py:meth:`~create_message_functions.message_to_bytes`  function</span>
+<span class="sd">                2. Stores the information regarding the message to be sent, in a database (if applicable)</span>
+<span class="sd">                3. Gets the current timestamp in order to know when we sent the message, using the function :py:meth:`~global_vars.get_timestamp`</span>
+<span class="sd">                4. Sends the message by running the :py:meth:`~mqtt_interaction_module.mqtt_interaction.publish` function.</span>
+<span class="sd">                5. Prints whether the message was sent or there was an error.</span>
+
+<span class="sd">            :note:  This function can be called in 2 ways: </span>
+<span class="sd">                        1. providing the payload</span>
+<span class="sd">                        2. providing msg_type and arguments</span>
+<span class="sd">                    In both cases you have to provide the gateway id, sink id, and node id.</span>
+
+<span class="sd">            :param gw_id: gateway id to who the message was sent.</span>
+<span class="sd">            :type gw_id: int</span>
+<span class="sd">            :param sink_id: sink id that received the message in the gateway</span>
+<span class="sd">            :type sink_id: int</span>
+<span class="sd">            :param node_id: node id where we want to send the message.</span>
+<span class="sd">            :type node_id: int</span>
+<span class="sd">            :param msg_type: Type of message that we want to send</span>
+<span class="sd">            :type msg_type: int</span>
+<span class="sd">            :param args: Additional message arguments, depending on the message type</span>
+<span class="sd">            :type args: list</span>
+
+<span class="sd">            :return:</span>
+<span class="sd">                Nothing, so far</span>
+
+<span class="sd">           </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&lt;send node msg&gt;: &quot;</span>
+        <span class="c1"># in order to broadcast to everyone: send_set_led_on_command 141009632514693 sink0 0xFFFFFFFF</span>
+        <span class="n">pub_supertopic</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_supertopic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pubtopic</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="c1"># Check parameters and convert them to the right data type.</span>
+        <span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">addr_ok</span><span class="p">)</span> <span class="o">=</span> <span class="n">interm</span><span class="o">.</span><span class="n">convert_dst_address</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;converted dst-Addr: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span>
+        
+        <span class="c1"># self.node_id = str(node_id)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">gw_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">addr_ok</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;destination address must be an integer (decimal or hex format)&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># OVERWRITE THE previous value for msg id, and increment by 1. Also check its limit (2 bytes)</span>
+        <span class="k">global</span> <span class="n">message_id</span>
+                    
+        <span class="c1"># generate message content if not already present</span>
+        <span class="k">if</span> <span class="n">payload</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;sending message using msg.args&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="c1"># meaning this is a request message            </span>
+                <span class="c1"># update the external variable (in local_settings.py) message_id, to keep track of it.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_msg_id</span><span class="p">()</span>
+                <span class="n">message_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">message_id</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>            
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;sending message from given payload&quot;</span><span class="p">)</span>
+
+        <span class="c1"># timestamp for certain purposes        </span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+
+        <span class="c1"># Register message to table requests_sent</span>
+        <span class="n">save_messages</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">save_messages</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>             
+            <span class="c1"># in case we enabled message info storing, then go ahead and store info from messages into db:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;arguments:&quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="p">[</span><span class="n">message_id</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">]]))</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">_register_gw_request_message</span><span class="p">(</span><span class="n">message_id</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+
+        <span class="c1"># preping message:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;preparing the message at </span><span class="si">{}</span><span class="s2"> to gateway &lt;</span><span class="si">{}</span><span class="s2">&gt;, to sink &lt;</span><span class="si">{}</span><span class="s2">&gt;, to node &lt;</span><span class="si">{}</span><span class="s2">&gt; with msg id: </span><span class="se">\</span>
+<span class="s2">            </span><span class="si">{}</span><span class="s2">, message type = </span><span class="si">{}</span><span class="s2"> and payload=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span><span class="n">node_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span><span class="p">,</span> 
+            <span class="n">msg_type</span><span class="p">,</span>  <span class="n">gvar</span><span class="o">.</span><span class="n">_bytes_to_str_hex_format</span><span class="p">(</span><span class="n">payload</span><span class="p">)))</span>
+
+        <span class="c1"># timestamp to control the time message was sent        </span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+
+        <span class="c1"># send message to the wirepass network</span>
+        <span class="n">sent</span><span class="o">=</span><span class="kc">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">gw_id</span> <span class="o">=</span> <span class="n">gw_id</span><span class="p">,</span>
+                                        <span class="n">sink_id</span> <span class="o">=</span> <span class="n">sink_id</span><span class="p">,</span>                                        
+                                        <span class="n">node_id</span> <span class="o">=</span> <span class="n">node_id</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;failed to send the message&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;result from wirepas send message: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sent</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="mqtt_interaction_node_basic.on_gateway_answer_callback"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback">[docs]</a>    <span class="k">def</span> <span class="nf">on_gateway_answer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gw_error_code</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Callback called when gateway publishes a message to the mesh network.</span>
+<span class="sd">        </span>
+<span class="sd">        :does:</span>
+<span class="sd">            1. More precisley, this callback is called when a message is received on the &quot;gw-response/&quot; local MQTT topic.</span>
+<span class="sd">            2. In this script a message will be printed only if an error is raised.</span>
+
+<span class="sd">        :note:    </span>
+<span class="sd">            By construction, every message published to this MQTT topic is a response to a previous request made to the nodes.</span>
+
+<span class="sd">        :param gw_error_code: error code</span>
+<span class="sd">        :type gw_error_code: bool?</span>
+<span class="sd">        :param param: error parameteres¿? It just displays &#39;None&#39; when there is no error, so we cannot use this as the response, or yes?</span>
+<span class="sd">        :type param: list? </span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Print an error message only if an error is raised.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;gw request callback msg&gt;&quot;</span>
+        
+        <span class="k">if</span> <span class="n">gw_error_code</span> <span class="o">!=</span> <span class="n">wmm</span><span class="o">.</span><span class="n">GatewayResultCode</span><span class="o">.</span><span class="n">GW_RES_OK</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Message sending failed: res=</span><span class="si">%s</span><span class="s2">. Caller param is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gw_error_code</span><span class="p">,</span> <span class="n">param</span><span class="p">))</span></div>
+        <span class="c1"># else:</span>
+        <span class="c1">#     print(&quot;{} msg from node received with params: {}&quot;.format(prefix, param))</span>
+        <span class="c1"># params is empty and displays &#39;None&#39;</span>
+
+
+    <span class="c1"># this is the alternative function to the &quot;on_listen&quot; function defined in the main mqtt_interaction class for cloud ineractions</span>
+<div class="viewcode-block" id="mqtt_interaction_node_basic.on_message_nodes"><a class="viewcode-back" href="../modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">on_message_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Every time a message is received from the mesh network, this function is invoked. </span>
+<span class="sd">        </span>
+<span class="sd">        :does:</span>
+<span class="sd">            1. We get the timestamp of when the message is received</span>
+<span class="sd">            2. We create a *RxMsg* class with all the raw info from the wirepass.data input</span>
+<span class="sd">            3. We parse the message payload, in order to extract the *message type* and *additional arguments* (if applicable)</span>
+<span class="sd">            4. If the parsing is successful, </span>
+<span class="sd">                - The message is displayed</span>
+<span class="sd">                - If the mode == &quot;request&quot; then</span>
+<span class="sd">                    - We call the function :py:meth:`~mqtt_interaction_node_temporal.mqtt_interaction_node_temporal.on_message_temporal_node`</span>
+<span class="sd">            5.  If mode == &quot;listen&quot; </span>
+<span class="sd">                - We just call the function :py:meth:`~mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen`</span>
+
+<span class="sd">        :note:</span>
+<span class="sd">            1.  It is the equivalent to the :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c` function of the</span>
+<span class="sd">                mqtt_interaction_cloud class.</span>
+
+<span class="sd">        :references:</span>
+<span class="sd">            1. It is useful to check the wirepas mqtt library documentation -&gt; https://wirepas.github.io/wirepas-mqtt-library/ </span>
+
+<span class="sd">        :param data: a list containing various different information regarding the message. It includes the raw payload, the node id, the gateway id, the sink id.</span>
+<span class="sd">        :type data: wirepass.data</span>
+
+<span class="sd">      </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;on_message_event (nodes)&gt;: &quot;</span>
+        <span class="c1"># use this timestamp from when the mesage is received</span>
+         
+        <span class="c1"># Init and process received message payload.</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">RxMsg</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">data_payload</span><span class="p">,</span> <span class="n">source_address</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">source_address</span><span class="p">,</span> <span class="n">gw_id</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">sink_id</span><span class="p">,</span> <span class="n">rawdata</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;#############  NODE data received: ###############&quot;</span><span class="p">)</span>
+        <span class="c1"># initial parsing:</span>
+        <span class="c1"># msg.parse_basic(self.subtopic) # basic parse already done in parse</span>
+        
+        <span class="c1"># parse received message    </span>
+        <span class="n">parsed</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subtopic</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">parsed</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing finished successfully&quot;</span><span class="p">)</span> 
+
+            <span class="n">msg</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_raw_data</span><span class="p">)</span> 
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span> <span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on_message_temporal_node</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Parsing failed: Invalid message received (unexpected byte length or msg type?) !</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># add code around here to save recieved message via callback function... Probably?</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;listen&quot;</span> <span class="p">:</span>  
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_message_main_node_listen</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">parsed</span><span class="p">)</span></div></div>
+
+  
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

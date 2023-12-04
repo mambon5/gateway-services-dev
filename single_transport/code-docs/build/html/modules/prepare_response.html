@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prepare_response &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="read_gw_database" href="read_gw_database.html" />
+    <link rel="prev" title="otap_update_all_nodes" href="otap_update_all_nodes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">prepare_response</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/prepare_response.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-prepare_response">
+<span id="prepare-response"></span><h1>prepare_response<a class="headerlink" href="#module-prepare_response" title="Permalink to this headline"></a></h1>
+<p>Prepares the response after a message is received and processed.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#prepare_response.prepare_response" title="prepare_response.prepare_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_response</span></code></a>(msg, parsed, update_db, ...)</p></td>
+<td><p>Function to prepare the response to the interlocutor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#prepare_response.prepare_response_cloud" title="prepare_response.prepare_response_cloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_response_cloud</span></code></a>(msg, node_msg, ...[, ...])</p></td>
+<td><p>Creates the response message for a cloud-gateway interaction.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#prepare_response.prepare_response_nodes" title="prepare_response.prepare_response_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_response_nodes</span></code></a>(msg, cloud_interac, ...)</p></td>
+<td><p>Creates the response message for a nodes-gateway interaction.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="prepare_response.prepare_response">
+<span class="sig-name descname"><span class="pre">prepare_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interlocutor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pubtopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tunnel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">software_update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/prepare_response.html#prepare_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prepare_response.prepare_response" title="Permalink to this definition"></a></dt>
+<dd><p>Function to prepare the response to the interlocutor. Based on the</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>original cloud/node message</p></li>
+<li><p>response from the node (if the original messages was from cloud &gt; node)</p></li>
+<li><p>interlocutor (cloud or nodes)</p></li>
+<li><p>interaction mode</p></li>
+<li><dl class="simple">
+<dt>the results of:</dt><dd><ul class="simple">
+<li><p>software update</p></li>
+<li><p>database update</p></li>
+<li><p>read database</p></li>
+<li><p>initial parsing</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<dl class="field-list">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic">
+<li><dl class="simple">
+<dt>It checks if there has been any error while processing the:</dt><dd><ul class="simple">
+<li><p>parsing</p></li>
+<li><p>tunneling (cloud to node or viceversa)</p></li>
+<li><p>reading of the database</p></li>
+<li><p>updating of the database</p></li>
+<li><p>updating of the software</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>If there has been a problem in any of the mentioned operations above, the message type is set to <em>Error</em>  and the
+proper error type is stored in the message arguments <em>msg.args</em>.</p></li>
+<li><p>Depending on the interlocutor (cloud/nodes) one of the following functions is called to finish the preparation
+of the response:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#prepare_response.prepare_response_nodes" title="prepare_response.prepare_response_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare_response_nodes()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prepare_response.prepare_response_cloud" title="prepare_response.prepare_response_cloud"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare_response_cloud()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The prepared response is returned, which contains a bool (preparation of response was success/failure) and the
+response (as the message payload, in bytes).</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>parsed</strong> (<em>bool</em>) – True if parsing was successful, False otherwise</p></li>
+<li><p><strong>db_update</strong> (<em>[</em><em>bool</em><em>, </em><em>list</em><em>]</em>) – result from the database update function call</p></li>
+<li><p><strong>read_db</strong> (<em>[</em><em>bool</em><em>, </em><em>list</em><em>]</em>) – result from the database read function call</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – whether node is “listen” or “request” mode</p></li>
+<li><p><strong>interlocutor</strong> (<em>string</em>) – whether node is “cloud” or “nodes” mode</p></li>
+<li><p><strong>pubtopic</strong> (<em>string</em>) – MQTT topic where the message is gonig to be published. It is None for node to gateway messages.</p></li>
+<li><p><strong>tunnel</strong> (<em>[</em><em>bool</em><em>, </em><em>node_msg</em><em>]</em>) – result from the tunnel to node call, it returns True if call was successful, and the message received from the node</p></li>
+<li><p><strong>soft_upd</strong> (<em>[</em><em>bool</em><em>, </em><em>bool</em><em>, </em><em>list</em><em>]</em>) – result from the software update function call</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>bytes</em> Message payload to respond with</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prepare_response.prepare_response_cloud">
+<span class="sig-name descname"><span class="pre">prepare_response_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">soft_up_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_up_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_db_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pub_supertopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/prepare_response.html#prepare_response_cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prepare_response.prepare_response_cloud" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the response message for a cloud-gateway interaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It sets the right message id and type</p></li>
+<li><p>It sets the right arguments</p></li>
+<li><p>Calls the <a class="reference internal" href="create_message_functions.html#create_message_functions.message_to_bytes" title="create_message_functions.message_to_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message_to_bytes()</span></code></a>  function to create the message</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – the message received from the cloud</p></li>
+<li><p><strong>node_msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – the message received from the node, via tunneling</p></li>
+<li><p><strong>soft_up_list</strong> (<em>list</em>) – resulting list from the software update function call</p></li>
+<li><p><strong>db_up_list</strong> (<em>list</em>) – resulting list from the database update function call</p></li>
+<li><p><strong>read_db_list</strong> (<em>list</em>) – resulting list from the database update function call</p></li>
+<li><p><strong>pubtopic</strong> (<em>string</em>) – MQTT topic where the message is going to be published. It is None for node to gateway messages.</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to prepend on each printed line on debug or console</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p><em>(bytes)</em> – the message payload that we wanted to create as a response</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prepare_response.prepare_response_nodes">
+<span class="sig-name descname"><span class="pre">prepare_response_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_interac</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_up_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_db_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/prepare_response.html#prepare_response_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#prepare_response.prepare_response_nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the response message for a nodes-gateway interaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It checks the message type and calls the <a class="reference internal" href="create_message_functions.html#create_message_functions.message_to_bytes" title="create_message_functions.message_to_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message_to_bytes()</span></code></a>  function to create the message</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – the message received</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to prepend on each printed line on debug or console</p></li>
+<li><p><strong>db_up_list</strong> (<em>list</em>) – resulting list from the database update function call</p></li>
+<li><p><strong>read_db_list</strong> (<em>list</em>) – resulting list from the database update function call</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p><em>(bytes)</em> – the message payload that we wanted to create as a response</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="otap_update_all_nodes.html" class="btn btn-neutral float-left" title="otap_update_all_nodes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="read_gw_database.html" class="btn btn-neutral float-right" title="read_gw_database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

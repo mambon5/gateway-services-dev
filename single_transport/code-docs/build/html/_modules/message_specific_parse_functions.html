@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>message_specific_parse_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">message_specific_parse_functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for message_specific_parse_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Script containing parsing functions that depend on the</span>
+
+<span class="sd">    - message type</span>
+
+<span class="sd">    For each message type a different parsing function is called. These functions are called by the more general</span>
+<span class="sd">    parse script.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="parse_error_message"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_error_message">[docs]</a><span class="k">def</span> <span class="nf">parse_error_message</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse the error message</span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing error message...&quot;</span><span class="p">)</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span> <span class="c1"># error number</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">error</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_echo_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_echo_response">[docs]</a><span class="k">def</span> <span class="nf">parse_echo_response</span><span class="p">(</span><span class="n">traveltime</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Parse the echo message. </span>
+<span class="sd">    </span>
+<span class="sd">    :note: It is unclear whether we have to use the *travel_time_ms* as the travel time in milliseconds, </span>
+<span class="sd">           or whether we have to transform it using the documentation.</span>
+<span class="sd">       </span>
+
+<span class="sd">    :references: </span>
+<span class="sd">        - Check out how to pass traveltime to millisecons as described on page 17 of this manual: https://wirepas.github.io/wm-sdk/master/d6/d50/wms__data_8h.html#a458421a43d4f6dc515faf427bf579d00</span>
+<span class="sd">            Basically we have to multiply the traveltime units by 1000/128 in order to obtain the value of travel time </span>
+<span class="sd">            in milliseconds</span>
+<span class="sd">        - Understanding the difference between *propagation delay* and *transmission delay* : https://www.baeldung.com/cs/propagation-vs-transmission-delay</span>
+
+<span class="sd">    :param traveltime: transmition delay from node to sink, in seconds / 128</span>
+<span class="sd">    :type traveltime: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return: The travel time transmission delay in milliseconds</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing echo message...&quot;</span><span class="p">)</span>
+    <span class="n">travel_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">traveltime</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="mi">128</span><span class="p">)</span> <span class="c1"># echo request travel time</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">travel_time</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<span class="c1"># to be deleted in production:</span>
+<div class="viewcode-block" id="parse_echo_response_gw_to_cloud"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_echo_response_gw_to_cloud">[docs]</a><span class="k">def</span> <span class="nf">parse_echo_response_gw_to_cloud</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the echo response from a gateway for a simulated cloud. </span>
+<span class="sd">    It receives the payload in bytes and calls the standard *parse_echo_response* function.</span>
+
+<span class="sd">    :param payload: message payload</span>
+<span class="sd">    :type payload: bytes</span>
+
+<span class="sd">    :return: The travel time transmission delay in milliseconds</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">trav_time</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s2">&quot;&lt;I&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">parse_echo_response</span><span class="p">(</span><span class="n">trav_time</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="parse_led_status_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_led_status_response">[docs]</a><span class="k">def</span> <span class="nf">parse_led_status_response</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the led status message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing led status message...&quot;</span><span class="p">)</span>
+    <span class="n">led_status</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span> <span class="c1"># led status</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">led_status</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_neighbour_number_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_neighbour_number_response">[docs]</a><span class="k">def</span> <span class="nf">parse_neighbour_number_response</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the number of neighbours message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Fill fields list with new payload data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing neighbour number message...&quot;</span><span class="p">)</span>
+    <span class="n">num_neighbours</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span> <span class="c1"># number of neighbours</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">num_neighbours</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_rssi_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_rssi_response">[docs]</a><span class="k">def</span> <span class="nf">parse_rssi_response</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the rssi message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing rssi message...&quot;</span><span class="p">)</span>
+    <span class="n">rssi</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span> <span class="c1"># rssi</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">rssi</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="parse_hops_response_from_node"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_hops_response_from_node">[docs]</a><span class="k">def</span> <span class="nf">parse_hops_response_from_node</span><span class="p">(</span><span class="n">hops</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the hops message from node to gateway.    </span>
+
+<span class="sd">    :param hops: the number of hops, sent by wirepass automatically in the message header</span>
+<span class="sd">    :type hops: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing hops message node to gateway...&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">hops</span><span class="p">]</span> <span class="c1"># number of hops</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_hops_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_hops_response">[docs]</a><span class="k">def</span> <span class="nf">parse_hops_response</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the hops message from gateway to cloud.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing hops message gw to cloud...&quot;</span><span class="p">)</span>
+    <span class="n">hops</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span> <span class="c1"># number of hops</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">hops</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_node_status_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_response">[docs]</a><span class="k">def</span> <span class="nf">parse_node_status_response</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node status from message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data, here come 15 bytes with different kinds of info</span>
+    <span class="c1"># the first byte contains the message type</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node status message...&quot;</span><span class="p">)</span>
+    <span class="n">led_status</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># led status</span>
+    <span class="n">dimming</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1"># dimming</span>
+    <span class="n">num_neighbours</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span> <span class="c1"># number of neighbours</span>
+    <span class="n">rssi</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># rssi</span>
+    <span class="n">hops</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">])</span> <span class="c1"># number of hops</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">led_status</span><span class="p">,</span> <span class="n">dimming</span><span class="p">,</span> <span class="n">num_neighbours</span><span class="p">,</span> <span class="n">rssi</span><span class="p">,</span> <span class="n">hops</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_node_status_response_from_node"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_response_from_node">[docs]</a><span class="k">def</span> <span class="nf">parse_node_status_response_from_node</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">rawdata</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node status from message, for node responses to gw.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param rawdata: raw data sent by wirepas automatically from the node to the sink in the message.</span>
+<span class="sd">    :type rawdata: JSON</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data, here come 15 bytes with different kinds of info</span>
+    <span class="c1"># the first byte contains the message type</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node status message...&quot;</span><span class="p">)</span>
+    <span class="n">led_status</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># led status</span>
+    <span class="n">dimming</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1"># dimming</span>
+    <span class="n">num_neighbours</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span> <span class="c1"># number of neighbours</span>
+    <span class="n">rssi</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># rssi</span>
+    <span class="n">hops</span> <span class="o">=</span> <span class="n">rawdata</span><span class="o">.</span><span class="n">hop_count</span>                 <span class="c1"># number of hops</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">led_status</span><span class="p">,</span> <span class="n">dimming</span><span class="p">,</span> <span class="n">num_neighbours</span><span class="p">,</span> <span class="n">rssi</span><span class="p">,</span> <span class="n">hops</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="parse_node_version_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_version_response">[docs]</a><span class="k">def</span> <span class="nf">parse_node_version_response</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node version from message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. In particular a list of 8 elements, each of them an int (0-254 possible values)</span>
+<span class="sd">            representing the stack and app version of the node software.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data, here come 15 bytes with different kinds of info</span>
+    <span class="c1"># the first byte contains the message type</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node version message...&quot;</span><span class="p">)</span>
+    <span class="n">stack_major</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># stack major</span>
+    <span class="n">stack_minor</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1"># stack minor</span>
+    <span class="n">stack_revision</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span> <span class="c1"># stack revision</span>
+    <span class="n">stack_build</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="c1"># stack build</span>
+    <span class="n">app_major</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span> <span class="c1"># app major</span>
+    <span class="n">app_minor</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span> <span class="c1"># app minor</span>
+    <span class="n">app_revision</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># app revision</span>
+    <span class="n">app_build</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">])</span> <span class="c1"># app build</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">stack_major</span><span class="p">,</span> <span class="n">stack_minor</span><span class="p">,</span> <span class="n">stack_revision</span><span class="p">,</span> <span class="n">stack_build</span><span class="p">,</span> <span class="n">app_major</span><span class="p">,</span> <span class="n">app_minor</span><span class="p">,</span> <span class="n">app_revision</span><span class="p">,</span> <span class="n">app_build</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_crc"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.get_crc">[docs]</a><span class="k">def</span> <span class="nf">get_crc</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">ini</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fi</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>    
+    <span class="sd">&quot;&quot;&quot; Parse the crc from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param ini: first byte where the crc is</span>
+<span class="sd">    :type ini: int    </span>
+<span class="sd">    :param fi: lst byte where the crc is</span>
+<span class="sd">    :type fi: int    </span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        **args** (*list*) --  the CRC number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">crc</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="p">:</span><span class="n">fi</span><span class="p">])</span> <span class="c1"># crc</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">crc</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">args</span></div>
+
+
+<span class="c1"># CLOUD REQUEST to NODE</span>
+<div class="viewcode-block" id="parse_set_strategy_message"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_set_strategy_message">[docs]</a><span class="k">def</span> <span class="nf">parse_set_strategy_message</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the strategy from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing (node) strategy cloud request...&quot;</span><span class="p">)</span>
+    <span class="n">strategy</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># strategy</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">strategy</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_dimming_message"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_dimming_message">[docs]</a><span class="k">def</span> <span class="nf">parse_dimming_message</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the dimming from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing dimming cloud request...&quot;</span><span class="p">)</span>
+    <span class="n">dimming</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># dimming</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;found a dimming of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dimming</span><span class="p">))</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">dimming</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+
+<span class="c1"># CLOUD TO GATEWAY REQUEST</span>
+
+<div class="viewcode-block" id="parse_cloud_to_gateway_request_generic_client_id"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_cloud_to_gateway_request_generic_client_id">[docs]</a><span class="k">def</span> <span class="nf">parse_cloud_to_gateway_request_generic_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the client id from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* List of parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing client id from cloud to gw request...&quot;</span><span class="p">)</span>
+    <span class="n">id_client</span> <span class="o">=</span> <span class="n">get_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>           <span class="c1"># client id</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_client</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_dimming_message_client_id"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_dimming_message_client_id">[docs]</a><span class="k">def</span> <span class="nf">parse_dimming_message_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the client id and dimming from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing client id and dimming...&quot;</span><span class="p">)</span>
+    <span class="n">id_client</span> <span class="o">=</span> <span class="n">get_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>           <span class="c1"># client id</span>
+    <span class="n">dimming</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>           <span class="c1"># dimming</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_client</span><span class="p">,</span> <span class="n">dimming</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_node_list_client_id"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_list_client_id">[docs]</a><span class="k">def</span> <span class="nf">parse_node_list_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node id list and client id from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    :param num_nodes: number of nodes</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string </span>
+<span class="sd">    :param firstn: first byte of the node id list to parse</span>
+<span class="sd">    :type firstn: int </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1][0] - client id</span>
+<span class="sd">            - [1][1] - number of nodes</span>
+<span class="sd">            - [1][2] - node id list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing client id and node list...&quot;</span><span class="p">)</span>
+    <span class="n">id_client</span> <span class="o">=</span> <span class="n">get_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>           <span class="c1"># client id</span>
+    <span class="n">preresult</span> <span class="o">=</span> <span class="n">parse_node_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="n">firstb</span><span class="p">)</span>
+    <span class="n">node_list</span> <span class="o">=</span> <span class="n">preresult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>           <span class="c1"># node id list</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_client</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">node_list</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_node_status_list_client_id"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_list_client_id">[docs]</a><span class="k">def</span> <span class="nf">parse_node_status_list_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node status list and client id from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    :param num_nodes: number of nodes</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  [0] - bool (True if successful, False if failed)</span>
+<span class="sd">                                [1][0] - client id</span>
+<span class="sd">                                [1][1] - number of nodes</span>
+<span class="sd">                                [1][2] - node status list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;parsing client id and node status list...&quot;</span><span class="p">)</span>
+    <span class="n">id_client</span> <span class="o">=</span> <span class="n">get_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>           <span class="c1"># client id</span>
+    <span class="n">preresult</span> <span class="o">=</span> <span class="n">parse_node_status_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="n">firstb</span><span class="p">)</span>
+    <span class="n">node_stat_list</span> <span class="o">=</span> <span class="n">preresult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>           <span class="c1"># node id list</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">id_client</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">node_stat_list</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<span class="c1"># def parse_update_software(payload, prefix=&quot;&quot;):</span>
+<span class="c1">#     &quot;&quot;&quot; Parse the device number from the message.    </span>
+
+<span class="c1">#     :param payload: Message payload in bytes that we wish to parse</span>
+<span class="c1">#     :type payload: bytes </span>
+<span class="c1">#     :param prefix: text to append to each console log or print</span>
+<span class="c1">#     :type prefix: string </span>
+    
+<span class="c1">#     :return:</span>
+<span class="c1">#         **result** (*list*) --  [0] - bool (True if successful, False if failed)</span>
+<span class="c1">#                                 [1] - no parameters yet</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     print(prefix+&quot;parsing extra parameters for the software update...&quot;)</span>
+    
+<span class="c1">#     return [True, []]</span>
+
+
+
+<span class="c1"># RESPONSE from CLOUD to GATEWAY request to cloud</span>
+<div class="viewcode-block" id="parse_alarm_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_alarm_response">[docs]</a><span class="k">def</span> <span class="nf">parse_alarm_response</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the alarm and crc from the response .    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parsing alarm cloud response...&quot;</span><span class="p">)</span>
+    <span class="n">alarm</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># alarm</span>
+    <span class="n">crc</span> <span class="o">=</span> <span class="n">get_crc</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>          <span class="c1"># should specify the byte positions that contain the crc code</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">alarm</span><span class="p">,</span> <span class="n">crc</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_crc_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_crc_response">[docs]</a><span class="k">def</span> <span class="nf">parse_crc_response</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the CRC number for a response message</span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *int* parsed CRC. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parsing crc response...&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">get_crc</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_gw_version_response"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_gw_version_response">[docs]</a><span class="k">def</span> <span class="nf">parse_gw_version_response</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Parse the gateway version number for a response message</span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* list with the 4 integer numbers represenenting together the version id number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parsing gateway version response...&quot;</span><span class="p">)</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;BBBB&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="c1"># gateway version </span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">version</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<span class="c1"># def _parse_cloud_to_gateway_dimming_request(msg):</span>
+<span class="c1">#     print(&quot;parsing dimming cloud to gateway request...&quot;)</span>
+<span class="c1">#     msg.dimming = gvar.unpack_bytes(&#39;&lt;B&#39;, msg.payload[3:4]) # alarm</span>
+<span class="c1">#     msg.args = [msg.dimming]</span>
+
+<span class="c1">#  NODE REQUESTS to GATEWAY parsing functions </span>
+<div class="viewcode-block" id="parse_node_alarm_request"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_alarm_request">[docs]</a><span class="k">def</span> <span class="nf">parse_node_alarm_request</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node alarm from the request.</span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parsing alarm node request...&quot;</span><span class="p">)</span>
+    <span class="n">alarm</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># alarm</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">alarm</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_current_voltage"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_current_voltage">[docs]</a><span class="k">def</span> <span class="nf">parse_current_voltage</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node electric parameters from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    /watch</span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">voltage</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># voltage</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># current</span>
+    <span class="n">change_type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1"># change type</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">voltage</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">change_type</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_electric_parameters"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_electric_parameters">[docs]</a><span class="k">def</span> <span class="nf">parse_electric_parameters</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node electric parameters from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">voltage</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># voltage</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># current</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span> <span class="c1"># power</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="c1"># frequency</span>
+    <span class="n">light_lev</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span> <span class="c1"># light_lev</span>
+    <span class="n">run_hours</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span> <span class="c1"># run_hours</span>
+    
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">voltage</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">light_lev</span><span class="p">,</span> <span class="n">run_hours</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="parse_electric_parameters_from_message"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_electric_parameters_from_message">[docs]</a><span class="k">def</span> <span class="nf">parse_electric_parameters_from_message</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node consumptions from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parsing basic consumption node request...&quot;</span><span class="p">)</span>
+    
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_electric_parameters</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">15</span><span class="p">])</span>
+
+    <span class="k">return</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_node_solar_metrics_request"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_solar_metrics_request">[docs]</a><span class="k">def</span> <span class="nf">parse_node_solar_metrics_request</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node solar metrics from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parsing solar panel metrics node request...&quot;</span><span class="p">)</span>
+    <span class="n">charge</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1"># charge</span>
+    <span class="n">production</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="c1"># production</span>
+    
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">charge</span><span class="p">,</span> <span class="n">production</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="parse_node_status_request"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_request">[docs]</a><span class="k">def</span> <span class="nf">parse_node_status_request</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node status from message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string    </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* Parsed arguments. Depending on the **message type** these arguments can be more or fewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fill fields list with new payload data, here come 15 bytes with different kinds of info</span>
+    <span class="c1"># the first byte contains the message type</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node status message...&quot;</span><span class="p">)</span>
+    <span class="n">led_status</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># led status</span>
+    <span class="n">dimming</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1"># dimming</span>
+    <span class="n">num_neighbours</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span> <span class="c1"># number of neighbours</span>
+    <span class="n">rssi</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># rssi</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">led_status</span><span class="p">,</span> <span class="n">dimming</span><span class="p">,</span> <span class="n">num_neighbours</span><span class="p">,</span> <span class="n">rssi</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="p">]</span></div>
+
+
+<span class="c1"># GATEWAY RESPONSE TO CLOUD request to gateway</span>
+
+<div class="viewcode-block" id="parse_node_list"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_list">[docs]</a><span class="k">def</span> <span class="nf">parse_node_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot; Parse the node id list from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    :param num_nodes: number of nodes</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string </span>
+<span class="sd">    :param firstn: first byte of the node id list to parse</span>
+<span class="sd">    :type firstn: int </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1][0] - number of nodes</span>
+<span class="sd">            - [1][1] - node id list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node list..&quot;</span><span class="p">)</span>
+    <span class="n">node_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+            <span class="n">ini</span> <span class="o">=</span> <span class="n">firstb</span> <span class="o">+</span> <span class="mi">8</span><span class="o">*</span><span class="n">i</span> <span class="c1"># first byte of the list of nodes</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="n">ini</span> <span class="o">+</span> <span class="mi">8</span>
+            <span class="n">node_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;Q&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="p">:</span><span class="n">fi</span><span class="p">])</span> <span class="c1"># node id</span>
+            <span class="n">node_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">node_ids</span><span class="p">]]</span></div>
+
+
+
+<span class="c1"># function that unpacks a node status list into an array [true, [num_nodes, node_list]]</span>
+<div class="viewcode-block" id="parse_node_status_list"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_list">[docs]</a><span class="k">def</span> <span class="nf">parse_node_status_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="p">:</span>   <span class="c1"># node status list</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node status list from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    :param num_nodes: number of nodes</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  [0] - bool (True if successful, False if failed)</span>
+<span class="sd">                                [1][0] - number of nodes</span>
+<span class="sd">                                [1][1] - node status list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node status list..&quot;</span><span class="p">)</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+            <span class="n">ini</span> <span class="o">=</span> <span class="n">firstb</span> <span class="o">+</span> <span class="mi">16</span><span class="o">*</span><span class="n">i</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="n">ini</span> <span class="o">+</span> <span class="mi">16</span> 
+            <span class="n">node_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;Q&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="p">:</span><span class="n">ini</span><span class="o">+</span><span class="mi">8</span><span class="p">])</span> <span class="c1"># node id</span>
+            <span class="n">led_state</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="o">+</span><span class="mi">8</span><span class="p">:</span><span class="n">ini</span><span class="o">+</span><span class="mi">9</span><span class="p">])</span> <span class="c1"># led state</span>
+            <span class="n">dimming</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="o">+</span><span class="mi">9</span><span class="p">:</span><span class="n">ini</span><span class="o">+</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># dimming</span>
+            <span class="n">neighb</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="o">+</span><span class="mi">10</span><span class="p">:</span><span class="n">ini</span><span class="o">+</span><span class="mi">14</span><span class="p">])</span> <span class="c1"># neighbours</span>
+            <span class="n">rssi</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;b&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="o">+</span><span class="mi">14</span><span class="p">:</span><span class="n">ini</span><span class="o">+</span><span class="mi">15</span><span class="p">])</span> <span class="c1"># rssi</span>
+            <span class="n">hops</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="o">+</span><span class="mi">15</span><span class="p">:</span><span class="n">fi</span><span class="p">])</span> <span class="c1"># hops</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">node_id</span><span class="p">,</span> <span class="n">led_state</span><span class="p">,</span> <span class="n">dimming</span><span class="p">,</span> <span class="n">neighb</span><span class="p">,</span> <span class="n">rssi</span><span class="p">,</span> <span class="n">hops</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">]]</span></div>
+
+<div class="viewcode-block" id="parse_node_electric_params_list"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_electric_params_list">[docs]</a><span class="k">def</span> <span class="nf">parse_node_electric_params_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstb</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Parse the node electrical parameters list from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    :param num_nodes: number of nodes</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  [0] - bool (True if successful, False if failed)</span>
+<span class="sd">                                [1][0] - number of nodes</span>
+<span class="sd">                                [1][1] - node id list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node consum list..&quot;</span><span class="p">)</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+            <span class="n">ini</span> <span class="o">=</span> <span class="n">firstb</span> <span class="o">+</span> <span class="mi">20</span><span class="o">*</span><span class="n">i</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="n">ini</span> <span class="o">+</span> <span class="mi">20</span>
+            <span class="n">node_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;Q&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="p">:</span><span class="n">ini</span><span class="o">+</span><span class="mi">8</span><span class="p">])</span> <span class="c1"># node id</span>
+            <span class="n">node_id</span><span class="o">=</span> <span class="p">[</span><span class="n">node_id</span><span class="p">]</span>
+            <span class="n">electricp</span> <span class="o">=</span> <span class="n">parse_electric_parameters</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="n">ini</span><span class="o">+</span><span class="mi">8</span><span class="p">:</span><span class="n">fi</span><span class="p">])</span>
+            <span class="n">node_id</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">electricp</span><span class="p">)</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">]]</span></div>
+
+<div class="viewcode-block" id="parse_alarm_node_list"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_alarm_node_list">[docs]</a><span class="k">def</span> <span class="nf">parse_alarm_node_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Parse the alarm and node id list from the message.    </span>
+
+<span class="sd">    :param payload: Message payload in bytes that we wish to parse</span>
+<span class="sd">    :type payload: bytes </span>
+<span class="sd">    :param num_nodes: number of nodes</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :param prefix: text to append to each console log or print</span>
+<span class="sd">    :type prefix: string </span>
+<span class="sd">    </span>
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  [0] - bool (True if successful, False if failed)</span>
+<span class="sd">                                [1][0] - alarm type</span>
+<span class="sd">                                [1][1] - number of nodes</span>
+<span class="sd">                                [1][2] - node id list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;parsing node alarm list..&quot;</span><span class="p">)</span>
+    <span class="n">alarm</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># alarm</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="n">parse_node_list</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">firstn</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># node ids</span>
+    <span class="nb">bool</span> <span class="o">=</span> <span class="n">result1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="n">result1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">node_list</span> <span class="o">=</span> <span class="n">result1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="p">[</span><span class="n">alarm</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">node_list</span><span class="p">]]</span> <span class="c1"># result is [True, [alarm, num_nodes, node_list]]</span></div>
+
+<div class="viewcode-block" id="get_client_id"><a class="viewcode-back" href="../modules/message_specific_parse_functions.html#message_specific_parse_functions.get_client_id">[docs]</a><span class="k">def</span> <span class="nf">get_client_id</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">id_client</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">unpack_bytes</span><span class="p">(</span><span class="s1">&#39;&lt;I&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>   
+    <span class="k">return</span> <span class="n">id_client</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

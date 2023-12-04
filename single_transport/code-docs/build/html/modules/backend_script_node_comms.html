@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>backend_script_node_comms &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cloud_settings" href="cloud_settings.html" />
+    <link rel="prev" title="backend_script_cloud_comms" href="backend_script_cloud_comms.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">backend_script_node_comms</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/backend_script_node_comms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-backend_script_node_comms">
+<span id="backend-script-node-comms"></span><h1>backend_script_node_comms<a class="headerlink" href="#module-backend_script_node_comms" title="Permalink to this headline"></a></h1>
+<p>Starts the interaction of the gateway with the nodes. It creates the user interface (in the terminal) for sending and receiving messages
+to/from the mesh network, respectively.
+The interface is in the terminal and allows to select <strong>one</strong> of the following mqtt interaction modes:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Gateway listens to mesh network messages</p></li>
+<li><p>Gateway sends requests to the mesh network</p></li>
+</ol>
+<p>In order to start any of the 2 interactions listed here, we should:</p>
+<ul class="simple">
+<li><p>select an interaction mode (either <em>request</em> or <em>listen</em>)</p></li>
+<li><p>create an interaction with the nodes, using the <a class="reference internal" href="mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main" title="mqtt_interaction_node_main.mqtt_interaction_node_main"><code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_node_main</span></code></a> class
+or the <a class="reference internal" href="mqtt_interaction_node_temporal.html#mqtt_interaction_node_temporal.mqtt_interaction_node_temporal" title="mqtt_interaction_node_temporal.mqtt_interaction_node_temporal"><code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_node_temporal</span></code></a> class, depending
+on the nature of the interaction. The <em>node main</em> class is more permanent and is supposed to constantly listen for any message from the nodes. While
+the <em>node temporal class</em> is designed to be created and destroyed instantaneosuly, and just used for tunneling a message from the cloud to the node.
+It is created as a necessary way of sending the message form the gateway to the node in order to complete the cloud &gt; node tunnel.</p></li>
+</ul>
+<p>Finally, the following is triggered depending on the interaction mode (listen or send):</p>
+<ul class="simple">
+<li><p><em>for listen modes</em>: the subscription sub loop starts</p></li>
+<li><p><em>for send modes</em>: the send message function is called.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">references</dt>
+<dd class="field-odd"><p>We followed this guide to install the python backend to the gateway &gt; <a class="reference external" href="https://developer.wirepas.com/support/solutions/articles/77000487992-how-to-communicate-with-a-wirepas-network-using-wirepas-gateway-ap">https://developer.wirepas.com/support/solutions/articles/77000487992-how-to-communicate-with-a-wirepas-network-using-wirepas-gateway-ap</a></p>
+</dd>
+</dl>
+<p>in order to know how to create a python backend to talk to the nodes.</p>
+</div></blockquote>
+<p class="rubric">Module Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#backend_script_node_comms.GW_REQUEST_TO_NODES" title="backend_script_node_comms.GW_REQUEST_TO_NODES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GW_REQUEST_TO_NODES</span></code></a></p></td>
+<td><p>interaction modes:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#backend_script_node_comms.MODE_LIST" title="backend_script_node_comms.MODE_LIST"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MODE_LIST</span></code></a></p></td>
+<td><p>different interaction modes with the nodes</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#backend_script_node_comms.message_id" title="backend_script_node_comms.message_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">message_id</span></code></a></p></td>
+<td><p>get the current message id, saved in file &quot;settings&quot;</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#backend_script_node_comms.DB_PATH" title="backend_script_node_comms.DB_PATH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DB_PATH</span></code></a></p></td>
+<td><p>DB_PATH = &quot;/home/roma/smartec/gateway-services/single_transport/backend/bbdd/&quot;</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#backend_script_node_comms.DB_NAME" title="backend_script_node_comms.DB_NAME"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DB_NAME</span></code></a></p></td>
+<td><p>name of database:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#backend_script_node_comms.save_messages" title="backend_script_node_comms.save_messages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_messages</span></code></a></p></td>
+<td><p>save messages information to db or not</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#backend_script_node_comms.main" title="backend_script_node_comms.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#backend_script_node_comms.run_node_comunications" title="backend_script_node_comms.run_node_comunications"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_node_comunications</span></code></a>([mode, wni, node_list])</p></td>
+<td><p>Starts the interaction with the mesh net.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="backend_script_node_comms.DB_NAME">
+<span class="sig-name descname"><span class="pre">DB_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wirepas_mesh_network.db'</span></em><a class="headerlink" href="#backend_script_node_comms.DB_NAME" title="Permalink to this definition"></a></dt>
+<dd><p>name of database:</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="backend_script_node_comms.DB_PATH">
+<span class="sig-name descname"><span class="pre">DB_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bbdd/'</span></em><a class="headerlink" href="#backend_script_node_comms.DB_PATH" title="Permalink to this definition"></a></dt>
+<dd><p>DB_PATH = “/home/roma/smartec/gateway-services/single_transport/backend/bbdd/”</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="backend_script_node_comms.GW_REQUEST_TO_NODES">
+<span class="sig-name descname"><span class="pre">GW_REQUEST_TO_NODES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'request</span> <span class="pre">to</span> <span class="pre">nodes'</span></em><a class="headerlink" href="#backend_script_node_comms.GW_REQUEST_TO_NODES" title="Permalink to this definition"></a></dt>
+<dd><p>interaction modes:</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="backend_script_node_comms.MODE_LIST">
+<span class="sig-name descname"><span class="pre">MODE_LIST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['request</span> <span class="pre">to</span> <span class="pre">nodes',</span> <span class="pre">'listen</span> <span class="pre">to</span> <span class="pre">nodes',</span> <span class="pre">'listen</span> <span class="pre">to</span> <span class="pre">nodes</span> <span class="pre">-raw_data',</span> <span class="pre">'fake</span> <span class="pre">node</span> <span class="pre">listener',</span> <span class="pre">&quot;fake</span> <span class="pre">node</span> <span class="pre">requester</span> <span class="pre">(doesn't</span> <span class="pre">work,</span> <span class="pre">can't</span> <span class="pre">fully</span> <span class="pre">simulate</span> <span class="pre">wirepas</span> <span class="pre">message)&quot;]</span></em><a class="headerlink" href="#backend_script_node_comms.MODE_LIST" title="Permalink to this definition"></a></dt>
+<dd><p>different interaction modes with the nodes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="backend_script_node_comms.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/backend_script_node_comms.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend_script_node_comms.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="backend_script_node_comms.message_id">
+<span class="sig-name descname"><span class="pre">message_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2772</span></em><a class="headerlink" href="#backend_script_node_comms.message_id" title="Permalink to this definition"></a></dt>
+<dd><p>get the current message id, saved in file “settings”</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="backend_script_node_comms.run_node_comunications">
+<span class="sig-name descname"><span class="pre">run_node_comunications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/backend_script_node_comms.html#run_node_comunications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#backend_script_node_comms.run_node_comunications" title="Permalink to this definition"></a></dt>
+<dd><p>Starts the interaction with the mesh net. It allows the user to select a mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>You select a mode of the 5 available</p></li>
+<li><p>then a <a class="reference internal" href="mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main" title="mqtt_interaction_node_main.mqtt_interaction_node_main"><code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_node_main</span></code></a> or
+<code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_cloud</span></code> class is created</p></li>
+<li><p>Depending on the mode selected (<em>listen</em> or <em>request</em>) the function <em>.listen()</em> or <em>.send_message()</em>
+are called.</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="backend_script_node_comms.save_messages">
+<span class="sig-name descname"><span class="pre">save_messages</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#backend_script_node_comms.save_messages" title="Permalink to this definition"></a></dt>
+<dd><p>save messages information to db or not</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="backend_script_cloud_comms.html" class="btn btn-neutral float-left" title="backend_script_cloud_comms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cloud_settings.html" class="btn btn-neutral float-right" title="cloud_settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

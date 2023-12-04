@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>update_gw_database &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="update_gw_software" href="update_gw_software.html" />
+    <link rel="prev" title="start_gw_comms" href="start_gw_comms.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">update_gw_database</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/update_gw_database.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-update_gw_database">
+<span id="update-gw-database"></span><h1>update_gw_database<a class="headerlink" href="#module-update_gw_database" title="Permalink to this headline"></a></h1>
+<p>Set of functions that will take care of updating the gateway database according to the message type received.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#update_gw_database.update_gw_database" title="update_gw_database.update_gw_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_gw_database</span></code></a>(msg[, mode, ...])</p></td>
+<td><p>Function that updates the gateway database.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#update_gw_database.update_gw_database_cloud" title="update_gw_database.update_gw_database_cloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_gw_database_cloud</span></code></a>(msg[, prefix])</p></td>
+<td><p>Function that updates the gateway database according to:</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#update_gw_database.update_gw_database_nodes" title="update_gw_database.update_gw_database_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_gw_database_nodes</span></code></a>(msg, mode[, ...])</p></td>
+<td><p>Function that updates the gateway database according to:</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="update_gw_database.update_gw_database">
+<span class="sig-name descname"><span class="pre">update_gw_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interlocutor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/update_gw_database.html#update_gw_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#update_gw_database.update_gw_database" title="Permalink to this definition"></a></dt>
+<dd><p>Function that updates the gateway database.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>It checks the interlocutor (cloud/nodes)</p></li>
+<li><dl class="simple">
+<dt>It calls either the:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#update_gw_database.update_gw_database_nodes" title="update_gw_database.update_gw_database_nodes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_gw_database_nodes()</span></code></a> if the interlocutor is <em>nodes</em></p></li>
+<li><p><a class="reference internal" href="#update_gw_database.update_gw_database_cloud" title="update_gw_database.update_gw_database_cloud"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_gw_database_cloud()</span></code></a> if the interlocutor is <em>cloud</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – either “listen” or “request”</p></li>
+<li><p><strong>interlocutor</strong> (<em>string</em>) – whether node is “cloud” or “nodes” mode</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>bool</em> True if database is changed, False if no changes were made</p></li>
+<li><p>[2] - <em>list</em> return arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="update_gw_database.update_gw_database_cloud">
+<span class="sig-name descname"><span class="pre">update_gw_database_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/update_gw_database.html#update_gw_database_cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#update_gw_database.update_gw_database_cloud" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Function that updates the gateway database according to:</dt><dd><ol class="arabic simple">
+<li><p>message MQTT supertopic</p></li>
+<li><p>message type</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Starts a switch case, depending on the <em>MQTT super-topic</em>.</p></li>
+<li><p>Starts another switch case, depending on the <em>message type</em></p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – prefix to append to every message print</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> return arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="update_gw_database.update_gw_database_nodes">
+<span class="sig-name descname"><span class="pre">update_gw_database_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interac</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/update_gw_database.html#update_gw_database_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#update_gw_database.update_gw_database_nodes" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Function that updates the gateway database according to:</dt><dd><ol class="arabic simple">
+<li><p>the message mode</p></li>
+<li><p>message type</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Starts a switch case, depending on <em>mode</em> (listen or request) and <em>message type</em>.</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – Message received class with all the arguments</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – either “listen” or “request”</p></li>
+<li><p><strong>interac</strong> (<em>mqtt_interaction_meshnet</em>) – MQTT node interaction (it can be deleted once we have a proper database and we don’t need to store the node list on RAM)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>bool</em> True if database is changed, False if no changes were made</p></li>
+<li><p>[2] - <em>list</em> return arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="start_gw_comms.html" class="btn btn-neutral float-left" title="start_gw_comms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="update_gw_software.html" class="btn btn-neutral float-right" title="update_gw_software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

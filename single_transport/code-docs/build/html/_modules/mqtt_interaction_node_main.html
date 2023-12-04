@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mqtt_interaction_node_main &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mqtt_interaction_node_main</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mqtt_interaction_node_main</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Main node to gateway interaction class.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">mqtt_interaction_node_basic</span> <span class="kn">import</span> <span class="n">mqtt_interaction_node_basic</span>
+<span class="kn">import</span> <span class="nn">update_gw_database</span> <span class="k">as</span> <span class="nn">updb</span>
+<span class="kn">import</span> <span class="nn">read_gw_database</span> <span class="k">as</span> <span class="nn">readdb</span>
+<span class="kn">import</span> <span class="nn">prepare_response</span> <span class="k">as</span> <span class="nn">sdresp</span>
+<span class="kn">import</span> <span class="nn">interaction_tunnel</span> <span class="k">as</span> <span class="nn">intunnel</span>
+<span class="kn">import</span> <span class="nn">otap_specific_functions</span> <span class="k">as</span> <span class="nn">ospef</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+<span class="kn">from</span> <span class="nn">wirepas_mqtt_library</span> <span class="kn">import</span> <span class="n">WirepasOtapHelper</span>
+
+<div class="viewcode-block" id="mqtt_interaction_node_main"><a class="viewcode-back" href="../modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main">[docs]</a><span class="k">class</span> <span class="nc">mqtt_interaction_node_main</span><span class="p">(</span><span class="n">mqtt_interaction_node_basic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the main interaction class with the nodes. </span>
+<span class="sd">    </span>
+<span class="sd">    :structure:</span>
+<span class="sd">        1. It will be running as long as the gateway is powered and until the script is stopped externally by someone or an error.</span>
+<span class="sd">        2. It listens to all the node messages, and then creates all the cloud-classes that listen</span>
+<span class="sd">           to the cloud messages directed towards the nodes. </span>
+<span class="sd">        3. It is the director of the wirepas orchestra.</span>
+<span class="sd">        4. It has the following methods:</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list`</span>
+<span class="sd">          </span>
+<span class="sd">    :param wni: the wirepas network interface class connected to the selected local mqtt broker     </span>
+<span class="sd">    :type wni: WirepasNetworkInterface</span>
+<span class="sd">    :param mode: mode of the interaction. Can be either &quot;listen&quot; to receive messages from the subtopic, or &quot;request&quot; if we want to the entity to publish requests to the pubtopic</span>
+<span class="sd">    :type mode: string</span>
+<span class="sd">    :param node_list: list of nodes that the gateway can see and talk to</span>
+<span class="sd">    :type node_list: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        Returns a :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic` class with the following attributes:</span>
+<span class="sd">            :node_id_list: (int) -- list of all nodes connected to the gateway at some point</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="mqtt_interaction_node_main.__init__"><a class="viewcode-back" href="../modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;listen&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_list</span> <span class="o">=</span> <span class="p">[]):</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;init mqtt main node interac&gt; &quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span> <span class="o">=</span> <span class="n">node_list</span>         <span class="c1"># here we will keep track of all the nodes we read</span>
+
+        <span class="n">mqtt_interaction_node_basic</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="n">wni</span><span class="p">)</span> 
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span> <span class="o">==</span> <span class="p">[]:</span> <span class="c1"># in case no node list was supplied, get one:</span>
+            <span class="c1"># getting node list of available nodes:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> no valid node list supplied, computing one...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+            <span class="n">otapHelper</span> <span class="o">=</span> <span class="n">WirepasOtapHelper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wni</span><span class="p">,</span>
+                                    <span class="nb">int</span><span class="p">(</span><span class="n">gvar</span><span class="o">.</span><span class="n">NETWORK_DEFAULT_CHANNEL</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span> <span class="o">=</span> <span class="n">ospef</span><span class="o">.</span><span class="n">get_node_list</span><span class="p">(</span><span class="n">otapHelper</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> node list detected by sink: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span><span class="p">))</span>
+       
+        <span class="c1"># for each node in the list, start listening to cloud messages for that specific node id.</span>
+        <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span><span class="p">:</span>
+            <span class="n">cloudtunel</span> <span class="o">=</span> <span class="n">intunnel</span><span class="o">.</span><span class="n">tunnel_to_cloud</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wni</span><span class="p">)</span>     </div>
+
+    <span class="c1"># this is the alternative function to the &quot;on_listen&quot; function defined in the main mqtt_interaction class for cloud ineractions</span>
+<div class="viewcode-block" id="mqtt_interaction_node_main.on_message_main_node_listen"><a class="viewcode-back" href="../modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen">[docs]</a>    <span class="k">def</span> <span class="nf">on_message_main_node_listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">parsed</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Every time a node sends a message to the gateway, this functions is executed.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Tunnel to cloud (i.e. starts listenning to incoming cloud messages, if the node that sends the message is unregisterd by the gateway)</span>
+<span class="sd">            2. Update the database (if applicable)</span>
+<span class="sd">            3. Read gateway database (if applicable)</span>
+<span class="sd">            4. Prepare the response based on the results of the previous actions</span>
+<span class="sd">            5. Send the message to the nodes, if the message is a node request, by calling the function </span>
+<span class="sd">               :py:meth:`~mqtt_interaction_module.mqtt_interaction.publish`</span>
+<span class="sd">           </span>
+<span class="sd">        :Note:  - It is the equivalent to the :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c` function of the</span>
+<span class="sd">                mqtt_interaction_cloud class.</span>
+
+<span class="sd">        :references:</span>
+<span class="sd">            1. It is useful to check the wirepas mqtt library documentation -&gt; https://wirepas.github.io/wirepas-mqtt-library/ </span>
+
+<span class="sd">        :param msg: message class</span>
+<span class="sd">        :type msg: RxMsg</span>
+<span class="sd">        :param parsed: True if parsing was successful, False if failed</span>
+<span class="sd">        :type parsed: bool</span>
+<span class="sd">            </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;on_message_event (nodes) main listen&gt;: &quot;</span>
+            
+        <span class="c1"># prepare tunnel to cloud</span>
+        <span class="n">cloudtunel</span> <span class="o">=</span> <span class="n">intunnel</span><span class="o">.</span><span class="n">prepare_cloud_tunnel</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>           
+                    
+        <span class="c1"># update database::</span>
+        <span class="n">update_db</span> <span class="o">=</span> <span class="n">updb</span><span class="o">.</span><span class="n">update_gw_database</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        
+        <span class="c1"># read database::</span>
+        <span class="n">read_db</span> <span class="o">=</span> <span class="n">readdb</span><span class="o">.</span><span class="n">read_gw_database</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span><span class="p">)</span>
+    
+        <span class="c1"># prepare response:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">sdresp</span><span class="o">.</span><span class="n">prepare_response</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">parsed</span><span class="p">,</span> <span class="n">update_db</span><span class="p">,</span> <span class="n">read_db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pubtopic</span><span class="p">,</span> <span class="n">cloudtunel</span><span class="p">)</span>
+        
+        <span class="c1"># error in prep response</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;response preparation failed. Quitting execution...&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># send response message if recieved message is a node request</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_a_msg_request</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;sending msg to gw: </span><span class="si">{}</span><span class="s2">, sink: </span><span class="si">{}</span><span class="s2"> and node: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">node_id</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span> <span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;response sent successfully&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: in publishing, response not sent. Message payload: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="mqtt_interaction_node_main.update_node_list"><a class="viewcode-back" href="../modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list">[docs]</a>    <span class="k">def</span> <span class="nf">update_node_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the node id list, if necessary. This function is executed everytime a node message is received.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Checks whether the node id that sent the message, is not already in the node list.</span>
+<span class="sd">            2. If it is not there, then add it.</span>
+
+<span class="sd">        :param node_id: Node id that has been detected on a new message. </span>
+<span class="sd">        :type node_id: int</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;update node list&gt; &quot;</span>
+
+        <span class="k">if</span> <span class="n">node_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">node_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;node </span><span class="si">{}</span><span class="s2"> added to the gateway node list&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;node </span><span class="si">{}</span><span class="s2"> already in the list&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span></div></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

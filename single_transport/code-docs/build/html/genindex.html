@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.cloud_to_node_tunnel.__init__">__init__() (cloud_to_node_tunnel method)</a>
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.__init__">(mqtt_interaction method)</a>
+</li>
+        <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.__init__">(mqtt_interaction_cloud method)</a>
+</li>
+        <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.__init__">(mqtt_interaction_node_basic method)</a>
+</li>
+        <li><a href="modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.__init__">(mqtt_interaction_node_main method)</a>
+</li>
+        <li><a href="modules/mqtt_interaction_node_temporal.html#mqtt_interaction_node_temporal.mqtt_interaction_node_temporal.__init__">(mqtt_interaction_node_temporal method)</a>
+</li>
+        <li><a href="modules/interaction_tunnel.html#interaction_tunnel.node_to_cloud_tunnel.__init__">(node_to_cloud_tunnel method)</a>
+</li>
+        <li><a href="classes/message_received_class.RxMsg.html#id0">(RxMsg method)</a>, <a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.__init__">[1]</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.__init__">[2]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.activate_all_sinks">activate_all_sinks() (in module otap_specific_functions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.add_msg_to_response_received_table">add_msg_to_response_received_table() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.add_msg_to_response_received_table">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    backend_script_cloud_comms
+
+      <ul>
+        <li><a href="modules/backend_script_cloud_comms.html#module-backend_script_cloud_comms">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    backend_script_node_comms
+
+      <ul>
+        <li><a href="modules/backend_script_node_comms.html#module-backend_script_node_comms">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/global_vars.html#global_vars.broadcast_address">broadcast_address (in module global_vars)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.check_for_response">check_for_response() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/create_message_cloud.html#create_message_cloud.cloud_request_to_gateway">cloud_request_to_gateway() (in module create_message_cloud)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC">CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/create_message_cloud.html#create_message_cloud.cloud_request_to_node">cloud_request_to_node() (in module create_message_cloud)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC">CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/create_message_cloud.html#create_message_cloud.cloud_resp_to_gateway">cloud_resp_to_gateway() (in module create_message_cloud)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li>
+    cloud_settings
+
+      <ul>
+        <li><a href="modules/cloud_settings.html#module-cloud_settings">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.cloud_to_node_tunnel">cloud_to_node_tunnel (class in interaction_tunnel)</a>
+</li>
+      <li>
+    compute_crc
+
+      <ul>
+        <li><a href="modules/compute_crc.html#module-compute_crc">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/compute_crc.html#compute_crc.compute_crc">compute_crc() (in module compute_crc)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.configure_sink">configure_sink() (in module otap_specific_functions)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.connect_pub_client">connect_pub_client() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.connect_sub_client">connect_sub_client() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.convert_dst_address">convert_dst_address() (in module mqtt_interaction_module)</a>
+</li>
+      <li>
+    create_message_cloud
+
+      <ul>
+        <li><a href="modules/create_message_cloud.html#module-create_message_cloud">module</a>
+</li>
+      </ul></li>
+      <li>
+    create_message_functions
+
+      <ul>
+        <li><a href="modules/create_message_functions.html#module-create_message_functions">module</a>
+</li>
+      </ul></li>
+      <li>
+    create_message_nodes
+
+      <ul>
+        <li><a href="modules/create_message_nodes.html#module-create_message_nodes">module</a>
+</li>
+      </ul></li>
+      <li>
+    create_message_specific_functions
+
+      <ul>
+        <li><a href="modules/create_message_specific_functions.html#module-create_message_specific_functions">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/global_vars.html#global_vars.create_otaphelper">create_otaphelper() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.create_wni">create_wni() (in module global_vars)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/message_received_class.html#message_received_class.datab">datab (in module message_received_class)</a>
+</li>
+      <li>
+    database_functions
+
+      <ul>
+        <li><a href="modules/database_functions.html#module-database_functions">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.DB_NAME">DB_NAME (in module backend_script_node_comms)</a>
+
+      <ul>
+        <li><a href="modules/message_received_class.html#message_received_class.DB_NAME">(in module message_received_class)</a>
+</li>
+      </ul></li>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.DB_PATH">DB_PATH (in module backend_script_node_comms)</a>
+
+      <ul>
+        <li><a href="modules/message_received_class.html#message_received_class.DB_PATH">(in module message_received_class)</a>
+</li>
+      </ul></li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.display">display() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.display">[1]</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_2_element_message">display_2_element_message() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_3_element_message">display_3_element_message() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_4_element_message">display_4_element_message() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_alarm_node_list">display_alarm_node_list() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_alarm_response">display_alarm_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.display_and_set_interaction_mode">display_and_set_interaction_mode() (in module global_vars)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_client_id_msg">display_client_id_msg() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_cloud_request_to_gateway">display_cloud_request_to_gateway() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_cloud_request_to_node">display_cloud_request_to_node() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_cloud_response_to_gateway_req">display_cloud_response_to_gateway_req() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_crc_response">display_crc_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_current_voltage_response">display_current_voltage_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_dimming_response">display_dimming_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_dimming_with_client_id_msg">display_dimming_with_client_id_msg() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_echo_response">display_echo_response() (in module message_display_specific_functions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_electrim_param_list">display_electrim_param_list() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_electrim_parameters_response">display_electrim_parameters_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_error_response">display_error_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_gateway_node_messages">display_gateway_node_messages() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_gateway_request_to_cloud">display_gateway_request_to_cloud() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_gateway_response_to_cloud_request_to_gateway">display_gateway_response_to_cloud_request_to_gateway() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_functions.html#message_display_functions.display_gateway_response_to_cloud_request_to_node">display_gateway_response_to_cloud_request_to_node() (in module message_display_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_hops_response">display_hops_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_led_get_state_response_message">display_led_get_state_response_message() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_led_status_response">display_led_status_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_n_element_message">display_n_element_message() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_neighbour_number_response">display_neighbour_number_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_node_list">display_node_list() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_node_list_client_id">display_node_list_client_id() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_node_status_list">display_node_status_list() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_node_status_response">display_node_status_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_node_version_response">display_node_version_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_remove_nodes_msg">display_remove_nodes_msg() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_rssi_response">display_rssi_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_solar_metrics_response">display_solar_metrics_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_strategy_response">display_strategy_response() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/message_display_specific_functions.html#message_display_specific_functions.display_version_message">display_version_message() (in module message_display_specific_functions)</a>
+</li>
+      <li><a href="modules/otap_menu.html#otap_menu.do_otap_action">do_otap_action() (in module otap_menu)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_GATEWAY_DATABASE_CONNECTION_ERROR">ERROR_TYPE_GATEWAY_DATABASE_CONNECTION_ERROR (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_GATEWAY_ROM_FULL">ERROR_TYPE_GATEWAY_ROM_FULL (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_INVALID_CRC">ERROR_TYPE_INVALID_CRC (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_INVALID_MSG_ORIGIN_MQTT_TOPIC">ERROR_TYPE_INVALID_MSG_ORIGIN_MQTT_TOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_INVALID_MSG_TYPE">ERROR_TYPE_INVALID_MSG_TYPE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_NODE_NOT_IN_GATEWAY">ERROR_TYPE_NODE_NOT_IN_GATEWAY (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_NODE_ROM_FULL">ERROR_TYPE_NODE_ROM_FULL (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_OTAP_FAILED">ERROR_TYPE_OTAP_FAILED (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_PARAMETERS_OUT_OF_RANGE">ERROR_TYPE_PARAMETERS_OUT_OF_RANGE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_PAYLOAD_NOT_IN_BYTES">ERROR_TYPE_PAYLOAD_NOT_IN_BYTES (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_STRATEGY_NOT_FOUND">ERROR_TYPE_STRATEGY_NOT_FOUND (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_UNEXPECTED_MESSAGE_LENGTH">ERROR_TYPE_UNEXPECTED_MESSAGE_LENGTH (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_UNRESPONSIVE_DRIVER">ERROR_TYPE_UNRESPONSIVE_DRIVER (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_UNRESPONSIVE_NODE">ERROR_TYPE_UNRESPONSIVE_NODE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_WHEN_READING_DATABASE">ERROR_TYPE_WHEN_READING_DATABASE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_WHEN_TUNNELING_TO_CLOUD">ERROR_TYPE_WHEN_TUNNELING_TO_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_WHEN_TUNNELING_TO_NODE">ERROR_TYPE_WHEN_TUNNELING_TO_NODE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_WHEN_UPDATING_DATABASE">ERROR_TYPE_WHEN_UPDATING_DATABASE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.ERROR_TYPE_WHEN_UPDATING_GW_SOFTWARE">ERROR_TYPE_WHEN_UPDATING_GW_SOFTWARE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.expected_length_alarm_node_list">expected_length_alarm_node_list() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_ADD_NODES_REQUEST_MSG">EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_ADD_NODES_REQUEST_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_ALARM_REQUEST_MSG">EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_ALARM_REQUEST_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_CONSUMS_REQUEST_MSG">EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_CONSUMS_REQUEST_MSG (in module global_vars)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_NODE_STATUS_REQUEST_MSG">EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_NODE_STATUS_REQUEST_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_REMOVE_NODES_REQUEST_MSG">EXPECTED_LENGTH_CLOUD_RESPONSE_TO_GATEWAY_REMOVE_NODES_REQUEST_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.expected_length_cloud_to_gw_remove_nodes">expected_length_cloud_to_gw_remove_nodes() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_ERROR">EXPECTED_LENGTH_ERROR (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_GET_DIMMING_STATUS_RESPONSE_MSG">EXPECTED_LENGTH_GET_DIMMING_STATUS_RESPONSE_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_GET_LED_STATUS_RESPONSE_MSG">EXPECTED_LENGTH_GET_LED_STATUS_RESPONSE_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_GET_NODE_STATUS_RESPONSE_MSG_CLOUD">EXPECTED_LENGTH_GET_NODE_STATUS_RESPONSE_MSG_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_GET_NODE_STATUS_RESPONSE_MSG_MESH_NETWORK">EXPECTED_LENGTH_GET_NODE_STATUS_RESPONSE_MSG_MESH_NETWORK (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_GET_NUMBER_OF_NEIGHBOURS_RESPONSE_MSG">EXPECTED_LENGTH_GET_NUMBER_OF_NEIGHBOURS_RESPONSE_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_GET_RSSI_RESPONSE_MSG">EXPECTED_LENGTH_GET_RSSI_RESPONSE_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NO_ARGUMENTS">EXPECTED_LENGTH_NO_ARGUMENTS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.expected_length_node_consum_list">expected_length_node_consum_list() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.expected_length_node_list">expected_length_node_list() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.expected_length_node_status_list">expected_length_node_status_list() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NODE_TO_GATEWAY_ALARM_REQUEST">EXPECTED_LENGTH_NODE_TO_GATEWAY_ALARM_REQUEST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NODE_TO_GATEWAY_CURRENT_VOLTAGE_REQUEST">EXPECTED_LENGTH_NODE_TO_GATEWAY_CURRENT_VOLTAGE_REQUEST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NODE_TO_GATEWAY_ELECTRIC_PARAMETERS_REQUEST">EXPECTED_LENGTH_NODE_TO_GATEWAY_ELECTRIC_PARAMETERS_REQUEST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NODE_TO_GATEWAY_GET_TIME_REQUEST">EXPECTED_LENGTH_NODE_TO_GATEWAY_GET_TIME_REQUEST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NODE_TO_GATEWAY_SOLAR_METRICS_REQUEST">EXPECTED_LENGTH_NODE_TO_GATEWAY_SOLAR_METRICS_REQUEST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_NODE_TO_NODE_STATUS_REQUEST">EXPECTED_LENGTH_NODE_TO_NODE_STATUS_REQUEST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_SEND_ECHO_RESPONSE_MSG_FROM_NODE">EXPECTED_LENGTH_SEND_ECHO_RESPONSE_MSG_FROM_NODE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_SET_DIMMING_RESPONSE_MSG">EXPECTED_LENGTH_SET_DIMMING_RESPONSE_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.EXPECTED_LENGTH_SET_STRATEGY_RESPONSE_MSG">EXPECTED_LENGTH_SET_STRATEGY_RESPONSE_MSG (in module global_vars)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.FAKE_CLOUD_PUB_SUPERTOPIC_LIST">FAKE_CLOUD_PUB_SUPERTOPIC_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.FILE_SETTINGS_GLOBAL">FILE_SETTINGS_GLOBAL (in module global_vars)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.FILE_SETTINGS_LOCAL">FILE_SETTINGS_LOCAL (in module global_vars)</a>
+</li>
+      <li><a href="modules/otap_menu.html#otap_menu.find_good_seq_number">find_good_seq_number() (in module otap_menu)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.GATEWAY_REQUEST_TO_CLOUD_MQTT_SUPERTOPIC">GATEWAY_REQUEST_TO_CLOUD_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/create_message_nodes.html#create_message_nodes.gateway_request_to_nodes">gateway_request_to_nodes() (in module create_message_nodes)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/create_message_nodes.html#create_message_nodes.gateway_response_to_nodes">gateway_response_to_nodes() (in module create_message_nodes)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.GATEWAY_VERSION">GATEWAY_VERSION (in module global_vars)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.gen_crc_message">gen_crc_message() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.gen_gw_version_message">gen_gw_version_message() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.gen_random_node_id_list">gen_random_node_id_list() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.get_all_files_in_dir">get_all_files_in_dir() (in module global_vars)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.get_client_id">get_client_id() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.get_crc">get_crc() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.get_gw_id">get_gw_id() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.get_gw_id">[1]</a>
+</li>
+      <li><a href="modules/mqtt_credentials.html#mqtt_credentials.get_local_creds">get_local_creds() (in module mqtt_credentials)</a>
+</li>
+      <li><a href="modules/create_message_functions.html#create_message_functions.get_msg_from_input">get_msg_from_input() (in module create_message_functions)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.get_msg_id">get_msg_id() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.get_msg_id">[1]</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.get_msg_id_and_type">get_msg_id_and_type() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.get_msg_id_and_type">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.get_msg_type">get_msg_type() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.get_msg_type">[1]</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.get_node_id">get_node_id() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.get_node_id">[1]</a>
+</li>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.get_node_list">get_node_list() (in module otap_specific_functions)</a>
+</li>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.get_node_version">get_node_version() (in module otap_specific_functions)</a>
+</li>
+      <li><a href="modules/database_functions.html#database_functions.get_row_string">get_row_string() (in module database_functions)</a>
+</li>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.get_scratchpads">get_scratchpads() (in module otap_specific_functions)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.get_sink_and_gw">get_sink_and_gw() (in module global_vars)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.get_sub_supertopic">get_sub_supertopic() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.get_sub_supertopic">[1]</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.get_supertopic">get_supertopic() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.get_timestamp">get_timestamp() (in module global_vars)</a>
+</li>
+      <li><a href="modules/mqtt_credentials.html#mqtt_credentials.global_broker">global_broker (in module mqtt_credentials)</a>
+</li>
+      <li>
+    global_vars
+
+      <ul>
+        <li><a href="modules/global_vars.html#module-global_vars">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/create_message_cloud.html#create_message_cloud.gw_request_to_cloud">gw_request_to_cloud() (in module create_message_cloud)</a>
+</li>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.GW_REQUEST_TO_NODES">GW_REQUEST_TO_NODES (in module backend_script_node_comms)</a>
+</li>
+      <li><a href="modules/create_message_cloud.html#create_message_cloud.gw_resp_to_cloud_req_to_gw">gw_resp_to_cloud_req_to_gw() (in module create_message_cloud)</a>
+</li>
+      <li><a href="modules/create_message_cloud.html#create_message_cloud.gw_resp_to_cloud_req_to_node">gw_resp_to_cloud_req_to_node() (in module create_message_cloud)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    interaction_tunnel
+
+      <ul>
+        <li><a href="modules/interaction_tunnel.html#module-interaction_tunnel">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.is_a_msg_request">is_a_msg_request() (mqtt_interaction method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.LED_STATE_OFF">LED_STATE_OFF (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.LED_STATE_ON">LED_STATE_ON (in module global_vars)</a>
+</li>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.list_sinks">list_sinks() (in module otap_specific_functions)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.listen">listen() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud">listen_to_cloud() (mqtt_interaction_cloud method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes">listen_to_nodes() (mqtt_interaction_node_basic method)</a>
+</li>
+      <li><a href="modules/mqtt_credentials.html#mqtt_credentials.local_broker">local_broker (in module mqtt_credentials)</a>
+</li>
+      <li><a href="modules/mqtt_credentials.html#mqtt_credentials.local_port">local_port (in module mqtt_credentials)</a>
+</li>
+      <li>
+    local_settings
+
+      <ul>
+        <li><a href="modules/local_settings.html#module-local_settings">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/backend_script_cloud_comms.html#backend_script_cloud_comms.main">main() (in module backend_script_cloud_comms)</a>
+
+      <ul>
+        <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.main">(in module backend_script_node_comms)</a>
+</li>
+        <li><a href="modules/otap_menu.html#otap_menu.main">(in module otap_menu)</a>
+</li>
+        <li><a href="modules/otap_update_all_nodes.html#otap_update_all_nodes.main">(in module otap_update_all_nodes)</a>
+</li>
+        <li><a href="modules/start_gw_comms.html#start_gw_comms.main">(in module start_gw_comms)</a>
+</li>
+      </ul></li>
+      <li>
+    message_display_functions
+
+      <ul>
+        <li><a href="modules/message_display_functions.html#module-message_display_functions">module</a>
+</li>
+      </ul></li>
+      <li>
+    message_display_specific_functions
+
+      <ul>
+        <li><a href="modules/message_display_specific_functions.html#module-message_display_specific_functions">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.message_id">message_id (in module backend_script_node_comms)</a>
+</li>
+      <li>
+    message_received_class
+
+      <ul>
+        <li><a href="modules/message_received_class.html#module-message_received_class">module</a>
+</li>
+      </ul></li>
+      <li>
+    message_received_parse_functions
+
+      <ul>
+        <li><a href="modules/message_received_parse_functions.html#module-message_received_parse_functions">module</a>
+</li>
+      </ul></li>
+      <li>
+    message_specific_parse_functions
+
+      <ul>
+        <li><a href="modules/message_specific_parse_functions.html#module-message_specific_parse_functions">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/create_message_functions.html#create_message_functions.message_to_bytes">message_to_bytes() (in module create_message_functions)</a>
+</li>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.MODE_LIST">MODE_LIST (in module backend_script_node_comms)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="modules/backend_script_cloud_comms.html#module-backend_script_cloud_comms">backend_script_cloud_comms</a>
+</li>
+        <li><a href="modules/backend_script_node_comms.html#module-backend_script_node_comms">backend_script_node_comms</a>
+</li>
+        <li><a href="modules/cloud_settings.html#module-cloud_settings">cloud_settings</a>
+</li>
+        <li><a href="modules/compute_crc.html#module-compute_crc">compute_crc</a>
+</li>
+        <li><a href="modules/create_message_cloud.html#module-create_message_cloud">create_message_cloud</a>
+</li>
+        <li><a href="modules/create_message_functions.html#module-create_message_functions">create_message_functions</a>
+</li>
+        <li><a href="modules/create_message_nodes.html#module-create_message_nodes">create_message_nodes</a>
+</li>
+        <li><a href="modules/create_message_specific_functions.html#module-create_message_specific_functions">create_message_specific_functions</a>
+</li>
+        <li><a href="modules/database_functions.html#module-database_functions">database_functions</a>
+</li>
+        <li><a href="modules/global_vars.html#module-global_vars">global_vars</a>
+</li>
+        <li><a href="modules/interaction_tunnel.html#module-interaction_tunnel">interaction_tunnel</a>
+</li>
+        <li><a href="modules/local_settings.html#module-local_settings">local_settings</a>
+</li>
+        <li><a href="modules/message_display_functions.html#module-message_display_functions">message_display_functions</a>
+</li>
+        <li><a href="modules/message_display_specific_functions.html#module-message_display_specific_functions">message_display_specific_functions</a>
+</li>
+        <li><a href="modules/message_received_class.html#module-message_received_class">message_received_class</a>
+</li>
+        <li><a href="modules/message_received_parse_functions.html#module-message_received_parse_functions">message_received_parse_functions</a>
+</li>
+        <li><a href="modules/message_specific_parse_functions.html#module-message_specific_parse_functions">message_specific_parse_functions</a>
+</li>
+        <li><a href="modules/mqtt_credentials.html#module-mqtt_credentials">mqtt_credentials</a>
+</li>
+        <li><a href="modules/mqtt_interaction_cloud.html#module-mqtt_interaction_cloud">mqtt_interaction_cloud</a>
+</li>
+        <li><a href="modules/mqtt_interaction_module.html#module-mqtt_interaction_module">mqtt_interaction_module</a>
+</li>
+        <li><a href="modules/mqtt_interaction_node_basic.html#module-mqtt_interaction_node_basic">mqtt_interaction_node_basic</a>
+</li>
+        <li><a href="modules/mqtt_interaction_node_main.html#module-mqtt_interaction_node_main">mqtt_interaction_node_main</a>
+</li>
+        <li><a href="modules/mqtt_interaction_node_temporal.html#module-mqtt_interaction_node_temporal">mqtt_interaction_node_temporal</a>
+</li>
+        <li><a href="modules/otap_menu.html#module-otap_menu">otap_menu</a>
+</li>
+        <li><a href="modules/otap_specific_functions.html#module-otap_specific_functions">otap_specific_functions</a>
+</li>
+        <li><a href="modules/otap_update_all_nodes.html#module-otap_update_all_nodes">otap_update_all_nodes</a>
+</li>
+        <li><a href="modules/prepare_response.html#module-prepare_response">prepare_response</a>
+</li>
+        <li><a href="modules/read_gw_database.html#module-read_gw_database">read_gw_database</a>
+</li>
+        <li><a href="modules/start_gw_comms.html#module-start_gw_comms">start_gw_comms</a>
+</li>
+        <li><a href="modules/update_gw_database.html#module-update_gw_database">update_gw_database</a>
+</li>
+        <li><a href="modules/update_gw_software.html#module-update_gw_software">update_gw_software</a>
+</li>
+      </ul></li>
+      <li>
+    mqtt_credentials
+
+      <ul>
+        <li><a href="modules/mqtt_credentials.html#module-mqtt_credentials">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction">mqtt_interaction (class in mqtt_interaction_module)</a>
+</li>
+      <li>
+    mqtt_interaction_cloud
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_cloud.html#module-mqtt_interaction_cloud">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud">mqtt_interaction_cloud (class in mqtt_interaction_cloud)</a>
+</li>
+      <li>
+    mqtt_interaction_module
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_module.html#module-mqtt_interaction_module">module</a>
+</li>
+      </ul></li>
+      <li>
+    mqtt_interaction_node_basic
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_node_basic.html#module-mqtt_interaction_node_basic">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic">mqtt_interaction_node_basic (class in mqtt_interaction_node_basic)</a>
+</li>
+      <li>
+    mqtt_interaction_node_main
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_node_main.html#module-mqtt_interaction_node_main">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main">mqtt_interaction_node_main (class in mqtt_interaction_node_main)</a>
+</li>
+      <li>
+    mqtt_interaction_node_temporal
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_node_temporal.html#module-mqtt_interaction_node_temporal">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/mqtt_interaction_node_temporal.html#mqtt_interaction_node_temporal.mqtt_interaction_node_temporal">mqtt_interaction_node_temporal (class in mqtt_interaction_node_temporal)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_CLOUD_TO_GATEWAY_REQUESTS_LIST">MSG_CLOUD_TO_GATEWAY_REQUESTS_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_CLOUD_TO_NODE_REQUESTS_LIST">MSG_CLOUD_TO_NODE_REQUESTS_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_GATEWAY_TO_CLOUD_LIST">MSG_GATEWAY_TO_CLOUD_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_NODE_REQUESTS_LIST">MSG_NODE_REQUESTS_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_PAYLOAD_ENDIANNESS">MSG_PAYLOAD_ENDIANNESS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_PAYLOAD_ENDIANNESS_v2">MSG_PAYLOAD_ENDIANNESS_v2 (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_RESPONSE_RECEIVED_FROM_NODES_LIST">MSG_RESPONSE_RECEIVED_FROM_NODES_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_SUPPORTED_LIST_CLOUD">MSG_SUPPORTED_LIST_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_SUPPORTED_LIST_NODE">MSG_SUPPORTED_LIST_NODE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_ADD_NODES_GW_TO_CLOUD">MSG_TYPE_ADD_NODES_GW_TO_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_ALARM_GW_TO_CLOUD">MSG_TYPE_ALARM_GW_TO_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_ALIVE_GW_TO_CLOUD">MSG_TYPE_ALIVE_GW_TO_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_GATEWAY_GET_GATEWAY_VERSION">MSG_TYPE_CLOUD_TO_GATEWAY_GET_GATEWAY_VERSION (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_GATEWAY_NODE_LIST">MSG_TYPE_CLOUD_TO_GATEWAY_NODE_LIST (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_GATEWAY_REMOVE_NODES">MSG_TYPE_CLOUD_TO_GATEWAY_REMOVE_NODES (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_GATEWAY">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_GATEWAY (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_NODES">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_NODES (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_ECHO">MSG_TYPE_CLOUD_TO_NODE_ECHO (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_DIMMING_STATUS">MSG_TYPE_CLOUD_TO_NODE_GET_DIMMING_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_HOPS">MSG_TYPE_CLOUD_TO_NODE_GET_HOPS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_LED_STATUS">MSG_TYPE_CLOUD_TO_NODE_GET_LED_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_NODE_STATUS">MSG_TYPE_CLOUD_TO_NODE_GET_NODE_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_NUMBER_OF_NEIGHBOURS">MSG_TYPE_CLOUD_TO_NODE_GET_NUMBER_OF_NEIGHBOURS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_RSSI">MSG_TYPE_CLOUD_TO_NODE_GET_RSSI (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_GET_VERSION">MSG_TYPE_CLOUD_TO_NODE_GET_VERSION (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_SEND_NEW_STRAGEGY">MSG_TYPE_CLOUD_TO_NODE_SEND_NEW_STRAGEGY (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_SET_BLINKING">MSG_TYPE_CLOUD_TO_NODE_SET_BLINKING (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_SET_DIMMING">MSG_TYPE_CLOUD_TO_NODE_SET_DIMMING (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_SET_LED_OFF">MSG_TYPE_CLOUD_TO_NODE_SET_LED_OFF (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_SET_LED_ON">MSG_TYPE_CLOUD_TO_NODE_SET_LED_ON (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_CLOUD_TO_NODE_SET_STRATEGY">MSG_TYPE_CLOUD_TO_NODE_SET_STRATEGY (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_ELECTRIC_PARAMETERS_GW_TO_CLOUD">MSG_TYPE_ELECTRIC_PARAMETERS_GW_TO_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_ERROR">MSG_TYPE_ERROR (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_ECHO">MSG_TYPE_GW_ECHO (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_GET_DIMMING_STATUS">MSG_TYPE_GW_GET_DIMMING_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_GET_HOPS">MSG_TYPE_GW_GET_HOPS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_GET_LED_STATUS">MSG_TYPE_GW_GET_LED_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_GET_NODE_STATUS">MSG_TYPE_GW_GET_NODE_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_GET_NUMBER_OF_NEIGHBOURS">MSG_TYPE_GW_GET_NUMBER_OF_NEIGHBOURS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_GET_RSSI">MSG_TYPE_GW_GET_RSSI (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_SEND_NEW_STRAGEGY">MSG_TYPE_GW_SEND_NEW_STRAGEGY (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_SET_LED_OFF">MSG_TYPE_GW_SET_LED_OFF (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_GW_SET_LED_ON">MSG_TYPE_GW_SET_LED_ON (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_INVALID_UNSUPPORTED_MSG">MSG_TYPE_INVALID_UNSUPPORTED_MSG (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_GET_TIME">MSG_TYPE_NODE_GET_TIME (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_SEND_ALARM">MSG_TYPE_NODE_SEND_ALARM (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_SEND_CURRENT_VOLTAGE">MSG_TYPE_NODE_SEND_CURRENT_VOLTAGE (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_SEND_ELECTRIC_PARAMETERS">MSG_TYPE_NODE_SEND_ELECTRIC_PARAMETERS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_SEND_NODE_STATUS">MSG_TYPE_NODE_SEND_NODE_STATUS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_SEND_SOLAR_PANEL_METRICS">MSG_TYPE_NODE_SEND_SOLAR_PANEL_METRICS (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_NODE_STATUS_GW_TO_CLOUD">MSG_TYPE_NODE_STATUS_GW_TO_CLOUD (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.MSG_TYPE_UNSEEN_NODES_GW_TO_CLOUD">MSG_TYPE_UNSEEN_NODES_GW_TO_CLOUD (in module global_vars)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.NETWORK_DEFAULT_CHANNEL">NETWORK_DEFAULT_CHANNEL (in module global_vars)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.node_id_list_client_id_payload">node_id_list_client_id_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.node_id_list_payload">node_id_list_payload() (in module create_message_specific_functions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/create_message_nodes.html#create_message_nodes.node_request_to_gateway">node_request_to_gateway() (in module create_message_nodes)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.NODE_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC">NODE_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC (in module global_vars)</a>
+</li>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.node_to_cloud_tunnel">node_to_cloud_tunnel (class in interaction_tunnel)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/compute_crc.html#compute_crc.old_compute_crc">old_compute_crc() (in module compute_crc)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.on_connect">on_connect() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_disconnect">on_disconnect() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_gateway_answer_callback">on_gateway_answer_callback() (mqtt_interaction_node_basic method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_message">on_message() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c">on_message_c() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.on_message_main_node_listen">on_message_main_node_listen() (mqtt_interaction_node_main method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes">on_message_nodes() (mqtt_interaction_node_basic method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/mqtt_interaction_node_temporal.html#mqtt_interaction_node_temporal.mqtt_interaction_node_temporal.on_message_temporal_node">on_message_temporal_node() (mqtt_interaction_node_temporal method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_publish">on_publish() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.on_subscribe">on_subscribe() (mqtt_interaction_cloud method)</a>
+</li>
+      <li>
+    otap_menu
+
+      <ul>
+        <li><a href="modules/otap_menu.html#module-otap_menu">module</a>
+</li>
+      </ul></li>
+      <li>
+    otap_specific_functions
+
+      <ul>
+        <li><a href="modules/otap_specific_functions.html#module-otap_specific_functions">module</a>
+</li>
+      </ul></li>
+      <li>
+    otap_update_all_nodes
+
+      <ul>
+        <li><a href="modules/otap_update_all_nodes.html#module-otap_update_all_nodes">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.pack_crc">pack_crc() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.parse">parse() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.parse">[1]</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_alarm_node_list">parse_alarm_node_list() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_alarm_response">parse_alarm_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.parse_basic">parse_basic() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.parse_basic">[1]</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_cloud_request_to_gateway">parse_cloud_request_to_gateway() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_cloud_request_to_node">parse_cloud_request_to_node() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_cloud_response_to_gateway_req">parse_cloud_response_to_gateway_req() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_cloud_to_gateway_request_generic_client_id">parse_cloud_to_gateway_request_generic_client_id() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_crc_response">parse_crc_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_current_voltage">parse_current_voltage() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_dimming_message">parse_dimming_message() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_dimming_message_client_id">parse_dimming_message_client_id() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_echo_response">parse_echo_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_echo_response_gw_to_cloud">parse_echo_response_gw_to_cloud() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_electric_parameters">parse_electric_parameters() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_electric_parameters_from_message">parse_electric_parameters_from_message() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_error_message">parse_error_message() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_gateway_request_to_cloud">parse_gateway_request_to_cloud() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_gateway_response_to_cloud_to_gateway_req">parse_gateway_response_to_cloud_to_gateway_req() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_gateway_response_to_cloud_to_node_req">parse_gateway_response_to_cloud_to_node_req() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_gw_version_response">parse_gw_version_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_hops_response">parse_hops_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_hops_response_from_node">parse_hops_response_from_node() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_led_status_response">parse_led_status_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_neighbour_number_response">parse_neighbour_number_response() (in module message_specific_parse_functions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_alarm_request">parse_node_alarm_request() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_electric_params_list">parse_node_electric_params_list() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_list">parse_node_list() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_list_client_id">parse_node_list_client_id() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_solar_metrics_request">parse_node_solar_metrics_request() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_list">parse_node_status_list() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_list_client_id">parse_node_status_list_client_id() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_request">parse_node_status_request() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_response">parse_node_status_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_status_response_from_node">parse_node_status_response_from_node() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_node_to_gw_request">parse_node_to_gw_request() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_received_parse_functions.html#message_received_parse_functions.parse_node_to_gw_response">parse_node_to_gw_response() (in module message_received_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_node_version_response">parse_node_version_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_rssi_response">parse_rssi_response() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/message_specific_parse_functions.html#message_specific_parse_functions.parse_set_strategy_message">parse_set_strategy_message() (in module message_specific_parse_functions)</a>
+</li>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.prepare_cloud_tunnel">prepare_cloud_tunnel() (in module interaction_tunnel)</a>
+</li>
+      <li>
+    prepare_response
+
+      <ul>
+        <li><a href="modules/prepare_response.html#module-prepare_response">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/prepare_response.html#prepare_response.prepare_response">prepare_response() (in module prepare_response)</a>
+</li>
+      <li><a href="modules/prepare_response.html#prepare_response.prepare_response_cloud">prepare_response_cloud() (in module prepare_response)</a>
+</li>
+      <li><a href="modules/prepare_response.html#prepare_response.prepare_response_nodes">prepare_response_nodes() (in module prepare_response)</a>
+</li>
+      <li><a href="modules/otap_specific_functions.html#otap_specific_functions.print_node_list">print_node_list() (in module otap_specific_functions)</a>
+</li>
+      <li><a href="modules/database_functions.html#database_functions.print_rows">print_rows() (in module database_functions)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.print_sub_loop">print_sub_loop() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.publish">publish() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c">publish_c() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet">publish_meshnet() (mqtt_interaction_node_basic method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.random_alarm_node_list_payload">random_alarm_node_list_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.random_node_id_list_payload">random_node_id_list_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.random_node_status_list_payload">random_node_status_list_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li>
+    read_gw_database
+
+      <ul>
+        <li><a href="modules/read_gw_database.html#module-read_gw_database">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/read_gw_database.html#read_gw_database.read_gw_database">read_gw_database() (in module read_gw_database)</a>
+</li>
+      <li><a href="modules/read_gw_database.html#read_gw_database.read_gw_database_cloud">read_gw_database_cloud() (in module read_gw_database)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/read_gw_database.html#read_gw_database.read_gw_database_nodes">read_gw_database_nodes() (in module read_gw_database)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.register_node_to_db">register_node_to_db() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.register_node_to_db">[1]</a>
+</li>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.request_to_node">request_to_node() (mqtt_interaction_node_basic method)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.respond_remove_nodes_msg_payload">respond_remove_nodes_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/backend_script_cloud_comms.html#backend_script_cloud_comms.run_cloud_comunications">run_cloud_comunications() (in module backend_script_cloud_comms)</a>
+</li>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.run_node_comunications">run_node_comunications() (in module backend_script_node_comms)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg">RxMsg (class in message_received_class)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/backend_script_node_comms.html#backend_script_node_comms.save_messages">save_messages (in module backend_script_node_comms)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.save_periodic_message_to_db">save_periodic_message_to_db() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.save_periodic_message_to_db">[1]</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.select_elem_from_list">select_elem_from_list() (in module global_vars)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.select_index_from_list">select_index_from_list() (in module global_vars)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input">send_cloud_msg_from_input() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.send_message">send_message() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.send_msg_from_input">send_msg_from_input() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_node_basic.html#mqtt_interaction_node_basic.mqtt_interaction_node_basic.send_msg_to_nodes_from_input">send_msg_to_nodes_from_input() (mqtt_interaction_node_basic method)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.send_node_status_msg_payload">send_node_status_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.send_node_version_msg_payload">send_node_version_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_1_arg_payload">set_1_arg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_2_arg_payload">set_2_arg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_alarm_and_crc_msg">set_alarm_and_crc_msg() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_client_id_msg_payload">set_client_id_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_dimming_msg_payload">set_dimming_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_echo_msg_payload">set_echo_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_electric_params_list_msg_payload">set_electric_params_list_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_electrim_params_msg_payload">set_electrim_params_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/backend_script_cloud_comms.html#backend_script_cloud_comms.set_mqtt_topics">set_mqtt_topics() (in module backend_script_cloud_comms)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.set_node_id">set_node_id() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.set_node_id_c">set_node_id_c() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.set_pub_client">set_pub_client() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_remove_nodes_msg_payload">set_remove_nodes_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_solar_metrics_msg_payload">set_solar_metrics_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/create_message_specific_functions.html#create_message_specific_functions.set_strategy_msg_payload">set_strategy_msg_payload() (in module create_message_specific_functions)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.mqtt_interaction_cloud.set_sub_client">set_sub_client() (mqtt_interaction_cloud method)</a>
+</li>
+      <li><a href="modules/database_functions.html#database_functions.sql_set_values">sql_set_values() (in module database_functions)</a>
+</li>
+      <li>
+    start_gw_comms
+
+      <ul>
+        <li><a href="modules/start_gw_comms.html#module-start_gw_comms">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.start_listen_loop">start_listen_loop() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.start_listen_thread">start_listen_thread() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.stop_sub_loop">stop_sub_loop() (mqtt_interaction method)</a>
+</li>
+      <li><a href="classes/message_received_class.RxMsg.html#message_received_class.RxMsg.store">store() (RxMsg method)</a>, <a href="modules/message_received_class.html#message_received_class.RxMsg.store">[1]</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.SUPERTOPIC_LIST">SUPERTOPIC_LIST (in module global_vars)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/message_received_class.html#message_received_class.TABLE_FAILS">TABLE_FAILS (in module message_received_class)</a>
+</li>
+      <li><a href="modules/message_received_class.html#message_received_class.TABLE_RECEIVED_RESPONSES">TABLE_RECEIVED_RESPONSES (in module message_received_class)</a>
+</li>
+      <li><a href="modules/message_received_class.html#message_received_class.TABLE_REQUESTS_SENT">TABLE_REQUESTS_SENT (in module message_received_class)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/message_received_class.html#message_received_class.TABLE_SUCCESS">TABLE_SUCCESS (in module message_received_class)</a>
+</li>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.cloud_to_node_tunnel.transmit_message_to_node">transmit_message_to_node() (cloud_to_node_tunnel method)</a>
+</li>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.tunnel_to_cloud">tunnel_to_cloud() (in module interaction_tunnel)</a>
+</li>
+      <li><a href="modules/interaction_tunnel.html#interaction_tunnel.tunnel_to_node">tunnel_to_node() (in module interaction_tunnel)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/global_vars.html#global_vars.unpack_bytes">unpack_bytes() (in module global_vars)</a>
+</li>
+      <li>
+    update_gw_database
+
+      <ul>
+        <li><a href="modules/update_gw_database.html#module-update_gw_database">module</a>
+</li>
+      </ul></li>
+      <li><a href="modules/update_gw_database.html#update_gw_database.update_gw_database">update_gw_database() (in module update_gw_database)</a>
+</li>
+      <li><a href="modules/update_gw_database.html#update_gw_database.update_gw_database_cloud">update_gw_database_cloud() (in module update_gw_database)</a>
+</li>
+      <li><a href="modules/update_gw_database.html#update_gw_database.update_gw_database_nodes">update_gw_database_nodes() (in module update_gw_database)</a>
+</li>
+      <li>
+    update_gw_software
+
+      <ul>
+        <li><a href="modules/update_gw_software.html#module-update_gw_software">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="modules/update_gw_software.html#update_gw_software.update_gw_software">update_gw_software() (in module update_gw_software)</a>
+</li>
+      <li><a href="modules/update_gw_software.html#update_gw_software.update_gw_software_only">update_gw_software_only() (in module update_gw_software)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.update_msg_id">update_msg_id() (in module global_vars)</a>
+
+      <ul>
+        <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.update_msg_id">(mqtt_interaction method)</a>
+</li>
+      </ul></li>
+      <li><a href="modules/mqtt_interaction_node_main.html#mqtt_interaction_node_main.mqtt_interaction_node_main.update_node_list">update_node_list() (mqtt_interaction_node_main method)</a>
+</li>
+      <li><a href="modules/update_gw_software.html#update_gw_software.update_node_software_otap">update_node_software_otap() (in module update_gw_software)</a>
+</li>
+      <li><a href="modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.update_with_new_msg">update_with_new_msg() (mqtt_interaction method)</a>
+</li>
+      <li><a href="modules/global_vars.html#global_vars.UPLINK_PACKET_EVAL_APP_ENDPOINT">UPLINK_PACKET_EVAL_APP_ENDPOINT (in module global_vars)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

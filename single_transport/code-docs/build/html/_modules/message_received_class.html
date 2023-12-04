@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>message_received_class &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">message_received_class</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for message_received_class</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Message class used in all interactions.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span> <span class="c1"># import global variables</span>
+<span class="kn">import</span> <span class="nn">message_received_parse_functions</span> <span class="k">as</span> <span class="nn">parsef</span> <span class="c1"># import global variables</span>
+<span class="kn">import</span> <span class="nn">database_functions</span> <span class="k">as</span> <span class="nn">db_fs</span> <span class="c1"># import functions for writing and reading of messages to/from the database</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>              <span class="c1"># to save certain messages to a sql database </span>
+<span class="kn">import</span> <span class="nn">message_display_functions</span> <span class="k">as</span> <span class="nn">displayf</span>
+<span class="kn">import</span> <span class="nn">compute_crc</span> <span class="k">as</span> <span class="nn">get_crc</span>
+
+<span class="c1"># global variables to import and use within the RxMsg class:</span>
+
+<span class="n">DB_PATH</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">DB_PATH</span>                                         <span class="c1">#: database path</span>
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">DB_NAME</span>                                         <span class="c1">#: database name        </span>
+<span class="n">datab</span> <span class="o">=</span> <span class="n">DB_PATH</span> <span class="o">+</span> <span class="n">DB_NAME</span>                                       <span class="c1">#: table names</span>
+<span class="n">TABLE_SUCCESS</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_SUCCESS</span>                             <span class="c1">#: table of successfully requests</span>
+<span class="n">TABLE_FAILS</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_FAILS</span>                                 <span class="c1">#: table of failed requests</span>
+<span class="n">TABLE_REQUESTS_SENT</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_REQUESTS_SENT</span>                 <span class="c1">#: table of requests sent</span>
+<span class="n">TABLE_RECEIVED_RESPONSES</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">TABLE_RECEIVED_RESPONSES</span>        <span class="c1">#: table of received responses</span>
+
+
+<div class="viewcode-block" id="RxMsg"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg">[docs]</a><span class="k">class</span> <span class="nc">RxMsg</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Message received class.</span>
+<span class="sd">    The message is the main way of communicating information between the cloud, the gateway and the nodes. </span>
+<span class="sd">    Every message will use this format when processed by the gateway.</span>
+<span class="sd">   </span>
+<span class="sd">    :does:</span>
+<span class="sd">    1. Parsing of the received messages (main functionality of the class)</span>
+<span class="sd">    2. Display of messages</span>
+<span class="sd">    3. Storage of messages</span>
+<span class="sd">    4. Calls specific functions depending on the message type, for parsing, displaying and storage.</span>
+
+<span class="sd">    </span>
+<span class="sd">   </span>
+<span class="sd">    :param payload: message payload, has a variable length</span>
+<span class="sd">    :type payload: bytes</span>
+<span class="sd">    :param topic: MQTT topic where the message was published. It is None for node to gateway messages.</span>
+<span class="sd">    :type topic: string</span>
+<span class="sd">    :param source_address: node id that sent the message. It is None for cloud to gateway messages.</span>
+<span class="sd">    :type source_address: int</span>
+<span class="sd">    :param gw_id: gateway id to who the message was sent.</span>
+<span class="sd">    :type gw_id: int</span>
+<span class="sd">    :param sink_id: sink id that received the message in the gateway</span>
+<span class="sd">    :type sink_id: int</span>
+
+
+<span class="sd">    :return:</span>
+
+<span class="sd">        Returns a **RxMsg** class with the following attributes:</span>
+
+<span class="sd">            :payload: (bytes) -- received message data payload </span>
+<span class="sd">            :msg_type: (int) -- message TYPE decoded from given data payload (value is None at init time)</span>
+<span class="sd">            :msg_id: (int) -- unique message temporal identifier</span>
+<span class="sd">            :gw_id: (int) -- gateway id</span>
+<span class="sd">            :sink_id: (int) -- sink id</span>
+<span class="sd">            :node_id: (int) -- node id that sent the message</span>
+<span class="sd">            :topic: (string) -- mqtt topic to which the message was sent (if applicable, for node messages this is None)</span>
+<span class="sd">            :args: (list) -- list of additional arguments (besides message id, and msg_type) contained in the message</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="RxMsg.__init__"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source_address</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gw_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sink_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rawdata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize class instance attributes.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span>       
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topic</span> <span class="o">=</span> <span class="n">topic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="n">source_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">=</span> <span class="n">gw_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sink_id</span> <span class="o">=</span> <span class="n">sink_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rawdata</span> <span class="o">=</span> <span class="n">rawdata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<span class="c1"># In order to translate from bytes to hex and viceversa it is good to read https://linuxhint.com/string-to-hexadecimal-in-python/</span>
+<span class="c1"># here you can use int(&quot;0x0A&quot;,16) to put this int into base 16.</span>
+
+<span class="c1"># when using the struct method &quot;unpack&quot;, the format &quot;&lt;&quot; means little endian, the format &quot;B&quot; means an unsigned int of 1 byte, and the format</span>
+<span class="c1"># &quot;I&quot; means a unsigned int of 4 bytes. Read the Readme.m of the evaluation app of wirepas sdk to understand how each byte is encoded in each message</span>
+
+    
+
+
+
+
+
+
+
+<span class="c1"># Store messages: #############################################</span>
+
+    <span class="c1"># save node perdiodic message into sqlite3 database:</span>
+<div class="viewcode-block" id="RxMsg.save_periodic_message_to_db"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.save_periodic_message_to_db">[docs]</a>    <span class="k">def</span> <span class="nf">save_periodic_message_to_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the periodic messages to the database</span>
+<span class="sd">        </span>
+
+
+<span class="sd">        :param node_id: node id</span>
+<span class="sd">        :type node_id: int</span>
+<span class="sd">        :param timestamp: custom timestamp and date up to the milliseconds</span>
+<span class="sd">        :type timestamp: string       </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="c1"># connecting to database if not already connected</span>
+        <span class="c1"># if &#39;conn&#39; not in locals():</span>
+        <span class="k">global</span> <span class="n">datab</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;store&gt;: &quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;database: &quot;</span> <span class="o">+</span> <span class="n">datab</span><span class="p">)</span>
+
+        <span class="c1">#table name:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;node_status&quot;</span>
+ 
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">datab</span><span class="p">)</span>   
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;Opened database &#39;&quot;</span><span class="o">+</span> <span class="n">datab</span> <span class="o">+</span><span class="s2">&quot;&#39; successfully</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span> 
+        <span class="c1"># check if table is there </span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM &#39;&#39;&#39;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                LIMIT 1;&#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="c1"># if it succeeds, table exists</span>
+
+        <span class="c1"># now if table doesn&#39;t exist, create it:</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;creating SQL table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE &#39;&#39;&#39;</span> <span class="o">+</span><span class="n">table</span><span class="o">+</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                (node_id TEXT      NOT NULL,</span>
+<span class="s1">                time           TEXT     NOT NULL,</span>
+<span class="s1">                node_counter           TEXT     NOT NULL,</span>
+<span class="s1">                primary key (node_id, time, node_counter));&#39;&#39;&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot; created successfully&quot;</span><span class="p">)</span>
+
+        <span class="n">node_counter</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg_fields</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># add data to table now:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span><span class="n">node_counter</span><span class="p">)]</span>
+        <span class="c1"># Print header information of received message.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Storing record to database; </span><span class="se">\n</span><span class="s2"> node id: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> date-time: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> counter value: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">node_counter</span> <span class="p">))</span>
+        
+        <span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO &quot;</span> <span class="o">+</span><span class="n">table</span><span class="o">+</span> <span class="s2">&quot; (node_id, time, node_counter) </span><span class="se">\</span>
+<span class="s2">            VALUES (?, ?, ?)&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;New data added to table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot; successfully&quot;</span><span class="p">)</span>
+
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Database connection closed&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RxMsg.register_node_to_db"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.register_node_to_db">[docs]</a>    <span class="k">def</span> <span class="nf">register_node_to_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Register or update a node. Each time that a node sends a message, and this function is</span>
+<span class="sd">        triggered, we will store the following information to the database to register the new node:</span>
+<span class="sd">        </span>
+<span class="sd">        - node_id TEXT      NOT NULL,</span>
+<span class="sd">        - active           INT     NOT NULL,</span>
+<span class="sd">        - led_status           INT     DEFAULT -1,</span>
+<span class="sd">        - dimming           INT     DEFAULT -1,</span>
+<span class="sd">        - first_seen           TEXT     DEFAULT &quot;not yet&quot;,</span>
+<span class="sd">        - last_seen           TEXT     DEFAULT &quot;never&quot;,</span>
+<span class="sd">        - amount_of_neighbours    INT     DEFAULT -1,</span>
+<span class="sd">        - hops    INT     DEFAULT -1,</span>
+<span class="sd">        - rssi    INT     DEFAULT -1,</span>
+<span class="sd">        </span>
+<span class="sd">        if this node was already registered, then we will only update the following parameters:</span>
+
+<span class="sd">        - last seen time</span>
+<span class="sd">        </span>
+<span class="sd">        :param node_id: node id</span>
+<span class="sd">        :type node_id: int</span>
+<span class="sd">        :param timestamp: custom timestamp and date up to the milliseconds</span>
+<span class="sd">        :type timestamp: string       </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+
+        <span class="c1"># connecting to database if not already connected</span>
+        <span class="c1"># if &#39;conn&#39; not in locals():</span>
+
+        <span class="k">global</span> <span class="n">datab</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;store&gt;: register node.. &quot;</span>        
+        
+        <span class="c1">#table name:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;nodes&quot;</span>
+ 
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">datab</span><span class="p">)</span>   
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;Opened database &#39;&quot;</span><span class="o">+</span> <span class="n">datab</span> <span class="o">+</span><span class="s2">&quot;&#39; successfully</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span> 
+        <span class="c1"># check if table is there </span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM &#39;&#39;&#39;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                LIMIT 1;&#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="c1"># if it succeeds, table exists</span>
+
+        <span class="c1"># now if table doesn&#39;t exist, create it:</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;creating SQL table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE &#39;&#39;&#39;</span> <span class="o">+</span><span class="n">table</span><span class="o">+</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                (node_id TEXT      NOT NULL,</span>
+<span class="s1">                active           INT     NOT NULL,</span>
+<span class="s1">                led_status           INT     DEFAULT -1,</span>
+<span class="s1">                dimming           INT     DEFAULT -1,</span>
+<span class="s1">                first_seen           TEXT     DEFAULT &quot;not yet&quot;,</span>
+<span class="s1">                last_seen           TEXT     DEFAULT &quot;never&quot;,</span>
+<span class="s1">                amount_of_neighbours    INT     DEFAULT -1,</span>
+<span class="s1">                hops    INT     DEFAULT -1,</span>
+<span class="s1">                rssi    INT     DEFAULT -1,</span>
+<span class="s1">                primary key (node_id));&#39;&#39;&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot; created successfully&quot;</span><span class="p">)</span>
+
+        <span class="c1"># looking for the received node </span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * from &quot;</span> <span class="o">+</span> <span class="n">table</span> <span class="o">+</span> <span class="s2">&quot; WHERE node_id = &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span>
+        <span class="c1"># get all the fileds we store for a node:</span>
+        <span class="n">column_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+
+        <span class="c1">#counting the times the node is there</span>
+        <span class="n">rows_read</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">rows_read</span><span class="o">=</span><span class="n">rows_read</span><span class="o">+</span><span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">rows_read</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="c1"># register node</span>
+            <span class="n">active</span> <span class="o">=</span> <span class="mi">1</span>
+            
+            <span class="n">rows</span> <span class="o">=</span> <span class="p">[(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">active</span><span class="p">,</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)]</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Print header information of received message.</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Storing record to database; </span><span class="se">\n</span><span class="s2"> node id: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> active: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> first_seen: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> last_seen: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">))</span>
+            
+            <span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO &quot;</span> <span class="o">+</span><span class="n">table</span><span class="o">+</span> <span class="s2">&quot; (node_id, active, first_seen, last_seen) </span><span class="se">\</span>
+<span class="s2">                VALUES (?, ?, ?, ?)&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="p">);</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;New data added to table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot; successfully:&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span>  <span class="n">rows_read</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: node &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; appears more than once in table &quot;</span><span class="o">+</span> <span class="n">table</span><span class="p">)</span>  
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># node already registered:  </span>
+            <span class="n">active</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">active</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;node was active&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>                
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;node was dead, and is now active&quot;</span><span class="p">)</span>
+            <span class="c1"># preparing new updates for the registered node:</span>
+            <span class="n">active</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">last_seen</span> <span class="o">=</span> <span class="n">timestamp</span>
+            
+            <span class="c1"># updating some parameters of the entry</span>
+            <span class="n">new_row</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">new_row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">active</span>
+            <span class="n">new_row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">last_seen</span>
+
+            <span class="c1"># saving the node updates into the database</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE &quot;</span> <span class="o">+</span> <span class="n">table</span> <span class="o">+</span> <span class="s2">&quot; SET &quot;</span><span class="o">+</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">sql_set_values</span><span class="p">(</span><span class="n">new_row</span><span class="p">,</span> <span class="n">column_names</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot; WHERE node_id = &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;query: &quot;</span> <span class="o">+</span> <span class="n">query</span><span class="p">)</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; table &quot;</span><span class="o">+</span> <span class="n">table</span> <span class="o">+</span> <span class="s2">&quot; updated properly!&quot;</span><span class="p">)</span>
+
+            <span class="c1"># send message to user:</span>
+            <span class="n">row_text</span> <span class="o">=</span> <span class="n">db_fs</span><span class="o">.</span><span class="n">get_row_string</span><span class="p">(</span><span class="n">new_row</span><span class="p">,</span> <span class="n">column_names</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;node </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; already registered in table &quot;</span> <span class="o">+</span> <span class="n">table</span> <span class="o">+</span> <span class="s2">&quot; of database &quot;</span> <span class="o">+</span> <span class="n">datab</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">row_text</span><span class="p">)</span>
+                          
+            
+            
+        <span class="nb">print</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Database connection closed&quot;</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RxMsg.add_msg_to_response_received_table"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.add_msg_to_response_received_table">[docs]</a>    <span class="k">def</span> <span class="nf">add_msg_to_response_received_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gateway_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Save response received to the responses_received table.</span>
+<span class="sd">        </span>
+<span class="sd">        :Note: </span>
+<span class="sd">            this function is bound to disappear, since it is not necessary anymore. </span>
+<span class="sd">            Instead, the gateway can open a &quot;listening&quot; thread and await for the </span>
+<span class="sd">            message id to be received, just before sending its message to the node.</span>
+<span class="sd">            This way we avoid having to use the hard disk in order to use the </span>
+<span class="sd">            request-response messaging mechanism.</span>
+
+<span class="sd">        :param gateway_id: gateway id</span>
+<span class="sd">        :type gateway_id: int</span>
+<span class="sd">        :param sink_id: sink id</span>
+<span class="sd">        :type sink_id: int </span>
+<span class="sd">        :param node_id: node id</span>
+<span class="sd">        :type node_id: int</span>
+<span class="sd">        :param timestamp: custom timestamp and date up to the milliseconds</span>
+<span class="sd">        :type timestamp: string       </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            bool -- true if successful</span>
+<span class="sd">        </span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="c1"># connecting to database:</span>
+        <span class="k">global</span> <span class="n">datab</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;store: response-received&gt;.. &quot;</span>        
+        
+        <span class="c1">#table name:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">TABLE_RECEIVED_RESPONSES</span>
+ 
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">datab</span><span class="p">)</span>   
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;Opened database &#39;&quot;</span><span class="o">+</span> <span class="n">datab</span> <span class="o">+</span><span class="s2">&quot;&#39; successfully</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span> 
+        <span class="c1"># check if table is there </span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM &#39;&#39;&#39;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                LIMIT 1;&#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="c1"># if it succeeds, table exists</span>
+
+        <span class="c1"># now if table doesn&#39;t exist, create it:</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;creating SQL table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE &#39;&#39;&#39;</span> <span class="o">+</span><span class="n">table</span><span class="o">+</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                (msg_id INT      NOT NULL,</span>
+<span class="s1">                msg_type INT    NOT NULL,</span>
+<span class="s1">                node_id           TEXT     NOT NULL,</span>
+<span class="s1">                gateway_id           TEXT     NOT NULL,</span>
+<span class="s1">                sink_id           TEXT     NOT NULL,</span>
+<span class="s1">                timestamp           TEXT     NOT NULL</span>
+<span class="s1">                );&#39;&#39;&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot; created successfully&quot;</span><span class="p">)</span>
+
+        <span class="c1"># register response received</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">gateway_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)]</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Print header information of received message.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Storing record to table </span><span class="si">{}</span><span class="s2">; </span><span class="se">\n</span><span class="s2"> message id: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> message type: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> node id: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> gateway id: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> sink id: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\</span>
+<span class="s2">            </span><span class="se">\n</span><span class="s2"> time: </span><span class="si">{}</span><span class="se">\n</span><span class="s2"> ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">))</span>
+        
+        <span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO &quot;</span> <span class="o">+</span><span class="n">table</span><span class="o">+</span> <span class="s2">&quot; (msg_id, msg_type, node_id, gateway_id, sink_id, timestamp ) </span><span class="se">\</span>
+<span class="s2">            VALUES (?, ?, ?, ?, ?,?)&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;New data added to table &quot;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s2">&quot; successfully:&quot;</span><span class="p">)</span>
+ 
+        <span class="nb">print</span> <span class="p">(</span><span class="n">prefix</span> <span class="o">+</span><span class="s2">&quot;Database connection closed&quot;</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="RxMsg.get_msg_id_and_type"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.get_msg_id_and_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_msg_id_and_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the *msg type* and *message id* fields from the message payload.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. calls the :py:meth:`~message_received_class.RxMsg.get_msg_type` and :py:meth:`~message_received_class.RxMsg.get_msg_id`  functions which will extract the first 3 bytes of the message</span>
+<span class="sd">            2. returns an error if it is unsuccessful in any of its steps.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Empty if parsing was ok, otherwise returns the error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;computing message id and type&gt; &quot;</span>
+
+        <span class="c1"># Check that the payload has at least one byte</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">bytes</span><span class="p">:</span>
+            <span class="c1"># Parse message type</span>
+            <span class="n">res_msg_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_id</span><span class="p">()</span>
+            <span class="n">res_msg_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_type</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">res_msg_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">res_msg_id</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>                <span class="c1"># if there was a problem parsing the message id, send that error as the problem </span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">res_msg_type</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">res_msg_type</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>             <span class="c1"># if message id was parsed ok, but the type wasn&#39;t, then send that error.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_INVALID_UNSUPPORTED_MSG</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_UNEXPECTED_MESSAGE_LENGTH</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> message payload recieved has 0 bytes&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+             
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="RxMsg.get_msg_type"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.get_msg_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_msg_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the *msg type* field from the message payload.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Unpacks the third byte of the received message payload.</span>
+<span class="sd">            2. If everything is correct, it will store the unpacked number as the message type attribute of the RxMsg class</span>
+<span class="sd">            3. If the lenght of the message is 0, it will report an error, &quot;unexpected message length&quot;</span>
+<span class="sd">            4. If the message type is not in the supported message list, it will report another error, &quot;invalid message type&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Empty if parsing was ok, otherwise returns the error type</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;computing message type&gt; &quot;</span>
+       
+        <span class="c1"># Get message type field from payload (little-endian bytes order and</span>
+        <span class="c1"># one unsigned byte to parse.</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]))</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="c1"># convert to int type</span>
+        <span class="c1"># message_type = int.from_bytes(message_type, gvar.MSG_PAYLOAD_ENDIANNESS)</span>
+        <span class="n">llista</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_SUPPORTED_LIST_NODE</span>
+        <span class="n">llista</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_SUPPORTED_LIST_CLOUD</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">message_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">llista</span><span class="p">:</span>
+            <span class="c1"># Unknown or unsupported message type received so return an invalid value.</span>
+            <span class="n">message_type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_INVALID_UNSUPPORTED_MSG</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_INVALID_MSG_TYPE</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: message type not in the cloud or node uspported lists&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>    <span class="c1"># operation was successful</span>
+       
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">message_type</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+ 
+<div class="viewcode-block" id="RxMsg.get_msg_id"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.get_msg_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_msg_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the *msg id* field from the message payload.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Empty if parsing was ok, otherwise returns the error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;parse msg id&gt;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+
+        <span class="c1"># Get message type field from payload (little-endian bytes order and</span>
+        <span class="c1"># one unsigned byte to parse.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">message_id</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;H&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">message_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_INVALID_UNSUPPORTED_MSG</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_UNEXPECTED_MESSAGE_LENGTH</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> error: parsing message id&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">message_id</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="RxMsg.get_node_id"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.get_node_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_node_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_supertopic</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the *node id* field from the message payload.</span>
+
+<span class="sd">        :param sub_supertopic: subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</span>
+<span class="sd">        :type sub_supertopic: string</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sub_supertopic</span> <span class="o">!=</span> <span class="kc">None</span> <span class="p">:</span> <span class="c1"># if message origin are not hte nodes, then get the gateway id</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">subject</span> <span class="o">==</span> <span class="s2">&quot;gw&quot;</span> <span class="p">:</span> <span class="c1"># to gateway</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
+            <span class="k">elif</span> <span class="n">subject</span> <span class="o">==</span> <span class="s2">&quot;n&quot;</span> <span class="p">:</span> <span class="c1"># to node</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="c1">#getting the node id from the topic</span></div>
+
+
+<div class="viewcode-block" id="RxMsg.get_sub_supertopic"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.get_sub_supertopic">[docs]</a>    <span class="k">def</span> <span class="nf">get_sub_supertopic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_topic</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;getting message origin: (in the case of gateway - node messaging this will be None)</span>
+
+<span class="sd">        :param sub_topic: subscription MQTT topic to which the message was sent. Default to None for node-to-gateway messages</span>
+<span class="sd">        :type sub_topic: string</span>
+
+<span class="sd">        :does: </span>
+<span class="sd">            1. compute the MQTT super topic, according to the topic received.</span>
+<span class="sd">            2. stores the value into an accessible attribute of the message named the same</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_supertopic</span><span class="p">(</span><span class="n">sub_topic</span><span class="p">)</span></div>
+        
+
+<div class="viewcode-block" id="RxMsg.get_gw_id"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.get_gw_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_gw_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_supertopic</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the *gateway id* field from the message payload.</span>
+<span class="sd">        </span>
+<span class="sd">        :param sub_supertopic: subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</span>
+<span class="sd">        :type sub_supertopic: string</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            None        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sub_supertopic</span> <span class="o">!=</span> <span class="kc">None</span> <span class="p">:</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">subject</span> <span class="o">==</span> <span class="s2">&quot;gw&quot;</span> <span class="p">:</span> <span class="c1"># to gateway</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">subject</span> <span class="o">==</span> <span class="s2">&quot;n&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">==</span> <span class="kc">None</span> <span class="p">:</span> <span class="c1"># to node</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="RxMsg.parse_basic"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.parse_basic">[docs]</a>    <span class="k">def</span> <span class="nf">parse_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_topic</span><span class="p">):</span> 
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Basic parsing for received messages. It does the most basic parsing of any message received. It just computes the </span>
+<span class="sd">        </span>
+<span class="sd">        :does: </span>
+<span class="sd">            1. Extracts the:</span>
+
+<span class="sd">                - *message id* using the :py:meth:`~message_received_class.RxMsg.get_msg_id_and_type` function</span>
+<span class="sd">                - *message type* using the :py:meth:`~message_received_class.RxMsg.get_msg_id_and_type` function</span>
+<span class="sd">                - *gateway id* using the :py:meth:`~message_received_class.RxMsg.get_gw_id` function</span>
+<span class="sd">                - *node id* using the :py:meth:`~message_received_class.RxMsg.get_node_id` function</span>
+<span class="sd">               from the message payload, and saves it in the :py:meth:`~message_received_class.RxMsg` class.</span>
+<span class="sd">            2. It returns *True* if the message basic parsing was successful, and *False* plus the error message, otherwise.</span>
+
+<span class="sd">        :param sub_supertopic: subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</span>
+<span class="sd">        :type sub_supertopic: string</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *list* return arguments. Empty if parsing was ok, otherwise returns the error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;parse basic&gt;: &quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;message received!&quot;</span><span class="p">)</span>
+        <span class="c1"># Clear fields list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_fields</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="c1"># Clear message type attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># extra parsing instructions when the msg comes from cloud mqtt broker to gateway:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_sub_supertopic</span><span class="p">(</span><span class="n">sub_topic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_gw_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_node_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span><span class="p">)</span>
+        <span class="c1"># self.get_sink_id(self.sub_supertopic)</span>
+
+        <span class="c1"># Check payload data has the right data type before trying to parse anything.</span>
+        <span class="n">res_parse_id_and_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_msg_id_and_type</span><span class="p">()</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;msg id: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, payload length: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; bytes, payload: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;basic parsing complete&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">res_parse_id_and_type</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_parse_id_and_type</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+        
+
+    <span class="c1"># parse message</span>
+<div class="viewcode-block" id="RxMsg.parse"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_topic</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Main parsing function. </span>
+
+<span class="sd">        :does:</span>
+<span class="sd">        </span>
+<span class="sd">        1. call the :py:meth:`~message_received_class.RxMsg.parse_basic` function</span>
+<span class="sd">        2. if the basic parsing was ok, then depending on the </span>
+<span class="sd">        </span>
+<span class="sd">           </span>
+<span class="sd">            - **message origin** (cloud or nodes)</span>
+
+<span class="sd">           a different parsing function from :py:meth:`~message_received_parse_functions` will be called.</span>
+<span class="sd">        3. After that, a specific parsing function from :py:meth:`~message_specific_parse_functions` will be called</span>
+<span class="sd">           depending on the </span>
+<span class="sd">         </span>
+<span class="sd">            - **message type**,</span>
+
+<span class="sd">           which is designed specifically for that type of message. </span>
+<span class="sd">        4. The specific parsing function will save additional rellevant data contained in the message, in the</span>
+<span class="sd">           **args** attribute (from arguments) of the :py:meth:`~message_received_class.RxMsg` class, as a list of objects.</span>
+<span class="sd">        5. Finally, it will return *True* if the parsing was all successfull, and *False* if there has been any kind of issue.</span>
+<span class="sd">        </span>
+<span class="sd">        :param sub_supertopic: subscription MQTT supertopic to which the message was sent. Default to None for node-to-gateway messages</span>
+<span class="sd">        :type sub_supertopic: string</span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+
+<span class="sd">            **result** (*bool*) -- True if parsing was successful, False if it failed)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;parse&gt;: &quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,[]]</span>
+        <span class="n">res_pbasic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_basic</span><span class="p">(</span><span class="n">sub_topic</span><span class="p">)</span>
+ 
+        <span class="c1"># Check payload data has the right data type and that the basic parsing was successful before trying to parse anything.</span>
+        <span class="k">if</span> <span class="n">res_pbasic</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">bytes</span><span class="p">:</span>            
+
+            <span class="c1"># Check if message ID parsing was successful and parse message</span>
+            <span class="c1"># payload accordingly. Bear in mind these are all response messages</span>
+
+            <span class="c1"># print(prefix + &quot;message id: &quot; + str(self.id))</span>
+            <span class="c1"># print(prefix + &quot;message type: &quot; + str(self.type))</span>
+            <span class="c1"># print(prefix + &quot;raw data length: &quot; + str(len(self.payload)))</span>
+            <span class="c1"># print(prefix + &quot;raw data payload: &quot; + str(self.payload))            </span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+                <span class="c1"># cloud requests to node</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud to node message request&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_cloud_request_to_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+                <span class="c1"># cloud requests to gateway</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud to gateway message request&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_cloud_request_to_gateway</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+                
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC</span><span class="p">:</span>
+                <span class="c1"># cloud response to a gateway request</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud_response_to_gateway_req&quot;</span><span class="p">)</span> 
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_cloud_response_to_gateway_req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;listen&quot;</span><span class="p">:</span> 
+                <span class="c1"># node --&gt; gateway messages</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_node_to_gw_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span>
+                <span class="c1"># gateway --&gt; node messages</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_node_to_gw_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+                <span class="c1"># responses to gw requests to nodes, and node direct messages are not differentiated when received, </span>
+                <span class="c1"># only afer parsing. So we put them all here.</span>
+
+            <span class="c1"># DELETE THE FOLLOWING THREE CASES AND FUNCTIONS FOR PRODUCTION: (this is just for testing purposes)</span>
+            <span class="c1"># gateway response to cloud_to_node_req</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway response to cloud request to node&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_gateway_response_to_cloud_to_node_req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+            <span class="c1"># gateway response to cloud request to gateway</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway response to cloud request to gateway&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_gateway_response_to_cloud_to_gateway_req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+            <span class="c1"># gateway request to cloud</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_REQUEST_TO_CLOUD_MQTT_SUPERTOPIC</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway request to cloud&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">parsef</span><span class="o">.</span><span class="n">parse_gateway_request_to_cloud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;error: invalid message origin!&quot;</span><span class="p">)</span>
+                <span class="c1"># create an error message</span>
+                <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_INVALID_MSG_ORIGIN_MQTT_TOPIC</span><span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Invalid payload type: return parsing failed.</span>
+            <span class="c1"># create an error message</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">res_pbasic</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> error in parse basic&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+                <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_pbasic</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;message payload not in bytes&quot;</span><span class="p">)</span>                
+                <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_PAYLOAD_NOT_IN_BYTES</span><span class="p">]</span>
+        
+        <span class="c1"># # the arguments are the second element of &quot;result&quot;</span>
+        <span class="c1"># self.args = result[1]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>   <span class="c1"># if result is false (or parsing went wrong), set up a msg error type</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>       <span class="c1"># very important line, do not delete otherwise we loose the received message arguments!</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    <span class="c1"># in the parsing, it makes only sense to return the bool, not the arguments, since they will be already stored in the msg.args</span></div>
+
+<div class="viewcode-block" id="RxMsg.display"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.display">[docs]</a>    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">print_raw_data</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to display the message fields.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">        1. Takes the parsed message         </span>
+<span class="sd">        2. Calls the specific display function from :py:meth:`~message_display_functions` depending on:</span>
+<span class="sd">            - **message type**</span>
+<span class="sd">            - **message origin** (cloud or nodes)</span>
+<span class="sd">            </span>
+<span class="sd">        :param timestamp: timestamp passed by the caller</span>
+<span class="sd">        :type timestamp: datetime (custom format)</span>
+<span class="sd">        :param print_raw_data: Print raw data or not</span>
+<span class="sd">        :type print_raw_data: bool</span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            None</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;display&gt;: &quot;</span>
+        <span class="c1"># format timestamp as YYYY-MM-DD HH:MM:SS        </span>
+        <span class="k">if</span> <span class="n">print_raw_data</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no raw data to show&quot;</span><span class="p">)</span>
+        <span class="c1"># Print header information of received message.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;Received message at </span><span class="si">{}</span><span class="s2"> at gateway &lt;</span><span class="si">{}</span><span class="s2">&gt;, sink &lt;</span><span class="si">{}</span><span class="s2">&gt;, node &lt;</span><span class="si">{}</span><span class="s2">&gt; :&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">timestamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sink_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span><span class="p">))</span>
+        <span class="c1"># print(prefix + &quot;Displaying the message in general:&quot;)</span>
+        <span class="c1"># self._display_general_message()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+            <span class="c1"># cloud requests to node</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud to node message request&quot;</span><span class="p">)</span>
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_cloud_request_to_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+            <span class="c1"># cloud requests to gateway</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud to gateway message request&quot;</span><span class="p">)</span>
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_cloud_request_to_gateway</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC</span><span class="p">:</span>
+            <span class="c1"># cloud response to a gateway request</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud_response_to_gateway_req&quot;</span><span class="p">)</span> 
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_cloud_response_to_gateway_req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="c1"># gatewat &lt;--&gt; node messages</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway to node messaging&quot;</span><span class="p">)</span> 
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_gateway_node_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+            <span class="c1"># responses to gw requests to nodes, and node direct messages are not differentiated when received, </span>
+            <span class="c1"># only afer parsing. So we put them all here.</span>
+
+        <span class="c1"># DELETE THE FOLLOWING THREE CASES AND FUNCTIONS FOR PRODUCTION: (this is just for testing purposes)</span>
+        <span class="c1"># gateway response to cloud_to_node_req</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway response to cloud request to node&quot;</span><span class="p">)</span>
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_gateway_response_to_cloud_request_to_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+        <span class="c1"># gateway response to cloud request to gateway</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway response to cloud request to gateway&quot;</span><span class="p">)</span>
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_gateway_response_to_cloud_request_to_gateway</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+        <span class="c1"># gateway request to cloud</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_REQUEST_TO_CLOUD_MQTT_SUPERTOPIC</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gateway request to cloud&quot;</span><span class="p">)</span>
+            <span class="n">displayf</span><span class="o">.</span><span class="n">display_gateway_request_to_cloud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;error: invalid message origin!&quot;</span><span class="p">)</span></div>
+
+
+       
+
+<div class="viewcode-block" id="RxMsg.store"><a class="viewcode-back" href="../modules/message_received_class.html#message_received_class.RxMsg.store">[docs]</a>    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gateway_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves to the database the received message payload arguments. The Gateway is responsible for </span>
+<span class="sd">        creating and mantaining the databases</span>
+
+<span class="sd">        If the global variable *store_messages* is set to True, this function will be called in different moments</span>
+<span class="sd">        and store the following information:</span>
+<span class="sd">        </span>
+<span class="sd">        1. Register nodes to the database</span>
+<span class="sd">        2. add_msg_to_response_received_table (depracated, this function is not necessary anymore and will be deleted)</span>
+
+
+<span class="sd">        :param timestamp: timestamp passed by caller</span>
+<span class="sd">        :type timestamp: datetime (custom format)</span>
+<span class="sd">        :param gateway_id: gateway id</span>
+<span class="sd">        :type gateway_id: int</span>
+<span class="sd">        :param sink_id: sink id</span>
+<span class="sd">        :type sink_id: int</span>
+<span class="sd">        :param node_id: node id</span>
+<span class="sd">        :type node_id: int</span>
+
+
+<span class="sd">        :return:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+
+        <span class="c1"># save message to responses_recieved or node_requests</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_RESPONSE_RECEIVED_FROM_NODES_LIST</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_msg_to_response_received_table</span><span class="p">(</span><span class="n">gateway_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cannot store received message, the msg type doesn&#39;t match any of: &quot;</span><span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_RESPONSE_RECEIVED_FROM_NODES_LIST</span><span class="p">]))</span>
+
+        <span class="c1"># register node, if not yet registered:</span>
+        <span class="c1"># in any recieved message, first store/check if already stored the node in the nodes table:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_node_to_db</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span></div></div>
+
+        <span class="c1"># print(&#39;&#39;)  # separate each new message display by one empty line </span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

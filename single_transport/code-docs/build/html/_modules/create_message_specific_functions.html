@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create_message_specific_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">create_message_specific_functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for create_message_specific_functions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions designed each for a specific message type. Each of this functions will take different arguments and create</span>
+<span class="sd">specific payloads that might be combinded later by the calling functions to create the whole message payload.</span>
+
+<span class="sd">1. There is a set of basic functions for general messages that just have 1 or 2 arguments.</span>
+<span class="sd">2. The other functions (i.e. CRC, alarm, led on, etc) call the 1-argument message function, and </span>
+<span class="sd">    tell her that the only argument to put is *this alarm* or *this list of nodes* or whatever arguments they need to convert into bytes.</span>
+<span class="sd">3. For messages that have many or a variable ammount of arguments, a specific function has been created for them.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="set_1_arg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_1_arg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">packs</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument payload for messages that only have 1 argument.</span>
+<span class="sd">    </span>
+<span class="sd">    :param args: argument to pack into bytes</span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param packs: compression type</span>
+<span class="sd">    :type packs: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- packed argument</span>
+
+<span class="sd">    :does:</span>
+<span class="sd">        1. Checks whether the *arguments* is a *list* or an *int*</span>
+<span class="sd">        2. According to each case, uses the **struct.pack** function to bring the *int* to *bytes* and returns the result</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;set payload arguments &quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">packs</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no arguments specified&quot;</span> <span class="p">)</span>   
+            <span class="k">return</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">packs</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error, args is not &#39;list&#39; nor &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;b&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_2_arg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_2_arg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_2_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">packs</span><span class="o">=</span><span class="s2">&quot;BB&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument payload for messages that only have 2 arguments.</span>
+<span class="sd">    </span>
+<span class="sd">    :param args: argument to pack into bytes</span>
+<span class="sd">    :type args: list</span>
+<span class="sd">    :param packs: compression type</span>
+<span class="sd">    :type packs: string</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- packed arguments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;set payload arguments &quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: less than 2 arguments specified&quot;</span> <span class="p">)</span>   
+            <span class="k">return</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">packs</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error, args is not &#39;list&#39; nor &#39;int&#39;&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;b&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="gen_crc_message"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.gen_crc_message">[docs]</a><span class="k">def</span> <span class="nf">gen_crc_message</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform the CRC into bytes from a normal message argument list</span>
+
+<span class="sd">    :param args:  list of arguments containing CRC to use at position 0</span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- generated payload corresonding to the crc</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack_crc</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="pack_crc"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.pack_crc">[docs]</a><span class="k">def</span> <span class="nf">pack_crc</span><span class="p">(</span><span class="n">crc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Put the CRC into bytes</span>
+
+<span class="sd">    :param crc:  CRC to use</span>
+<span class="sd">    :type crc: int</span>
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- generated payload corresonding to the crc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;I&quot;</span><span class="p">,</span> <span class="n">crc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_dimming_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_dimming_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_dimming_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument into bytes for dimming messages.</span>
+<span class="sd">    </span>
+<span class="sd">    :param args: dimming to pack into bytes</span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- packed arguments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<div class="viewcode-block" id="set_strategy_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_strategy_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_strategy_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument into bytes for strategy messages.</span>
+<span class="sd">    </span>
+<span class="sd">    :param args: strategy to pack into bytes</span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- packed strategy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_echo_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_echo_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_echo_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument into bytes for echo messages.</span>
+<span class="sd">    </span>
+<span class="sd">    :param args: echo to pack into bytes</span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- packed echo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">==</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">400</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span> 
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">set_1_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="send_node_status_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.send_node_status_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">send_node_status_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument into bytes for node status list messages. So far it is inventing the status of the nodes, so</span>
+<span class="sd">    this function should change.</span>
+<span class="sd">    </span>
+<span class="sd">    :param args: node status list to pack into bytes</span>
+<span class="sd">    :type args: list containing: led status, dimming, num neighbours, rssi, hops</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- packed node status list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;BbIbB&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()),</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">101</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span> 
+                <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">420</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="o">-</span><span class="mi">100</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">256</span><span class="p">)</span>
+                <span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;BbIbB&quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="send_node_version_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.send_node_version_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">send_node_version_msg_payload</span><span class="p">(</span><span class="n">s_major</span><span class="p">,</span> <span class="n">s_minor</span><span class="p">,</span> <span class="n">s_revision</span><span class="p">,</span> <span class="n">s_build</span><span class="p">,</span> <span class="n">app_maj</span><span class="p">,</span> <span class="n">app_min</span><span class="p">,</span> <span class="n">app_rev</span><span class="p">,</span> <span class="n">app_build</span><span class="p">,</span> <span class="n">packs</span><span class="o">=</span><span class="s2">&quot;BBBBBBBB&quot;</span><span class="p">)</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message  argument into bytes for sending the node version.</span>
+<span class="sd">    The node software version consists of a list of 8 int ranging from 0-254 which codify:</span>
+<span class="sd">                </span>
+<span class="sd">        1. *stack_version* major.minor.revision.build. These are the first 4 ints of the list.</span>
+<span class="sd">        2. *app_version* major.minor.revision.build. These are the last 4 ints of the list.</span>
+
+<span class="sd">    :param args: node version list to pack into bytes</span>
+<span class="sd">    :type args: list containing: s_major, s_minor, s_revision, s_build, app_maj, app_min, app_rev, app_build and packs</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- 8 bytes codifying the node version in bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="o">+</span><span class="n">packs</span><span class="p">,</span> <span class="n">s_major</span><span class="p">,</span> <span class="n">s_minor</span><span class="p">,</span> <span class="n">s_revision</span><span class="p">,</span> <span class="n">s_build</span><span class="p">,</span> <span class="n">app_maj</span><span class="p">,</span> <span class="n">app_min</span><span class="p">,</span> <span class="n">app_rev</span><span class="p">,</span> <span class="n">app_build</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_electrim_params_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_electrim_params_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_electrim_params_msg_payload</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for node electric parameters. Change this function, right now it is inventing the electrical</span>
+<span class="sd">    parameters.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node consumption metrics, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;HHHBBI&quot;</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">340</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">6500300</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_solar_metrics_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_solar_metrics_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_solar_metrics_msg_payload</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a node solar panel metrics. Change this function, right now it is inventing the solar</span>
+<span class="sd">    parameters.</span>
+<span class="sd">    </span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node solar panel metrics, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;HH&quot;</span><span class="p">,</span><span class="mi">2400</span><span class="p">,</span> <span class="mi">140</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_electric_params_list_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_electric_params_list_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_electric_params_list_msg_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a node electric parameters list. Change this function, right now it is inventing the electrical</span>
+<span class="sd">    parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    :param num_nodes:  number of nodes to use</span>
+<span class="sd">    :type args: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node consumption metrics list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;HQHHHBBIQHHHBBIQHHHBBI&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">141</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">340</span><span class="p">,</span> <span class="mi">460</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">6500300</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">6506600</span><span class="p">,</span><span class="mi">144</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">6502400</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="node_id_list_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.node_id_list_payload">[docs]</a><span class="k">def</span> <span class="nf">node_id_list_payload</span><span class="p">(</span><span class="n">node_ids</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a given node id list</span>
+<span class="sd">    </span>
+<span class="sd">    :param node_ids:  array containing all node id&#39;s</span>
+<span class="sd">    :type node_ids: int array</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- generated node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_ids</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;H&quot;</span><span class="p">,</span><span class="n">num_nodes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;Q&quot;</span><span class="p">,</span> <span class="n">node_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="random_node_id_list_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.random_node_id_list_payload">[docs]</a><span class="k">def</span> <span class="nf">random_node_id_list_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a random node id list. Change this function, right now it is inventing the node ids.</span>
+<span class="sd">    </span>
+<span class="sd">    :param num_nodes:  number of nodes to use</span>
+<span class="sd">    :type args: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">node_ids</span> <span class="o">=</span> <span class="n">gen_random_node_id_list</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">node_id_list_payload</span><span class="p">(</span><span class="n">node_ids</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="random_node_status_list_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.random_node_status_list_payload">[docs]</a><span class="k">def</span> <span class="nf">random_node_status_list_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the argument payload for random node status list messages.</span>
+<span class="sd">    </span>
+<span class="sd">    :param num:nodes:  number of nodes to use</span>
+<span class="sd">    :type args: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node list status, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;H&quot;</span><span class="p">,</span><span class="n">num_nodes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;QBbIbB&quot;</span><span class="p">,</span><span class="mi">140</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()),</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">101</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span> 
+                <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">420</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="o">-</span><span class="mi">100</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">256</span><span class="p">)</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="random_alarm_node_list_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.random_alarm_node_list_payload">[docs]</a><span class="k">def</span> <span class="nf">random_alarm_node_list_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a random alarm and node id list. Change this function, right now it is inventing the node alarms.</span>
+<span class="sd">    </span>
+<span class="sd">    :param num:nodes:  number of nodes to use</span>
+<span class="sd">    :type args: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated alarm and node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;BH&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">7</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">num_nodes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;Q&quot;</span><span class="p">,</span><span class="mi">140</span><span class="o">+</span><span class="n">i</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<div class="viewcode-block" id="set_remove_nodes_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_remove_nodes_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_remove_nodes_msg_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a remove nodes list. Right now it is inventing the node ids.</span>
+<span class="sd">    </span>
+<span class="sd">    :param num:nodes:  number of nodes to use</span>
+<span class="sd">    :type args: int</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">random_node_id_list_payload</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+<span class="c1"># gw response to clodu request to gw</span>
+
+<div class="viewcode-block" id="respond_remove_nodes_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.respond_remove_nodes_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">respond_remove_nodes_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a remove nodes list. argument into bytes</span>
+<span class="sd">    </span>
+<span class="sd">    :param args:  list containig the arguments to use when answering the cloud</span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- crc generated message, this is just a crc message!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">random_node_id_list_payload</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<span class="c1"># create functions gateway &lt;&lt;&gt;&gt; cloud response</span>
+
+<span class="c1"># def set_dimming_with_client_id_msg_payload(args): </span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Set the argument argument into bytes for dimming with client id messages.</span>
+    
+<span class="c1">#     :param args: [client_id, dimming] to pack into bytes</span>
+<span class="c1">#     :type args: list</span>
+
+<span class="c1">#     :return:</span>
+<span class="c1">#         :payload: (bytes) -- packed arguments</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     print(&quot;set dimming&gt; args: &quot; + str(args))</span>
+<span class="c1">#     payload = set_2_arg_payload(args, &quot;Ib&quot;)</span>
+<span class="c1">#     return payload</span>
+
+<div class="viewcode-block" id="set_client_id_msg_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_client_id_msg_payload">[docs]</a><span class="k">def</span> <span class="nf">set_client_id_msg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for the client id    </span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- randomly generated node consumption metrics, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">client_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;I&quot;</span><span class="p">,</span><span class="n">client_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+<div class="viewcode-block" id="node_id_list_client_id_payload"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.node_id_list_client_id_payload">[docs]</a><span class="k">def</span> <span class="nf">node_id_list_client_id_payload</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a message with client id and node id list</span>
+<span class="sd">    </span>
+<span class="sd">    ::param args:  list of 2 elements containing the *client_id* and the *node_id_list* to send to cloud</span>
+<span class="sd">    :type args: list</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- generated node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;creating node id list with client id payload&gt; &quot;</span>
+    <span class="n">client_id</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">node_ids</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_ids</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;IH&quot;</span><span class="p">,</span><span class="n">client_id</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; client_id: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, num_nodes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, node list: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node_ids</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;Q&quot;</span><span class="p">,</span> <span class="n">node_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+
+
+
+<span class="c1"># auxiliary functions for creating the message payload</span>
+
+<div class="viewcode-block" id="gen_random_node_id_list"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.gen_random_node_id_list">[docs]</a><span class="k">def</span> <span class="nf">gen_random_node_id_list</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a random list of node ids, of length given by the argument</span>
+<span class="sd">    </span>
+<span class="sd">    :param num_nodes:  number of nodes to use</span>
+<span class="sd">    :type num_nodes: int</span>
+<span class="sd">    :return:</span>
+<span class="sd">        :list: (np.array) -- generated node id list, as a numpy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span> <span class="o">+</span> <span class="mi">140</span>
+    <span class="k">return</span> <span class="nb">list</span></div>
+
+
+<span class="c1"># simulated, ready to be deleted:</span>
+<span class="c1"># cloud response to gateway request</span>
+<div class="viewcode-block" id="set_alarm_and_crc_msg"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.set_alarm_and_crc_msg">[docs]</a><span class="k">def</span> <span class="nf">set_alarm_and_crc_msg</span><span class="p">(</span><span class="n">alarm</span><span class="p">,</span> <span class="n">crc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a cloud response to a previous gateway request with an alarm and many nodes to it</span>
+<span class="sd">    </span>
+<span class="sd">    :param alarm:  the alarm that the gateway sent to the cloud</span>
+<span class="sd">    :type alarm: int</span>
+<span class="sd">    :param payload: received message payload that we want to transform into a CRC</span>
+<span class="sd">    :type payload: bytes</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- generated node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">alarm</span><span class="p">,</span> <span class="n">crc</span><span class="p">]</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">set_2_arg_payload</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;BI&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+    
+<div class="viewcode-block" id="gen_gw_version_message"><a class="viewcode-back" href="../modules/create_message_specific_functions.html#create_message_specific_functions.gen_gw_version_message">[docs]</a><span class="k">def</span> <span class="nf">gen_gw_version_message</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the message argument into bytes for a cloud response to a previous gateway request with the gateway version</span>
+<span class="sd">    </span>
+<span class="sd">    :param alarm:  the alarm that the gateway sent to the cloud</span>
+<span class="sd">    :type alarm: int</span>
+<span class="sd">    :param payload: received message payload that we want to transform into a CRC</span>
+<span class="sd">    :type payload: bytes</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        :payload: (bytes) -- generated node id list, and packed into bytes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&lt;BBBB&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">version</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">version</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">version</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">payload</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

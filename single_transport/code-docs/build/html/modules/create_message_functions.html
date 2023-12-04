@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>create_message_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="create_message_nodes" href="create_message_nodes.html" />
+    <link rel="prev" title="create_message_cloud" href="create_message_cloud.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">create_message_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/create_message_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-create_message_functions">
+<span id="create-message-functions"></span><h1>create_message_functions<a class="headerlink" href="#module-create_message_functions" title="Permalink to this headline"></a></h1>
+<p>Script responsible for transforming the information into bytes and creating the message for the desired entity.</p>
+<ul class="simple">
+<li><p>Once an “interaction mode” is selected, you can choose to create a message</p></li>
+<li><p>This script switches between the different MQTT supertopics in order to know which kind of message is desired</p></li>
+<li><p>Once a supertopic and message type are chosen, it will call a specific message content function, for message content creation</p></li>
+<li><p>Some functions are not for production yet, and they invent or randomly generate the messages, for testing the infrastructure.</p></li>
+</ul>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#create_message_functions.get_msg_from_input" title="create_message_functions.get_msg_from_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_msg_from_input</span></code></a>(msg_id, pubtopic)</p></td>
+<td><p>Creates a message based on the user input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#create_message_functions.message_to_bytes" title="create_message_functions.message_to_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">message_to_bytes</span></code></a>(msg_id, msg_type, args, ...)</p></td>
+<td><p>It creates the byte payload for delivery. It creates the message payload (in bytes) just using the:</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_functions.get_msg_from_input">
+<span class="sig-name descname"><span class="pre">get_msg_from_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pubtopic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_functions.html#get_msg_from_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_functions.get_msg_from_input" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a message based on the user input. Read the user input, and puts all the message information into bytes.
+This function is designed for testing purposes only, won’t be called in production.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg_id</strong> (<em>int</em>) – message temporary unique identifier (id)</p></li>
+<li><p><strong>pubtopic</strong> (<em>string</em>) – MQTT topic where we will publish our message (None for gateay to node messaging)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>:payload (bytes) – message payload</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_message_functions.message_to_bytes">
+<span class="sig-name descname"><span class="pre">message_to_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pub_supertopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_message_functions.html#message_to_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_message_functions.message_to_bytes" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>It creates the byte payload for delivery. It creates the message payload (in bytes) just using the:</dt><dd><ol class="arabic simple">
+<li><p>message id</p></li>
+<li><p>message type</p></li>
+<li><p>message arguments</p></li>
+<li><p>publication mqtt topic</p></li>
+</ol>
+</dd>
+</dl>
+<p>this message is the one that will be sent.
+We assume that all the necessary arguments have been passed for creating the message.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg_id</strong> (<em>int</em>) – message id</p></li>
+<li><p><strong>msg_type</strong> (<em>int</em>) – message type</p></li>
+<li><p><strong>args</strong> (<em>list</em>) – arguments that we wish to include in the message</p></li>
+<li><p><strong>pub_supertopic</strong> (<em>string</em>) – MQTT super topic where the message is gonig to be published.</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – string to prepend to all the prints/console logs</p></li>
+<li><p><strong>msg</strong> (<a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><em>RxMsg</em></a>) – messge received class RxMsg, only when creating response messages to a previous request! This field will be <em>None</em> for request mode</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
+<dt class="field-odd">payload</dt>
+<dd class="field-odd"><p><em>(bytes)</em> – generated message payload</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><blockquote>
+<div><p>In order to encode the message it calls a series of subfunctions depending on the</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Message type</p></li>
+<li><p>Message destination <em>(represented by the pubtopic parameter)</em></p></li>
+</ol>
+</div></blockquote>
+<p>There are a total of 9 types of messages to be created from the gateway (or simulated):</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>gateway</strong> response to cloud request to node</p></li>
+<li><p><strong>gateway</strong> response to cloud request to gateway</p></li>
+<li><p><strong>gateway</strong> request to cloud</p></li>
+<li><p><strong>gateway</strong> request to nodes</p></li>
+<li><p><strong>gateway</strong> response to nodes</p></li>
+<li><p>node request to <strong>gateway</strong> (simulated)</p></li>
+<li><p>cloud request to node (simulated)</p></li>
+<li><p>cloud request to <strong>gateway</strong> (simulated)</p></li>
+<li><p>cloud response to <strong>gateway</strong> request (simulated)</p></li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+<dl class="simple">
+<dt>messages 1-5 are the production-time messages that the gateway will indeed create, number 6 simulates the node requests and 7-9 simulate the</dt><dd><p>cloud messages and responses. The last 4 messages are purely for testing that the first 5 gateway messages work as expected.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="create_message_cloud.html" class="btn btn-neutral float-left" title="create_message_cloud" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="create_message_nodes.html" class="btn btn-neutral float-right" title="create_message_nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mqtt_interaction_module &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mqtt_interaction_module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mqtt_interaction_module</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This is the basic structure for the node and cloud communications.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>              <span class="c1">#: import global variables</span>
+<span class="kn">import</span> <span class="nn">time</span>                             <span class="c1"># to get message reception time</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="o">*</span>                    <span class="c1"># for pack/unpack functions</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">import</span> <span class="nn">mqtt_credentials</span> <span class="k">as</span> <span class="nn">creds</span>        <span class="c1"># global and local credentials containing all the details on the MQTT broker connection (passwords, hosts, ports, etc)</span>
+
+
+<div class="viewcode-block" id="mqtt_interaction"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction">[docs]</a><span class="k">class</span> <span class="nc">mqtt_interaction</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Basic interaction class. </span>
+<span class="sd">    The classes :py:class:`~mqtt_interaction_cloud.mqtt_interaction_cloud` and </span>
+<span class="sd">    :py:class:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic` are extensions of this one.</span>
+
+<span class="sd">    The structure of this class is the following:</span>
+
+<span class="sd">    :structure:</span>
+<span class="sd">        1. It creates the WNI if needed, and not already created.</span>
+<span class="sd">        2. If the interlocutor is the &quot;cloud&quot;, then it subscribe and sets a publisher to the right global MQTT topics.</span>
+<span class="sd">        3. Finally, it has the following methods:</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.listen`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.on_message` </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.send_message`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.start_listen_thread`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.check_for_response`  </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.on_disconnect`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.on_publish` </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.update_with_new_message`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.update_msg_id`  </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.set_node_id`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.stop_sub_loop` </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.print_sub_loop`</span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.start_listen_loop`  </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.send_msg_from_input` </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.is_a_msg_request` </span>
+<span class="sd">            - :py:meth:`~mqtt_interaction_module.mqtt_interaction.convert_dst_address`  </span>
+<span class="sd">     </span>
+<span class="sd">    :param subtopic: MQTT topic to which the client will subscribe to</span>
+<span class="sd">    :type subtopic: string</span>
+<span class="sd">    :param pubtopic: MQTT topic to which the client will publish to</span>
+<span class="sd">    :type pubtopic: string</span>
+<span class="sd">    :param mode: mode of the interaction. Can be either &quot;listen&quot; to receive messages from the subtopic, or &quot;request&quot; if we want to the entity to publish requests to the pubtopic</span>
+<span class="sd">    :type mode: string</span>
+<span class="sd">    :param file_settings: file containing the shared message id to update</span>
+<span class="sd">    :type file_settings: file</span>
+<span class="sd">    :param interlocutor: entity which we wish to communicate to. Defaults to *cloud*</span>
+<span class="sd">    :type interlocutor: string</span>
+
+<span class="sd">    :return:</span>
+
+<span class="sd">        Returns a **mqtt_interaction** class with the following attributes:</span>
+
+<span class="sd">            :pubclient: (mqtt.Client) -- MQTT client for publishing messages (only if interlocutor is &quot;cloud&quot;) </span>
+<span class="sd">            :subclient: (mqtt.Client) -- MQTT client for subscribing to a topic (only if interlocutor is &quot;cloud&quot;) </span>
+<span class="sd">            :pub_msg_id: (int) -- unique message temporal identifier for the published messages</span>
+<span class="sd">            :gw_id: (int) -- gateway id for the interaction</span>
+<span class="sd">            :run_loop: (bool) -- run the subclient loop, while true</span>
+<span class="sd">            :pub_resp_received: (bool) -- whether a response for the sent message has been received</span>
+<span class="sd">            :max_wait: (int) -- max waiting time for response before deciding no response has been received, in seconds</span>
+<span class="sd">            :startime: (int) -- start time (in seconds) of the loop in the subclient</span>
+<span class="sd">            :thread: (thread) -- thread to use for starting a subscriber or publisher client when needed while the main thread still runs</span>
+<span class="sd">            :print_raw_data: (bool) -- whether or not we wish to print the raw data we get from the node</span>
+<span class="sd">            :send_attempts: (int) -- number of times the message will be tried to be sent, if the previous attempts fail to get a matching response</span>
+<span class="sd">            :start_countdown: *(bool)* -- Bool that detects when the listening loop timer, has to start counting down</span>
+<span class="sd">            :msg_to_send: *(bytes)* -- Message to send to node? or cloud? probably stores the message from a tunnel connexion.</span>
+<span class="sd">            :start_countdown: *(bool)* -- If true, it prints the left time in the wait loop countdown at every iteration</span>
+<span class="sd">            :local_broker: *(ip)* -- ip of the local MQTT broker</span>
+<span class="sd">            :local_port: *(int)* -- direction of the local MQTT broker port to access</span>
+<span class="sd">            :local_user: *(string)* -- username needed to access the local MQTT broker</span>
+<span class="sd">            :local_password: *(string)* -- password needed to access the local MQTT broker</span>
+<span class="sd">            :local_insecure: *(bool)* -- allow insecure connection to the local MQTT broker?</span>
+<span class="sd">            :global_broker: *(ip)* -- ip of the global MQTT broker</span>
+<span class="sd">            :global_port: *(int)* -- direction of the global MQTT broker port to access</span>
+<span class="sd">            :global_user: *(string)* -- username needed to access the global MQTT broker</span>
+<span class="sd">            :global_password: *(string)* -- password needed to access the global MQTT broker</span>
+<span class="sd">            :wni: *(WirepasNetworkInterface)* -- a wirepas network interface class connected to the selected local mqtt broker</span>
+<span class="sd">            :need_local_wni: *(bool)* -- Whether even though wni=*None* we still need to create a wni, or not.</span>
+<span class="sd">            </span>
+<span class="sd">     &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="mqtt_interaction.__init__"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtopic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pubtopic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;request&quot;</span><span class="p">,</span> <span class="n">file_settings</span><span class="o">=</span><span class="n">gvar</span><span class="o">.</span><span class="n">FILE_SETTINGS_GLOBAL</span><span class="p">,</span> <span class="n">interlocutor</span><span class="o">=</span><span class="s2">&quot;cloud&quot;</span><span class="p">,</span> <span class="n">wni</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">need_local_wni</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize class interaction attributes.    </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;init basic mqtt interac&gt; &quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">subtopic</span> <span class="o">=</span> <span class="n">subtopic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pubtopic</span> <span class="o">=</span> <span class="n">pubtopic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pubclient</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subclient</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pub_resp_received</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sink</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_loop</span> <span class="o">=</span> <span class="kc">True</span>            <span class="c1"># run the subclient loop, while true</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span> <span class="o">=</span> <span class="mi">2</span>              <span class="c1"># default max waiting time for response before deciding no response has been received, in seconds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">startime</span> <span class="o">=</span> <span class="kc">None</span>            <span class="c1"># start time (in seconds) of the loop in the subclient</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">=</span> <span class="n">interlocutor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_raw_data</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_attempts</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_attempts_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_attempts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_to_send</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_countdown</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wni</span> <span class="o">=</span> <span class="n">wni</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">need_local_wni</span> <span class="o">=</span> <span class="n">need_local_wni</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_settings</span> <span class="o">=</span> <span class="n">file_settings</span>        <span class="c1"># file for storing message id and updating it:s</span>
+        
+
+        <span class="c1"># mqtt connection parameters:</span>
+        <span class="c1"># global broker:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">broker</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">global_broker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">global_port</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">global_user</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">global_password</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># local broker:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_broker</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">local_broker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_port</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">local_port</span>
+
+       
+                                  
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wni</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;WirepasNetworkInterface class already created, skipping creation of a new wni.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">need_local_wni</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wni</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">create_wni</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wni class needed, we just created a new one.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;wni not needed and not created.&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;initializing basic mqtt interaction class..&quot;</span><span class="p">)</span>
+
+        <span class="c1"># use sink to compute gw and sink id, except if it is a fake cloud simulator.</span>
+        <span class="k">if</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_supertopic</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pubtopic</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">FAKE_CLOUD_PUB_SUPERTOPIC_LIST</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sink</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_sink_and_gw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wni</span><span class="p">)</span> <span class="c1"># set sink and gateway id</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> gateway and sink already set.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> gateway id: </span><span class="si">{}</span><span class="s2">, sink: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sink</span><span class="p">))</span>
+
+        <span class="c1"># since senders to the gateway, don&#39;t necessarily know what is the gateway and sink addresses.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;sink and gateway set&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inter class initialized&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">interlocutor</span><span class="o">==</span><span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;interlocutor is a cloud&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_node_id</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">mode</span><span class="o">==</span><span class="s2">&quot;request&quot;</span><span class="p">:</span>
+                <span class="c1"># subscribe to expected response topic:    </span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">subclient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_sub_client</span><span class="p">(</span><span class="s2">&quot;(response) &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">subtopic</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;--&gt; subscriber&quot;</span><span class="p">)</span>          
+
+                <span class="c1"># publish message:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pubclient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_pub_client</span><span class="p">(</span><span class="s2">&quot;publisher--&gt;&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pubtopic</span><span class="p">)</span> <span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">mode</span><span class="o">==</span><span class="s2">&quot;listen&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">subclient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_sub_client</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">pubtopic</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;--&gt; subscriber&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;init mqtt_interaction() error: &#39;mode&#39; not recognized&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mqtt_interaction.listen"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.listen">[docs]</a>    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       When any interaction is set to &quot;listen&quot; to its interlocutor, this function is immediately called.</span>
+
+<span class="sd">       :does:</span>
+<span class="sd">            - depending on the interlocutor (cloud or nodes) it will call</span>
+<span class="sd">                - :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud`</span>
+<span class="sd">                or</span>
+
+<span class="sd">                - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.listen_to_nodes`</span>
+<span class="sd">              and start the specific listening function.</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span><span class="s2">&quot;&lt;listen&gt; &quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listen_to_cloud</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span><span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listen_to_nodes</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mqtt_interaction.on_message"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_message">[docs]</a>    <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">userdata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sent_msg_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>     <span class="c1"># cloud on message function, create function for callback</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        When a message is received, this callback function is invoked.</span>
+<span class="sd">         </span>
+<span class="sd">        :does:</span>
+<span class="sd">            - depending on the interlocutor (cloud or nodes) it will call</span>
+<span class="sd">                - :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c`</span>
+
+<span class="sd">                or</span>
+
+<span class="sd">                - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.on_message_nodes`</span>
+<span class="sd">              and call the right function for processing the received message.</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        :param data: message payload</span>
+<span class="sd">        :type data: bytes</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>      
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;on message&gt; &quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;received at &quot;</span> <span class="o">+</span> <span class="n">timestamp</span><span class="p">)</span>
+    
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_message_c</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sent_msg_id</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span><span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">client</span>   <span class="c1"># in the node messages (using wirepass), the data is passed in the first argument of &quot;on_message&quot; function</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;received data: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_message_nodes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error, message received but invalid interlocutor: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.check_for_response"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.check_for_response">[docs]</a>    <span class="k">def</span> <span class="nf">check_for_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the message received corresponds to any previous request.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Checks weather the response msg id matches the request msg id.</span>
+<span class="sd">            2. If the above is true, and either the node ids or the gw ids of the received and sent messages coincide, then</span>
+<span class="sd">               the received message is considered a received response to a previous request.</span>
+<span class="sd">            3. If that is the case, the algorithm marks it as a received response, and stops the listening thread by calling the </span>
+<span class="sd">               :py:meth:`~mqtt_interaction_module.mqtt_interaction.stop_sub_loop` function.</span>
+<span class="sd">            4. If the received message is not a response, then that is reported in the logs/console print.</span>
+
+<span class="sd">        :param msg: message class</span>
+<span class="sd">        :type msg: RxMsg</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            :True: -- if response id matches the initial request</span>
+<span class="sd">            :False: -- Otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;check for response&gt;: &quot;</span>
+        <span class="n">option1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span>
+        <span class="n">option2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span> <span class="ow">and</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">gw_id</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;checking for response... msg id:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, iter msg id:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span><span class="p">)</span> <span class="o">+</span> 
+        <span class="s2">&quot;, msg.node_id:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, interaction node_id:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, msg_gw_id:&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">gw_id</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;, iter gw_id:&quot;</span><span class="o">+</span>
+        <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gw_id</span><span class="p">))</span>
+        <span class="k">if</span>  <span class="n">option1</span> <span class="ow">or</span> <span class="n">option2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;response found corresponding to request message&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pub_resp_received</span> <span class="o">=</span> <span class="kc">True</span>                          
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_sub_loop</span><span class="p">()</span>  
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;not a matching response.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># depending on the message type, we should also check for: </span>
+            <span class="c1"># CRC, num of nodes, etc...</span>
+
+
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    
+<div class="viewcode-block" id="mqtt_interaction.on_disconnect"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">on_disconnect</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span><span class="n">rc</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        what to do if a MQTT client gets disconnected.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. stops the subscribe loop by calling the function *stop_sub_loop()*</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DisConnected result code &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">rc</span><span class="p">))</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">stop_sub_loop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.on_publish"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.on_publish">[docs]</a>    <span class="k">def</span> <span class="nf">on_publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">client</span><span class="p">,</span><span class="n">payload</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        When a message is published to either the global or local MQTT broker, this function is invoked.</span>
+
+<span class="sd">        :param client: publisher client</span>
+<span class="sd">        :type client: mqtt.Client</span>
+<span class="sd">        :param payload: message payload</span>
+<span class="sd">        :type payload: bytes</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;on publish&gt; &quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;message published successfully at &quot;</span><span class="o">+</span> <span class="n">timestamp</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;for cloud called!&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;for nodes called!&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># publish topic function</span>
+
+<div class="viewcode-block" id="mqtt_interaction.publish"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.publish">[docs]</a>    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>   <span class="n">payload</span><span class="p">,</span>  
+                        <span class="n">gw_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">sink_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">node_id</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Publishes a message to the MQTT topic.</span>
+<span class="sd">        </span>
+<span class="sd">        :does: </span>
+<span class="sd">            1. Starts a listening thread to anticipate the possible response. </span>
+<span class="sd">               It calls the function :py:meth:`~mqtt_interaction_module.mqtt_interaction.start_listen_thread`.</span>
+<span class="sd">            2. It calls the publishing function, which can either be:</span>
+
+<span class="sd">                - :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c` if we are publishing the message to the cloud</span>
+
+<span class="sd">                or</span>
+
+<span class="sd">                - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.publish_meshnet` if we are publishing the message to the nodes.</span>
+<span class="sd">            3. Checks if the message has been published successfully or not, and reports a message accordingly to the logs.</span>
+<span class="sd">            4. Starts the timeout countdown for receiving a response to the just published request message. This is done by setting boolean </span>
+<span class="sd">               :py:data:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.start_countdown` to True.</span>
+<span class="sd">                </span>
+<span class="sd">        :param client: publisher client</span>
+<span class="sd">        :type client: mqtt.Client</span>
+<span class="sd">        :param payload: message payload</span>
+<span class="sd">        :type payload: bytes</span>
+<span class="sd">        :param node id: node id to who we wish to communicate</span>
+<span class="sd">        :type node id: int</span>
+<span class="sd">        :param gw_id: gateway id to send the message from (in case of fake cloud, *to*)</span>
+<span class="sd">        :type gw_id: int</span>
+<span class="sd">        :param sink_id: Sink id where nodes connect to the gateway</span>
+<span class="sd">        :type sink_id: string   </span>
+<span class="sd">        </span>
+<span class="sd">        :return:</span>
+<span class="sd">            - published (bool) -- True if publish successful, False if failed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&lt;inter.publish&gt;: &quot;</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+        <span class="n">published</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">msg_to_send</span> <span class="o">=</span> <span class="p">[</span><span class="n">payload</span><span class="p">,</span> <span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">client</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span> 
+            <span class="c1">#listen to incoming messages in a new thread, right before publishing the message, for request mode</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;start listen thread, mode:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_listen_thread</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="n">published</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">publish_c</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="n">payload</span><span class="p">,</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="n">published</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">publish_meshnet</span><span class="p">(</span><span class="n">gw_id</span><span class="p">,</span> <span class="n">sink_id</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;interlocutor: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">published</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;message sent: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; at: &quot;</span> <span class="o">+</span> <span class="n">timestamp</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;message publication failed, stoping listening thread&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_sub_loop</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span>
+            <span class="c1"># Start the timer loop and wait for message(s) once everything is published properly and the listening also started</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;start timer loop, mode:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_countdown</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="n">published</span></div>
+        
+<div class="viewcode-block" id="mqtt_interaction.update_with_new_msg"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.update_with_new_msg">[docs]</a>    <span class="k">def</span> <span class="nf">update_with_new_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the interaction value of the *sub_msg_id* parameter, to equal that of the received message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_msg_id</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">id</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.update_msg_id"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.update_msg_id">[docs]</a>    <span class="k">def</span> <span class="nf">update_msg_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the message id that is stored in the external settings file.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Increments the value of the global message id saved in the file</span>
+
+<span class="sd">                - :py:meth:`~global_settings` if we wish to publish to the cloud</span>
+
+<span class="sd">                or</span>
+
+<span class="sd">                - :py:meth:`~local_settings` if we wish to publish to the nodes.                </span>
+<span class="sd">        </span>
+<span class="sd">               by calling the function :py:meth:`~global_vars.update_msg_id`.</span>
+<span class="sd">            2. Gets this value and saves it in the interaction parameter :py:data:`~mqtt_interaction_module.mqtt_interaction.pub_msg_id`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pub_msg_id</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">update_msg_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_settings</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.set_node_id"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.set_node_id">[docs]</a>    <span class="k">def</span> <span class="nf">set_node_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the node id for messages sent to/from cloud only.</span>
+
+<span class="sd">        It does so by calling the function :py:data:`~mqtt_interaction_cloud.mqtt_interaction_cloud.set_node_id_c`</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_node_id_c</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;set node id&gt; error, wrong interlocutor being used!&quot;</span><span class="p">)</span>
+            <span class="k">return</span></div>
+        
+
+<div class="viewcode-block" id="mqtt_interaction.stop_sub_loop"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.stop_sub_loop">[docs]</a>    <span class="k">def</span> <span class="nf">stop_sub_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stops the listening loop that actually keeps printing the remaning time before timeout, when a message is sent</span>
+<span class="sd">        to either the cloud or the nodes. </span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. sets the variable *run_loop&quot; to False</span>
+<span class="sd">            2. If the interlocutor is *cloud* it calls the paho mqtt function *loop_stop()* to stop the subscription to the global MQTT broker.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_loop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subclient</span><span class="o">.</span><span class="n">loop_stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_countdown</span> <span class="o">=</span> <span class="kc">False</span></div>
+        <span class="c1"># self.subclient.disconnect() # disconnect the listener</span>
+        
+<div class="viewcode-block" id="mqtt_interaction.print_sub_loop"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.print_sub_loop">[docs]</a>    <span class="k">def</span> <span class="nf">print_sub_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">wait</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints the seconds left before timeout when waiting for a response.</span>
+
+<span class="sd">        :param dt: time interval from when the subscribe loop started, up to now.</span>
+<span class="sd">        :type dt: int</span>
+<span class="sd">        :param wait: time (in milliseconds) when the last counter was printed</span>
+<span class="sd">        :type wait: int</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Prints the seconds left before reaching *max_wait* time.</span>
+<span class="sd">            2. At every print, it updates the time the counter was last printed in *wait*</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">wait</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">startime</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; s&quot;</span><span class="p">)</span>
+            <span class="n">wait</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="c1"># print timer functions:</span>
+        <span class="n">dt2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">wait</span>
+        <span class="k">if</span> <span class="n">dt2</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">:</span>
+            <span class="n">wait</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span> <span class="o">-</span><span class="n">dt</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; s&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wait</span></div>
+
+    
+
+<div class="viewcode-block" id="mqtt_interaction.start_listen_loop"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.start_listen_loop">[docs]</a>    <span class="k">def</span> <span class="nf">start_listen_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>      
+        <span class="sd">&quot;&quot;&quot;Creates and starts the loop that prints the timeout time left before aborting the connection to either the cloud or the nodes.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            If interaction mode == &quot;listen&quot;</span>
+<span class="sd">                1. It does nothing, either the cloud or the node class is responsible for properly listening to all the incoming messages.</span>
+<span class="sd">            If mode == &quot;request&quot;</span>
+<span class="sd">                1. Creates a loop that lasts for *max_wait* time at most. This is a parameter of the RxMsg class.</span>
+<span class="sd">                2. Once a matching response to the previous request, or the *max_wait* time is reached, the loop stops.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;start timer loop&gt; &quot;</span>
+        <span class="c1"># loop startime:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">startime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s2">&quot;start loop&quot;</span><span class="p">)</span>
+
+        <span class="c1"># timer:</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">startime</span><span class="p">)</span>
+        <span class="n">wait</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">startime</span>
+
+        <span class="c1"># main timer loop:</span>
+        <span class="c1"># while self.run_loop and  (dt &lt; self.max_wait or self.mode == &quot;listen&quot;):  </span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span><span class="p">:</span>              
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_loop</span> <span class="ow">and</span>  <span class="p">(</span><span class="n">dt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span><span class="p">):</span>                
+                
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;request&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_countdown</span><span class="p">:</span>                                       
+                    <span class="c1"># update timer:                                                </span>
+                    <span class="n">dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">startime</span><span class="p">)</span>                              
+                    <span class="c1"># print timer:</span>
+                    <span class="c1"># print(&quot;dt: &quot; + str(dt))</span>
+                    <span class="n">wait</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_sub_loop</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">wait</span><span class="p">)</span>  
+
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span> <span class="c1"># in order to decrease CPU usage                          </span>
+            
+       
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pub_resp_received</span><span class="p">:</span>
+                <span class="n">timestamp</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_timestamp</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;great! response received at &quot;</span> <span class="o">+</span> <span class="n">timestamp</span><span class="p">)</span>
+            <span class="k">else</span> <span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_attempts_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_attempts_left</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_attempts_left</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;retrying to publish the message, attemps left: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">send_attempts_left</span><span class="p">))</span>
+                    <span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg_to_send</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="nb">list</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="nb">list</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># this part is not very well, explained, basically we republish the same message</span>
+                <span class="k">elif</span> <span class="n">dt</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;sheit, no answer after &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_wait</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; seconds :/ and &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">send_attempts</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; send attemps.&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;finished&quot;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="mqtt_interaction.start_listen_thread"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.start_listen_thread">[docs]</a>    <span class="k">def</span> <span class="nf">start_listen_thread</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Starts the function :py:meth:`~mqtt_interaction_module.mqtt_interaction.listen` in a new thread.</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">listen</span><span class="p">)</span>
+        <span class="c1"># self.thread.daemon = True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new thread running on background&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.send_msg_from_input"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.send_msg_from_input">[docs]</a>    <span class="k">def</span> <span class="nf">send_msg_from_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Sends a message based on the user input.</span>
+<span class="sd">        </span>
+<span class="sd">        :does:</span>
+<span class="sd">            - depending on the interlocutor (cloud or nodes) it will call</span>
+<span class="sd">                - :py:meth:`~mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input`</span>
+<span class="sd">                - :py:meth:`~mqtt_interaction_node_basic.mqtt_interaction_node_basic.send_msg_to_nodes_from_input`</span>
+<span class="sd">              and call the right function for sending a new message to the desired interlocutor.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;send msg from input&gt; &quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_cloud_msg_from_input</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_msg_to_nodes_from_input</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.send_message"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.send_message">[docs]</a>    <span class="k">def</span> <span class="nf">send_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">gw_id</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sink</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">node_id</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">msg_type</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;Sends a message to the right interlocutor.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            1. Calls the main :py:meth:`~mqtt_interaction_module.mqtt_interaction.send_msg_from_input` function</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span> <span class="p">:</span>                
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_msg_from_input</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_msg_from_input</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="mqtt_interaction.is_a_msg_request"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction.is_a_msg_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_a_msg_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the message received is a message request or a message response.</span>
+
+<span class="sd">        :does:</span>
+<span class="sd">            - Returns *True* is the message received is a message request.</span>
+<span class="sd">            - Returns *False* otherwise.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_CLOUD_TO_NODE_REQUESTS_LIST</span> <span class="ow">or</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_CLOUD_TO_GATEWAY_REQUESTS_LIST</span> <span class="ow">or</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span><span class="p">:</span>
+                <span class="c1"># I added the message type error in this.</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">msg_type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_NODE_REQUESTS_LIST</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+    
+        <span class="k">return</span> <span class="kc">False</span></div></div>
+
+<div class="viewcode-block" id="convert_dst_address"><a class="viewcode-back" href="../modules/mqtt_interaction_module.html#mqtt_interaction_module.convert_dst_address">[docs]</a><span class="k">def</span> <span class="nf">convert_dst_address</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Function to check and convert destination address parameter.</span>
+<span class="sd">            </span>
+<span class="sd">            :param dst_addr: node id who we wish to communicate to</span>
+<span class="sd">            :type dst_addr: int</span>
+<span class="sd">            </span>
+<span class="sd">            :returns:</span>
+<span class="sd">                :dst_addr: (int) -- destination address converted from decimal or hexadecimal format to integer</span>
+<span class="sd">                :res: (bool) -- conversion status (True: conversion successful, False: conversion failed)</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># try to convert parameter from decimal or hexadecimal format to integer</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dst_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">)</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">dst_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wrong parameter value given ! &lt;destination address&gt; must be an integer (decimal or hexadecimal format)&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">dst_addr</span><span class="p">,</span> <span class="n">res</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

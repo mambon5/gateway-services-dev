@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mqtt_interaction_cloud &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mqtt_interaction_module" href="mqtt_interaction_module.html" />
+    <link rel="prev" title="mqtt_credentials" href="mqtt_credentials.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">mqtt_interaction_cloud</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/mqtt_interaction_cloud.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mqtt_interaction_cloud">
+<span id="mqtt-interaction-cloud"></span><h1>mqtt_interaction_cloud<a class="headerlink" href="#module-mqtt_interaction_cloud" title="Permalink to this headline"></a></h1>
+<p>This file contains all the main details of the interaction between the gateway and the cloud.</p>
+<dl class="simple">
+<dt>The remaining details involve the file <a class="reference internal" href="interaction_tunnel.html#module-interaction_tunnel" title="interaction_tunnel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">interaction_tunnel</span></code></a> file and in particular the tunneling classes:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="interaction_tunnel.html#interaction_tunnel.node_to_cloud_tunnel" title="interaction_tunnel.node_to_cloud_tunnel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">node_to_cloud_tunnel</span></code></a></p></li>
+<li><p><a class="reference internal" href="interaction_tunnel.html#interaction_tunnel.cloud_to_node_tunnel" title="interaction_tunnel.cloud_to_node_tunnel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cloud_to_node_tunnel</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud" title="mqtt_interaction_cloud.mqtt_interaction_cloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mqtt_interaction_cloud</span></code></a>(subtopic, pubtopic[, ...])</p></td>
+<td><p>Cloud to gateway mqtt interaction class.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mqtt_interaction_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pubtopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'request'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_local_wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gw_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="mqtt_interaction_module.html#mqtt_interaction_module.mqtt_interaction" title="mqtt_interaction_module.mqtt_interaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mqtt_interaction_module.mqtt_interaction</span></code></a></p>
+<p>Cloud to gateway mqtt interaction class.</p>
+<dl class="field-list">
+<dt class="field-odd">Structure</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><dl class="simple">
+<dt>It can be used for:</dt><dd><ul class="simple">
+<li><p>Recieving cloud messages to the gateway</p></li>
+<li><p>Receiving the cloud messages aimed at a specific node</p></li>
+<li><p>Sending messages from a node to the cloud</p></li>
+<li><p>Sending messages from the gateway to the cloud</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>It handles all the interaction and messages from Cloud to Gateway. Every
+create/send/parse/display/etc method on the cloud-gateway messaging, is handled by this class.</p></li>
+</ol>
+<ol class="arabic simple" start="5">
+<li><dl class="simple">
+<dt>Tt has the following methods:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.on_connect" title="mqtt_interaction_cloud.mqtt_interaction_cloud.on_connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_connect()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.on_subscribe" title="mqtt_interaction_cloud.mqtt_interaction_cloud.on_subscribe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_subscribe()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c" title="mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c"><code class="xref py py-meth docutils literal notranslate"><span class="pre">on_message_c()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input" title="mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send_cloud_msg_from_input()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.set_pub_client" title="mqtt_interaction_cloud.mqtt_interaction_cloud.set_pub_client"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_pub_client()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.set_sub_client" title="mqtt_interaction_cloud.mqtt_interaction_cloud.set_sub_client"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_sub_client()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.connect_pub_client" title="mqtt_interaction_cloud.mqtt_interaction_cloud.connect_pub_client"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_pub_client()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.connect_sub_client" title="mqtt_interaction_cloud.mqtt_interaction_cloud.connect_sub_client"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_sub_client()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c" title="mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c"><code class="xref py py-meth docutils literal notranslate"><span class="pre">publish_c()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.set_node_id_c" title="mqtt_interaction_cloud.mqtt_interaction_cloud.set_node_id_c"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_node_id_c()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud" title="mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud"><code class="xref py py-meth docutils literal notranslate"><span class="pre">listen_to_cloud()</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>subtopic</strong> (<em>string</em>) – MQTT topic to which the client will subscribe to</p></li>
+<li><p><strong>pubtopic</strong> (<em>string</em>) – MQTT topic to which the client will publish to</p></li>
+<li><p><strong>mode</strong> (<em>string</em>) – mode of the interaction. Can be either “listen” to receive messages from the subtopic, or “request” if we want to the entity to publish requests to the pubtopic</p></li>
+<li><p><strong>file_settings</strong> (<em>file</em>) – file containing the shared message id to update</p></li>
+<li><p><strong>interlocutor</strong> (<em>string</em>) – interaction mode interlocutor, or entity the gateway communicates to, it can be either “cloud” or “nodes”.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Returns a <strong>mqtt_interaction_cloud</strong> class with the following attributes:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">pubtopic</dt>
+<dd class="field-odd"><p>(string) – MQTT publication topic of the gateway to the cloud</p>
+</dd>
+<dt class="field-even">subtopic</dt>
+<dd class="field-even"><p>(string) – MQTT subscription topic to which the gw subscribes to in the global MQTT</p>
+</dd>
+<dt class="field-odd">pubclient</dt>
+<dd class="field-odd"><p>(mqtt.Client) – MQTT client for publishing messages (only if interlocutor is “cloud”)</p>
+</dd>
+<dt class="field-even">subclient</dt>
+<dd class="field-even"><p>(mqtt.Client) – MQTT client for subscribing to a topic (only if interlocutor is “cloud”)</p>
+</dd>
+<dt class="field-odd">pub_msg_id</dt>
+<dd class="field-odd"><p>(int) – unique message temporal identifier for the published messages</p>
+</dd>
+<dt class="field-even">node_id</dt>
+<dd class="field-even"><p>(int) – node id concerning the interaction</p>
+</dd>
+<dt class="field-odd">run_loop</dt>
+<dd class="field-odd"><p>(bool) – run the subclient loop, while true</p>
+</dd>
+<dt class="field-even">pub_resp_received</dt>
+<dd class="field-even"><p>(bool) – whether a response for the sent message has been received</p>
+</dd>
+<dt class="field-odd">max_wait</dt>
+<dd class="field-odd"><p>(int) – max waiting time for response before deciding no response has been received, in seconds</p>
+</dd>
+<dt class="field-even">startime</dt>
+<dd class="field-even"><p>(int) – start time (in seconds) of the loop in the subclient</p>
+</dd>
+<dt class="field-odd">thread</dt>
+<dd class="field-odd"><p>(thread) – thread to use for starting a subscriber or publisher client when needed while the main thread still runs</p>
+</dd>
+<dt class="field-even">print_raw_data</dt>
+<dd class="field-even"><p>(bool) – whether or not we wish to print the raw data we get from the node</p>
+</dd>
+<dt class="field-odd">tunnel</dt>
+<dd class="field-odd"><p>(cloud_to_node_tunnel) – class for establishing a connection between a cloud interaction and a node interaction</p>
+</dd>
+</dl>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+<p>Initialize mqtt interaction cloud class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pubtopic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'request'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">need_local_wni</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gw_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize mqtt interaction cloud class</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.connect_pub_client">
+<span class="sig-name descname"><span class="pre">connect_pub_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.connect_pub_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.connect_pub_client" title="Permalink to this definition"></a></dt>
+<dd><p>Connects the client to the MQTT broker</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> (<em>mqtt.Client</em>) – publisher client</p>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>Connects the client to the MQTT broker</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.connect_sub_client">
+<span class="sig-name descname"><span class="pre">connect_sub_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.connect_sub_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.connect_sub_client" title="Permalink to this definition"></a></dt>
+<dd><p>Connects the client to the MQTT broker</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> (<em>mqtt.Client</em>) – subscriber client</p>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>Connects the client to the MQTT broker</p></li>
+<li><p>Subscribes the client to the subscription topic specified when creating the interaction</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud">
+<span class="sig-name descname"><span class="pre">listen_to_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.listen_to_cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.listen_to_cloud" title="Permalink to this definition"></a></dt>
+<dd><p>Starts the listening function for incoming cloud messages to the gateway.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Starts the “loop_start()” mqtt paho function, which handles automatic reconnects and calls the loop method regularily in a new thread</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.on_connect">
+<span class="sig-name descname"><span class="pre">on_connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.on_connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.on_connect" title="Permalink to this definition"></a></dt>
+<dd><p>callback function on a new connection. (when CONNACK is received from the MQTT broker basically)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c">
+<span class="sig-name descname"><span class="pre">on_message_c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sent_msg_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.on_message_c"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.on_message_c" title="Permalink to this definition"></a></dt>
+<dd><p>When a cloud message is received, this callback function is invoked.</p>
+<dl class="field-list">
+<dt class="field-odd">Note</dt>
+<dd class="field-odd"><p>This function has a lot of arguments that we don’t use
+but we must keep, since the paho.mqtt library sends them anyway and we need to pick just the one that interests us. Arguments
+that we don’t use: “client, userdata, sent_msg_id”.</p>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><p>if <strong>mode == “listen”:</strong></p>
+<ol class="arabic simple">
+<li><p>Parses the message and stores temporal information on the class <a class="reference internal" href="message_received_class.html#message_received_class.RxMsg" title="message_received_class.RxMsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">RxMsg()</span></code></a></p></li>
+<li><p>Displays the rellevant information on the message: <em>id</em>, <em>type</em>, additional arguments (if applicable)</p></li>
+<li><p>Tunnels to the node network (if applicable)</p></li>
+<li><p>Updates software (if applicable)</p></li>
+<li><p>Updates database (if applicable)</p></li>
+<li><p>Read the database (if applicable)</p></li>
+<li><p>Prepares de the response using the previous results, and the function <a class="reference internal" href="interaction_tunnel.html#interaction_tunnel.tunnel_to_node" title="interaction_tunnel.tunnel_to_node"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tunnel_to_node()</span></code></a></p></li>
+<li><p>Opens an interaction with the nodes using the function <a class="reference internal" href="interaction_tunnel.html#interaction_tunnel.tunnel_to_node" title="interaction_tunnel.tunnel_to_node"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tunnel_to_node()</span></code></a> (if applicable)</p></li>
+<li><p>Once the node-interaction is resolved, sends a response back to the cloud</p></li>
+</ol>
+<p>alternatively if <strong>mode == “request”</strong></p>
+<ol class="arabic simple">
+<li><p>It just parses and checks the response to the previous request.</p></li>
+<li><p>If the response is NOT Okay, the execution continues and the message is ignored as if it wasn’t received.</p></li>
+</ol>
+</dd>
+<dt class="field-odd">References</dt>
+<dd class="field-odd"><p>Take a look at the documentation on the python paho.mqtt <em>on_message</em> function arguments here -&gt; <a class="reference external" href="http://www.steves-internet-guide.com/receiving-messages-mqtt-python-client/">http://www.steves-internet-guide.com/receiving-messages-mqtt-python-client/</a></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>data</strong> (<em>bytes</em>) – message payload</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.on_subscribe">
+<span class="sig-name descname"><span class="pre">on_subscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">granted_qos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.on_subscribe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.on_subscribe" title="Permalink to this definition"></a></dt>
+<dd><p>callback function on a new subscription</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c">
+<span class="sig-name descname"><span class="pre">publish_c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.publish_c"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.publish_c" title="Permalink to this definition"></a></dt>
+<dd><p>Publishes a message to the MQTT topic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Publishes the message payload to the publish topic. This topic was defined when we created the interaction</p></li>
+</ol>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>client</strong> (<em>mqtt.Client</em>) – publisher client</p></li>
+<li><p><strong>payload</strong> (<em>bytes</em>) – message payload</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>res</strong> (<em>bool</em>) – True if the publication is successful, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input">
+<span class="sig-name descname"><span class="pre">send_cloud_msg_from_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.send_cloud_msg_from_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.send_cloud_msg_from_input" title="Permalink to this definition"></a></dt>
+<dd><p>Sends a message based on the user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Does</dt>
+<dd class="field-odd"><ol class="arabic simple">
+<li><p>Updates the message id, both in the temporary memory of this script, and in the settings file.</p></li>
+<li><p>It gets the message paylod based on the user input, via the function <em>get_msg_from_input</em></p></li>
+<li><p>Starts a new computing thread in which a subscribing client starts to listen for possible responses</p></li>
+<li><p>Publishes the message to the MQTT broker</p></li>
+<li><p>Block the main execution, until the opened thread has found a result and finished her task.</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.set_node_id_c">
+<span class="sig-name descname"><span class="pre">set_node_id_c</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.set_node_id_c"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.set_node_id_c" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the node id for messages sent to/from cloud</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.set_pub_client">
+<span class="sig-name descname"><span class="pre">set_pub_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.set_pub_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.set_pub_client" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a cloud mqtt.Client to act for publishing messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client_name</strong> (<em>string</em>) – name we wish to give to the publisher.</p>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>Creates the client</p></li>
+<li><p>Defines the on_publish function</p></li>
+<li><p>sets username and password (if applicable)</p></li>
+<li><p>Connects the client to the MQTT broker</p></li>
+</ol>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Returns the client</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">client</dt>
+<dd class="field-odd"><p>(mqtt.Client) – MQTT client for publishing messages</p>
+</dd>
+</dl>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mqtt_interaction_cloud.mqtt_interaction_cloud.set_sub_client">
+<span class="sig-name descname"><span class="pre">set_sub_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mqtt_interaction_cloud.html#mqtt_interaction_cloud.set_sub_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mqtt_interaction_cloud.mqtt_interaction_cloud.set_sub_client" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a cloud mqtt.Client to act for receiving messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client_name</strong> (<em>string</em>) – name we wish to give to the publisher.</p>
+</dd>
+<dt class="field-even">Does</dt>
+<dd class="field-even"><ol class="arabic simple">
+<li><p>Creates the client</p></li>
+<li><p>Defines the on_message_c received function</p></li>
+<li><p>Sets username and password (if applicable)</p></li>
+<li><p>Connects the client to the MQTT broker</p></li>
+</ol>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Returns the client</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">client</dt>
+<dd class="field-odd"><p>(mqtt.Client) – MQTT client for receiving messages</p>
+</dd>
+</dl>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mqtt_credentials.html" class="btn btn-neutral float-left" title="mqtt_credentials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mqtt_interaction_module.html" class="btn btn-neutral float-right" title="mqtt_interaction_module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

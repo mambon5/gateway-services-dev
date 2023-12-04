@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prepare_response &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/message_specific_parse_functions.html">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">prepare_response</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for prepare_response</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Prepares the response after a message is received and processed.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">global_vars</span> <span class="k">as</span> <span class="nn">gvar</span>
+<span class="kn">import</span> <span class="nn">create_message_functions</span> <span class="k">as</span> <span class="nn">creamsgf</span>
+
+<div class="viewcode-block" id="prepare_response"><a class="viewcode-back" href="../modules/prepare_response.html#prepare_response.prepare_response">[docs]</a><span class="k">def</span> <span class="nf">prepare_response</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">parsed</span><span class="p">,</span> <span class="n">update_db</span><span class="p">,</span> <span class="n">read_db</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">interlocutor</span><span class="p">,</span> <span class="n">pubtopic</span><span class="p">,</span> <span class="n">tunnel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">software_update</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to prepare the response to the interlocutor. Based on the </span>
+
+<span class="sd">        1. original cloud/node message</span>
+<span class="sd">        2. response from the node (if the original messages was from cloud &gt; node)</span>
+<span class="sd">        3. interlocutor (cloud or nodes)</span>
+<span class="sd">        4. interaction mode</span>
+<span class="sd">        5. the results of:</span>
+<span class="sd">            - software update</span>
+<span class="sd">            - database update</span>
+<span class="sd">            - read database</span>
+<span class="sd">            - initial parsing</span>
+
+
+<span class="sd">    :does: </span>
+<span class="sd">        1. It checks if there has been any error while processing the:</span>
+<span class="sd">            - parsing</span>
+<span class="sd">            - tunneling (cloud to node or viceversa)</span>
+<span class="sd">            - reading of the database</span>
+<span class="sd">            - updating of the database</span>
+<span class="sd">            - updating of the software</span>
+<span class="sd">        2. If there has been a problem in any of the mentioned operations above, the message type is set to *Error*  and the </span>
+<span class="sd">           proper error type is stored in the message arguments *msg.args*.</span>
+<span class="sd">        3. Depending on the interlocutor (cloud/nodes) one of the following functions is called to finish the preparation</span>
+<span class="sd">           of the response:</span>
+<span class="sd">                - :py:meth:`~prepare_response.prepare_response_nodes`</span>
+<span class="sd">                - :py:meth:`~prepare_response.prepare_response_cloud`</span>
+<span class="sd">        4. The prepared response is returned, which contains a bool (preparation of response was success/failure) and the </span>
+<span class="sd">           response (as the message payload, in bytes).</span>
+<span class="sd">    </span>
+
+<span class="sd">    :param msg: Message received class with all the arguments</span>
+<span class="sd">    :type msg: RxMsg</span>
+<span class="sd">    :param parsed: True if parsing was successful, False otherwise</span>
+<span class="sd">    :type parsed: bool</span>
+<span class="sd">    :param db_update: result from the database update function call</span>
+<span class="sd">    :type db_update: [bool, list]</span>
+<span class="sd">    :param read_db: result from the database read function call</span>
+<span class="sd">    :type read_db: [bool, list]</span>
+<span class="sd">    :param mode: whether node is &quot;listen&quot; or &quot;request&quot; mode</span>
+<span class="sd">    :type mode: string</span>
+<span class="sd">    :param interlocutor: whether node is &quot;cloud&quot; or &quot;nodes&quot; mode</span>
+<span class="sd">    :type interlocutor: string</span>
+<span class="sd">    :param pubtopic: MQTT topic where the message is gonig to be published. It is None for node to gateway messages.</span>
+<span class="sd">    :type pubtopic: string</span>
+<span class="sd">    :param tunnel: result from the tunnel to node call, it returns True if call was successful, and the message received from the node</span>
+<span class="sd">    :type tunnel: [bool, node_msg]</span>
+<span class="sd">    :param soft_upd: result from the software update function call </span>
+<span class="sd">    :type soft_upd: [bool, bool, list]</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        **result** (*list*) --  </span>
+<span class="sd">            - [0] - *bool* (True if successful, False if failed)</span>
+<span class="sd">            - [1] - *bytes* Message payload to respond with</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&lt;prepare response&gt; &quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="p">[]]</span>
+    <span class="n">pub_supertopic</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">get_supertopic</span><span class="p">(</span><span class="n">pubtopic</span><span class="p">)</span>
+
+    <span class="c1"># CHECKING POSSIBLE PROCESSING ERRORS:</span>
+    <span class="c1"># parsing error:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">parsed</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: message parsing failed&quot;</span><span class="p">)</span>
+        <span class="c1"># the error arguments are already generated for this case automatically</span>
+
+
+    <span class="c1"># tunnel error:</span>
+    <span class="k">elif</span> <span class="n">tunnel</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">tunnel</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="c1"># answer with error response</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span>
+        <span class="k">if</span> <span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: tunneling to nodes failed.&quot;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_WHEN_TUNNELING_TO_NODE</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: tunneling to cloud failed.&quot;</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_WHEN_TUNNELING_TO_CLOUD</span><span class="p">]</span>
+        <span class="n">tunnel</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span> <span class="c1"># we set the node message response arguments = the request messsage argument (which is the error code)</span>
+    
+    <span class="c1"># error while software update</span>
+    <span class="k">elif</span> <span class="n">software_update</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">software_update</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: update gateway software failed.&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># answer with error response</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_WHEN_UPDATING_GW_SOFTWARE</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">software_update</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">software_update</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;software updated!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># error while update database:</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">update_db</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: update gateway database failed.&quot;</span><span class="p">)</span>
+        <span class="c1"># answer with error response</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_WHEN_UPDATING_DATABASE</span><span class="p">]</span>
+
+    <span class="c1"># error while reading database:</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">read_db</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: read gateway database failed. &quot;</span><span class="p">)</span>
+        <span class="c1"># answer with error response</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">ERROR_TYPE_WHEN_READING_DATABASE</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">prepare_response_nodes</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">tunnel</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">update_db</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">read_db</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mode</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">interlocutor</span> <span class="o">==</span> <span class="s2">&quot;cloud&quot;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">prepare_response_cloud</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">tunnel</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">software_update</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">update_db</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">read_db</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;not a valid interlocutor found&quot;</span><span class="p">)</span>    
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="prepare_response_cloud"><a class="viewcode-back" href="../modules/prepare_response.html#prepare_response.prepare_response_cloud">[docs]</a><span class="k">def</span> <span class="nf">prepare_response_cloud</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">node_msg</span><span class="p">,</span> <span class="n">soft_up_list</span><span class="p">,</span> <span class="n">db_up_list</span><span class="p">,</span> <span class="n">read_db_list</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the response message for a cloud-gateway interaction.</span>
+
+<span class="sd">    :does:</span>
+
+<span class="sd">        1. It sets the right message id and type</span>
+<span class="sd">        2. It sets the right arguments </span>
+<span class="sd">        3. Calls the :py:meth:`~create_message_functions.message_to_bytes`  function to create the message</span>
+<span class="sd">    </span>
+<span class="sd">    :param msg: the message received from the cloud</span>
+<span class="sd">    :type msg: RxMsg</span>
+<span class="sd">    :param node_msg: the message received from the node, via tunneling</span>
+<span class="sd">    :type node_msg: RxMsg</span>
+<span class="sd">    :param soft_up_list: resulting list from the software update function call </span>
+<span class="sd">    :type soft_up_list: list</span>
+<span class="sd">    :param db_up_list: resulting list from the database update function call</span>
+<span class="sd">    :type db_up_list: list</span>
+<span class="sd">    :param read_db_list: resulting list from the database update function call</span>
+<span class="sd">    :type read_db_list: list</span>
+<span class="sd">    :param pubtopic: MQTT topic where the message is going to be published. It is None for node to gateway messages.</span>
+<span class="sd">    :type pubtopic: string</span>
+<span class="sd">    :param prefix: text to prepend on each printed line on debug or console</span>
+<span class="sd">    :type prefix: string</span>
+
+<span class="sd">    :returns:</span>
+<span class="sd">        :payload: *(bytes)* -- the message payload that we wanted to create as a response</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;cloud&gt; &quot;</span> 
+    
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>   <span class="c1"># empty message in bytes</span>
+
+    <span class="c1"># payload = creamsgf.message_to_bytes(msg.id, msg.type, msg.args, pubtopic, prefix, msg)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># PARSING ERROR MSG</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span><span class="p">:</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+
+    <span class="c1"># GATEWAY RESPONSE TO CLOUD REQUEST TO NODE</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_NODE_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; gw response to cloud to node&gt; &quot;</span>
+
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_CLOUD_TO_NODE_REQUESTS_LIST</span><span class="p">:</span>   
+            
+            <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_NODE_GET_VERSION</span><span class="p">:</span> <span class="c1"># for cloud requests of node version</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">node_msg</span> <span class="c1"># this gives the list of the 8 node version numbers</span>
+                <span class="n">msg_type</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span>
+            <span class="k">else</span><span class="p">:</span>   <span class="c1"># rest of cloud requests to node</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">node_msg</span><span class="o">.</span><span class="n">args</span>
+                <span class="n">msg_type</span> <span class="o">=</span> <span class="n">node_msg</span><span class="o">.</span><span class="n">type</span>
+            
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg_type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: wrong msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+    <span class="c1"># GATEWAY RESPONSE TO CLOUD REQUEST TO GATEWAY</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">GATEWAY_RESPONSE_TO_CLOUD_REQUEST_TO_GATEWAY_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; cloud to gateway&gt; &quot;</span>
+        <span class="c1"># discriminate according to message type:</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_REMOVE_NODES</span><span class="p">:</span> <span class="c1"># CLOUD -&gt; GATEWAY: REMOVE NODES</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; remove nodes&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;right now nodes should be removed from the database, but no database is configured yet :(&quot;</span><span class="p">)</span>
+            
+            <span class="n">args</span> <span class="o">=</span> <span class="n">db_up_list</span> <span class="c1"># db_up_list should be = [crc]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;args: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, msg.type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_NODE_LIST</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;nodes should have been read from the local database, but there is no one yet :&#39;) (ploro)&quot;</span><span class="p">)</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">read_db_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_GATEWAY</span><span class="p">,</span><span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_UPDATE_NODES</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_CLOUD_TO_GATEWAY_GET_GATEWAY_VERSION</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; gw version&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;gw version should&#39;ve been read&quot;</span><span class="p">)</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">read_db_list</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="c1"># read_db_list contains a list with the 4 elements codifying the version of the gateway.</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+    
+    
+    <span class="c1"># CLOUD RESPONSE TO GATEWAY REQUEST</span>
+    <span class="k">elif</span> <span class="n">msg</span><span class="o">.</span><span class="n">sub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; cloud response to gateway request&gt; &quot;</span>
+        <span class="c1"># discriminate according to message type:</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALIVE_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ADD_NODES_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_UNSEEN_NODES_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_NODE_STATUS_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ALARM_GW_TO_CLOUD</span><span class="p">,</span>
+                        <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ELECTRIC_PARAMETERS_GW_TO_CLOUD</span><span class="p">]:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; other&gt; &quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;no action needed yet&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="p">[]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: no action detected for given msg type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+
+    <span class="c1"># to be deleted from production: (simulates cloud behaviour)</span>
+
+    <span class="c1"># GATEWAY REQUEST TO CLOUD (no gateway database update needed)</span>
+    <span class="k">elif</span> <span class="n">pub_supertopic</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">CLOUD_RESPONSE_TO_GATEWAY_REQUEST_MQTT_SUPERTOPIC</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; cloud response to gw request&gt; &quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;fake cloud listening simulation: sending the msg arguments to the message to bytes function&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;error: invalid message origin detected&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="prepare_response_nodes"><a class="viewcode-back" href="../modules/prepare_response.html#prepare_response.prepare_response_nodes">[docs]</a><span class="k">def</span> <span class="nf">prepare_response_nodes</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">cloud_interac</span><span class="p">,</span> <span class="n">db_up_list</span><span class="p">,</span> <span class="n">read_db_list</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the response message for a nodes-gateway interaction.</span>
+<span class="sd">    </span>
+<span class="sd">    :does:</span>
+<span class="sd">        1. It checks the message type and calls the :py:meth:`~create_message_functions.message_to_bytes`  function to create the message</span>
+
+<span class="sd">    :param msg: the message received</span>
+<span class="sd">    :type msg: RxMsg</span>
+<span class="sd">    :param prefix: text to prepend on each printed line on debug or console</span>
+<span class="sd">    :type prefix: string</span>
+<span class="sd">    :param db_up_list: resulting list from the database update function call</span>
+<span class="sd">    :type db_up_list: list</span>
+<span class="sd">    :param read_db_list: resulting list from the database update function call</span>
+<span class="sd">    :type read_db_list: list</span>
+<span class="sd">    </span>
+<span class="sd">    :returns:</span>
+<span class="sd">        :payload: *(bytes)* -- the message payload that we wanted to create as a response</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;nodes&gt; &quot;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># PREPARING RESPONSE FOR ANY KIND OF VALID MESSAGE</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_TYPE_ERROR</span> <span class="ow">or</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">gvar</span><span class="o">.</span><span class="n">MSG_NODE_REQUESTS_LIST</span><span class="p">:</span>
+        <span class="n">pub_supertopic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">creamsgf</span><span class="o">.</span><span class="n">message_to_bytes</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">pub_supertopic</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">payload</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;message type from nodes -&gt; gateway not recognized&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="k">return</span> <span class="n">result</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

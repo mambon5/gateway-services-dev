@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>message_specific_parse_functions &mdash; Gateway communication&#39;s code 01-05-2023 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mqtt_credentials" href="mqtt_credentials.html" />
+    <link rel="prev" title="message_received_parse_functions" href="message_received_parse_functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Gateway communication's code
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend_script_cloud_comms.html">backend_script_cloud_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend_script_node_comms.html">backend_script_node_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_settings.html">cloud_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compute_crc.html">compute_crc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_cloud.html">create_message_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_functions.html">create_message_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_nodes.html">create_message_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_message_specific_functions.html">create_message_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_functions.html">database_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_vars.html">global_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interaction_tunnel.html">interaction_tunnel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local_settings.html">local_settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_functions.html">message_display_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_display_specific_functions.html">message_display_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_class.html">message_received_class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_received_parse_functions.html">message_received_parse_functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">message_specific_parse_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_credentials.html">mqtt_credentials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_cloud.html">mqtt_interaction_cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_module.html">mqtt_interaction_module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_basic.html">mqtt_interaction_node_basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_main.html">mqtt_interaction_node_main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mqtt_interaction_node_temporal.html">mqtt_interaction_node_temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_menu.html">otap_menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_specific_functions.html">otap_specific_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otap_update_all_nodes.html">otap_update_all_nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prepare_response.html">prepare_response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_gw_database.html">read_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_gw_comms.html">start_gw_comms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_database.html">update_gw_database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_gw_software.html">update_gw_software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gateway communication's code</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">message_specific_parse_functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/message_specific_parse_functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-message_specific_parse_functions">
+<span id="message-specific-parse-functions"></span><h1>message_specific_parse_functions<a class="headerlink" href="#module-message_specific_parse_functions" title="Permalink to this headline"></a></h1>
+<p>Script containing parsing functions that depend on the</p>
+<ul class="simple">
+<li><p>message type</p></li>
+</ul>
+<p>For each message type a different parsing function is called. These functions are called by the more general
+parse script.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.get_client_id" title="message_specific_parse_functions.get_client_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_client_id</span></code></a>(payload)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.get_crc" title="message_specific_parse_functions.get_crc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_crc</span></code></a>(payload[, ini, fi])</p></td>
+<td><p>Parse the crc from the message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_alarm_node_list" title="message_specific_parse_functions.parse_alarm_node_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_alarm_node_list</span></code></a>(payload, num_nodes, prefix)</p></td>
+<td><p>Parse the alarm and node id list from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_alarm_response" title="message_specific_parse_functions.parse_alarm_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_alarm_response</span></code></a>(payload)</p></td>
+<td><p>Parse the alarm and crc from the response .</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_cloud_to_gateway_request_generic_client_id" title="message_specific_parse_functions.parse_cloud_to_gateway_request_generic_client_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_cloud_to_gateway_request_generic_client_id</span></code></a>(...)</p></td>
+<td><p>Parse the client id from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_crc_response" title="message_specific_parse_functions.parse_crc_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_crc_response</span></code></a>(payload)</p></td>
+<td><p>Parse the CRC number for a response message</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_current_voltage" title="message_specific_parse_functions.parse_current_voltage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_current_voltage</span></code></a>(payload)</p></td>
+<td><p>Parse the node electric parameters from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_dimming_message" title="message_specific_parse_functions.parse_dimming_message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_dimming_message</span></code></a>(payload, prefix)</p></td>
+<td><p>Parse the dimming from the message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_dimming_message_client_id" title="message_specific_parse_functions.parse_dimming_message_client_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_dimming_message_client_id</span></code></a>(payload, prefix)</p></td>
+<td><p>Parse the client id and dimming from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_echo_response" title="message_specific_parse_functions.parse_echo_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_echo_response</span></code></a>(traveltime[, prefix])</p></td>
+<td><p>Parse the echo message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_echo_response_gw_to_cloud" title="message_specific_parse_functions.parse_echo_response_gw_to_cloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_echo_response_gw_to_cloud</span></code></a>(payload[, ...])</p></td>
+<td><p>Parse the echo response from a gateway for a simulated cloud.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_electric_parameters" title="message_specific_parse_functions.parse_electric_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_electric_parameters</span></code></a>(payload)</p></td>
+<td><p>Parse the node electric parameters from the message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_electric_parameters_from_message" title="message_specific_parse_functions.parse_electric_parameters_from_message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_electric_parameters_from_message</span></code></a>(payload)</p></td>
+<td><p>Parse the node consumptions from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_error_message" title="message_specific_parse_functions.parse_error_message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_error_message</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the error message</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_gw_version_response" title="message_specific_parse_functions.parse_gw_version_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_gw_version_response</span></code></a>(payload)</p></td>
+<td><p>Parse the gateway version number for a response message</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_hops_response" title="message_specific_parse_functions.parse_hops_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_hops_response</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the hops message from gateway to cloud.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_hops_response_from_node" title="message_specific_parse_functions.parse_hops_response_from_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_hops_response_from_node</span></code></a>(hops, prefix)</p></td>
+<td><p>Parse the hops message from node to gateway.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_led_status_response" title="message_specific_parse_functions.parse_led_status_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_led_status_response</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the led status message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_neighbour_number_response" title="message_specific_parse_functions.parse_neighbour_number_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_neighbour_number_response</span></code></a>(payload[, ...])</p></td>
+<td><p>Parse the number of neighbours message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_alarm_request" title="message_specific_parse_functions.parse_node_alarm_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_alarm_request</span></code></a>(payload)</p></td>
+<td><p>Parse the node alarm from the request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_electric_params_list" title="message_specific_parse_functions.parse_node_electric_params_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_electric_params_list</span></code></a>(payload, ...)</p></td>
+<td><p>Parse the node electrical parameters list from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_list" title="message_specific_parse_functions.parse_node_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_list</span></code></a>(payload, num_nodes, prefix)</p></td>
+<td><p>Parse the node id list from the message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_list_client_id" title="message_specific_parse_functions.parse_node_list_client_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_list_client_id</span></code></a>(payload, ...[, firstb])</p></td>
+<td><p>Parse the node id list and client id from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_solar_metrics_request" title="message_specific_parse_functions.parse_node_solar_metrics_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_solar_metrics_request</span></code></a>(payload)</p></td>
+<td><p>Parse the node solar metrics from the message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_status_list" title="message_specific_parse_functions.parse_node_status_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_status_list</span></code></a>(payload, num_nodes, ...)</p></td>
+<td><p>Parse the node status list from the message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_status_list_client_id" title="message_specific_parse_functions.parse_node_status_list_client_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_status_list_client_id</span></code></a>(payload, ...)</p></td>
+<td><p>Parse the node status list and client id from the message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_status_request" title="message_specific_parse_functions.parse_node_status_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_status_request</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the node status from message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_status_response" title="message_specific_parse_functions.parse_node_status_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_status_response</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the node status from message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_status_response_from_node" title="message_specific_parse_functions.parse_node_status_response_from_node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_status_response_from_node</span></code></a>(...[, ...])</p></td>
+<td><p>Parse the node status from message, for node responses to gw.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_node_version_response" title="message_specific_parse_functions.parse_node_version_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_node_version_response</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the node version from message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_rssi_response" title="message_specific_parse_functions.parse_rssi_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_rssi_response</span></code></a>(payload[, prefix])</p></td>
+<td><p>Parse the rssi message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#message_specific_parse_functions.parse_set_strategy_message" title="message_specific_parse_functions.parse_set_strategy_message"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_set_strategy_message</span></code></a>(payload, prefix)</p></td>
+<td><p>Parse the strategy from the message.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.get_client_id">
+<span class="sig-name descname"><span class="pre">get_client_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#get_client_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.get_client_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.get_crc">
+<span class="sig-name descname"><span class="pre">get_crc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#get_crc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.get_crc" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the crc from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>ini</strong> (<em>int</em>) – first byte where the crc is</p></li>
+<li><p><strong>fi</strong> (<em>int</em>) – lst byte where the crc is</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>args</strong> (<em>list</em>) –  the CRC number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_alarm_node_list">
+<span class="sig-name descname"><span class="pre">parse_alarm_node_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_alarm_node_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_alarm_node_list" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the alarm and node id list from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –  [0] - bool (True if successful, False if failed)</dt><dd><p>[1][0] - alarm type
+[1][1] - number of nodes
+[1][2] - node id list</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_alarm_response">
+<span class="sig-name descname"><span class="pre">parse_alarm_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_alarm_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_alarm_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the alarm and crc from the response .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_cloud_to_gateway_request_generic_client_id">
+<span class="sig-name descname"><span class="pre">parse_cloud_to_gateway_request_generic_client_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_cloud_to_gateway_request_generic_client_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_cloud_to_gateway_request_generic_client_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the client id from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> List of parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_crc_response">
+<span class="sig-name descname"><span class="pre">parse_crc_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_crc_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_crc_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the CRC number for a response message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>int</em> parsed CRC.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_current_voltage">
+<span class="sig-name descname"><span class="pre">parse_current_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_current_voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_current_voltage" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node electric parameters from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+</dl>
+<p>/watch
+:return:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_dimming_message">
+<span class="sig-name descname"><span class="pre">parse_dimming_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_dimming_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_dimming_message" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the dimming from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_dimming_message_client_id">
+<span class="sig-name descname"><span class="pre">parse_dimming_message_client_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_dimming_message_client_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_dimming_message_client_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the client id and dimming from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_echo_response">
+<span class="sig-name descname"><span class="pre">parse_echo_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traveltime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_echo_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_echo_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the echo message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Note</dt>
+<dd class="field-odd"><p>It is unclear whether we have to use the <em>travel_time_ms</em> as the travel time in milliseconds,
+or whether we have to transform it using the documentation.</p>
+</dd>
+<dt class="field-even">References</dt>
+<dd class="field-even"><ul class="simple">
+<li><dl class="simple">
+<dt>Check out how to pass traveltime to millisecons as described on page 17 of this manual: <a class="reference external" href="https://wirepas.github.io/wm-sdk/master/d6/d50/wms__data_8h.html#a458421a43d4f6dc515faf427bf579d00">https://wirepas.github.io/wm-sdk/master/d6/d50/wms__data_8h.html#a458421a43d4f6dc515faf427bf579d00</a></dt><dd><p>Basically we have to multiply the traveltime units by 1000/128 in order to obtain the value of travel time
+in milliseconds</p>
+</dd>
+</dl>
+</li>
+<li><p>Understanding the difference between <em>propagation delay</em> and <em>transmission delay</em> : <a class="reference external" href="https://www.baeldung.com/cs/propagation-vs-transmission-delay">https://www.baeldung.com/cs/propagation-vs-transmission-delay</a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>traveltime</strong> (<em>int</em>) – transmition delay from node to sink, in seconds / 128</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The travel time transmission delay in milliseconds
+<strong>result</strong> (<em>list</em>) –</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_echo_response_gw_to_cloud">
+<span class="sig-name descname"><span class="pre">parse_echo_response_gw_to_cloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_echo_response_gw_to_cloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_echo_response_gw_to_cloud" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the echo response from a gateway for a simulated cloud.
+It receives the payload in bytes and calls the standard <em>parse_echo_response</em> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – message payload</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The travel time transmission delay in milliseconds
+<strong>result</strong> (<em>list</em>) –</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_electric_parameters">
+<span class="sig-name descname"><span class="pre">parse_electric_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_electric_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_electric_parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node electric parameters from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_electric_parameters_from_message">
+<span class="sig-name descname"><span class="pre">parse_electric_parameters_from_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_electric_parameters_from_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_electric_parameters_from_message" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node consumptions from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_error_message">
+<span class="sig-name descname"><span class="pre">parse_error_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_error_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_error_message" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the error message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_gw_version_response">
+<span class="sig-name descname"><span class="pre">parse_gw_version_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_gw_version_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_gw_version_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the gateway version number for a response message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> list with the 4 integer numbers represenenting together the version id number</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_hops_response">
+<span class="sig-name descname"><span class="pre">parse_hops_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_hops_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_hops_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the hops message from gateway to cloud.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_hops_response_from_node">
+<span class="sig-name descname"><span class="pre">parse_hops_response_from_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_hops_response_from_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_hops_response_from_node" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the hops message from node to gateway.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hops</strong> (<em>int</em>) – the number of hops, sent by wirepass automatically in the message header</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_led_status_response">
+<span class="sig-name descname"><span class="pre">parse_led_status_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_led_status_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_led_status_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the led status message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_neighbour_number_response">
+<span class="sig-name descname"><span class="pre">parse_neighbour_number_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_neighbour_number_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_neighbour_number_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the number of neighbours message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_alarm_request">
+<span class="sig-name descname"><span class="pre">parse_node_alarm_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_alarm_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_alarm_request" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node alarm from the request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_electric_params_list">
+<span class="sig-name descname"><span class="pre">parse_node_electric_params_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_electric_params_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_electric_params_list" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node electrical parameters list from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –  [0] - bool (True if successful, False if failed)</dt><dd><p>[1][0] - number of nodes
+[1][1] - node id list</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_list">
+<span class="sig-name descname"><span class="pre">parse_node_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_list" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node id list from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+<li><p><strong>firstn</strong> (<em>int</em>) – first byte of the node id list to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1][0] - number of nodes</p></li>
+<li><p>[1][1] - node id list</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_list_client_id">
+<span class="sig-name descname"><span class="pre">parse_node_list_client_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_list_client_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_list_client_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node id list and client id from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+<li><p><strong>firstn</strong> (<em>int</em>) – first byte of the node id list to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1][0] - client id</p></li>
+<li><p>[1][1] - number of nodes</p></li>
+<li><p>[1][2] - node id list</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_solar_metrics_request">
+<span class="sig-name descname"><span class="pre">parse_node_solar_metrics_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_solar_metrics_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_solar_metrics_request" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node solar metrics from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_status_list">
+<span class="sig-name descname"><span class="pre">parse_node_status_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_status_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_status_list" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node status list from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –  [0] - bool (True if successful, False if failed)</dt><dd><p>[1][0] - number of nodes
+[1][1] - node status list</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_status_list_client_id">
+<span class="sig-name descname"><span class="pre">parse_node_status_list_client_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_status_list_client_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_status_list_client_id" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node status list and client id from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>num_nodes</strong> (<em>int</em>) – number of nodes</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –  [0] - bool (True if successful, False if failed)</dt><dd><p>[1][0] - client id
+[1][1] - number of nodes
+[1][2] - node status list</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_status_request">
+<span class="sig-name descname"><span class="pre">parse_node_status_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_status_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_status_request" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node status from message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_status_response">
+<span class="sig-name descname"><span class="pre">parse_node_status_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_status_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_status_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node status from message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_status_response_from_node">
+<span class="sig-name descname"><span class="pre">parse_node_status_response_from_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_status_response_from_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_status_response_from_node" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node status from message, for node responses to gw.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>rawdata</strong> (<em>JSON</em>) – raw data sent by wirepas automatically from the node to the sink in the message.</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_node_version_response">
+<span class="sig-name descname"><span class="pre">parse_node_version_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_node_version_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_node_version_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the node version from message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl>
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. In particular a list of 8 elements, each of them an int (0-254 possible values)</p></li>
+</ul>
+<p>representing the stack and app version of the node software.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_rssi_response">
+<span class="sig-name descname"><span class="pre">parse_rssi_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_rssi_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_rssi_response" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the rssi message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="message_specific_parse_functions.parse_set_strategy_message">
+<span class="sig-name descname"><span class="pre">parse_set_strategy_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/message_specific_parse_functions.html#parse_set_strategy_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#message_specific_parse_functions.parse_set_strategy_message" title="Permalink to this definition"></a></dt>
+<dd><p>Parse the strategy from the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>bytes</em>) – Message payload in bytes that we wish to parse</p></li>
+<li><p><strong>prefix</strong> (<em>string</em>) – text to append to each console log or print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><strong>result</strong> (<em>list</em>) –</dt><dd><ul class="simple">
+<li><p>[0] - <em>bool</em> (True if successful, False if failed)</p></li>
+<li><p>[1] - <em>list</em> Parsed arguments. Depending on the <strong>message type</strong> these arguments can be more or fewer</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="message_received_parse_functions.html" class="btn btn-neutral float-left" title="message_received_parse_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mqtt_credentials.html" class="btn btn-neutral float-right" title="mqtt_credentials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Romà Masana.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
